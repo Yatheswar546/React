@@ -1,0 +1,171 @@
+=> In general we use <a> tags in html for redirecting to other pages/sections.
+=> But using of these <a> tags will reload the entire page including the DOM tree 
+    which results in increased load time.
+=> And also sometimes the same code (<head>, <nav>, <footer>) is used in multiple pages 
+    are loaded each time.
+
+=> This is because of Multi-Page Application(MPA), this issue is resolved in React 
+    as React is a Single-Page Application(SPA). 
+
+=> In React this routing is done using "React-Router".
+
+====================================================================================
+
+React-Router:
+
+React Router is the standard third-party library used to handle 
+client-side routing in React applications.
+
+=> we need to use third-party library "Router"
+=> we need to install react-router using "npm install react-router-dom"
+
+=> BrowseRouter : It stores the current location in the browser's address bar using clean URLs.
+
+=> we need to wrap the app inside "BrowseRouter" so we can use it in entire project.
+
+=> <Route />
+    <Route /> is the fundamental unit used to map a URL path to a React component.
+    It is children.
+    It takes element path as props and redirect to that component(page)
+
+=> <Routes />
+    It is the container component that wraps all individual route definitions.
+    It is the parent which is a collection of all Routes.
+    It examines all its children (<Route /> elements) and renders only the best match for the current URL.
+
+=> <Link> : used to navigate to other components. It is replacement of <a> in html.
+            in this "to" is used to give the path.
+
+====================================================================================
+
+Programmatic Navigation:
+
+=> Navigation needs to be done based on the result of an event or a logic.
+Eg: Form Submission, Buttons 
+
+=> "useNavigate()" is used to achieve Programmatic Navigation.
+
+Eg:  const navigate = useNavigate();
+
+     function handleClick(){
+        navigate('/cart');
+     }
+
+     <button onClick = {handleClick}> Go to Cart </button>
+
+    
+
+====================================================================================
+
+
+Example Code for a Navbar 
+
+File Structure
+
+src
+│
+├── concepts
+│     └──6.ReactRouter 
+|            ├── pages
+|            │     ├── Home.jsx
+|            │     ├── About.jsx
+|            │     ├── Services.jsx
+|            │     └── Contact.jsx
+|           └── Navbar.jsxNavbar.jsx
+│
+│
+├── App.jsx
+└── main.jsx
+
+main.jsx:
+
+// we need wrap the <App /> in <BrowseRouter /> 
+
+import { StrictMode, React } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import { BrowserRouter } from 'react-router-dom'
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  </BrowserRouter>
+)
+
+------------------------------------------------------------------------------
+
+App.jsx
+
+// we need to import Route & Routes and all the components
+
+import './App.css'
+import { Routes, Route } from 'react-router-dom'
+
+import Navbar from "./concepts/6.ReactRouter/Navbar";
+import Home from "./concepts/6.ReactRouter/pages/Home";
+import About from "./concepts/6.ReactRouter/pages/About";
+import Services from "./concepts/6.ReactRouter/pages/Services";
+import Contact from "./concepts/6.ReactRouter/pages/Contact";
+
+function App() {
+
+  return (
+    <>
+        <Navbar />
+
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/about" element={<About />}/>
+          <Route path="/services" element={<Services />}/>
+          <Route path="/contact" element={<Contact />}/>
+        </Routes>
+
+    </>
+  )
+}
+
+export default App
+
+------------------------------------------------------------------------------
+
+Navbar.jsx
+
+// we use Link tag here to give the respective paths
+
+import { Link } from "react-router-dom";
+
+export default function Navbar() {  
+
+    return(
+        <nav>
+            <Link to="/">Home</Link> |
+            <Link to="/about">About</Link> |
+            <Link to="/services">Services</Link> |
+            <Link to="/contact">Contact</Link> |
+        </nav>
+    )
+
+}
+
+------------------------------------------------------------------------------
+
+Home.jsx, About.jsx, Services.jsx, Contact.jsx 
+
+export default function Home(){
+    return <h1>Home Page</h1>
+}
+
+export default function About(){
+    return <h1>About Page</h1>
+}
+
+export default function Services(){
+    return <h1>Service Page</h1>
+}
+
+export default function Contact(){
+    return <h1>Contact Page</h1>
+}
