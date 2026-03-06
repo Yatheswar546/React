@@ -1,0 +1,153 @@
+React:
+
+-> Js library
+-> It can be integrated with anything (Vanilla.js, Next.js, Vue.js, Angular.js)
+
+NOTE: A "library" is a tool you call upon when you need it (you are in control), 
+    while a "framework" provides a structure that calls your code for you (it is in control). 
+
+Features of React:
+1) It contains single html file. It is a "Single Page Application"
+2) In react projects we won't redirect to other pages, we stay on single html page, 
+    the required components will be replaced accordingly.
+3) We create multiple "routes" to route that component.
+4) Components, these are reusable components.
+5) Virtual DOM (Unique Selling Point)
+6) Virtual DOM is a replica of real DOM.
+7) Virtual DOM & Real DOM are always on sink.
+
+          copy/replica                   Update                         Reconcilation
+Real DOM -------------->  Virtual DOM -----------> Updated Virtual DOM --------------> Updated Real DOM
+            duplicate                 Diffing Algo.
+
+Diffing Algorithm: 
+=> Used to find out the difference between two tress (Real & Virtual DOM).
+=> It gives the node that is different in Virtual DOM to Real DOM and the changes are applied.
+
+Reconcilation: Virtual DOM and Real DOM become same.
+
+=======================================================================================
+
+Components (The Building Blocks):
+
+=> There are two types of components:
+    1) Class Components      : Depricated, asked only for interviews
+    2) Functional Components : Uses functions, regular functions to create UI.
+
+
+=======================================================================================
+
+Important Libraries:
+
+1) react 
+2) react-dom/client (  createRoot()  )
+
+=> index.html : single HTML file
+=> main.js    : main file, it access index.html file and creates root element using "createRoot()". 
+                but we can't do any changes do this. It contains "App" component.
+=> App.js     : topmost parent, the "App" component.
+                it is the starting point everything we create here will go in "App.js".
+
+=> "root.render" is same as "appendChild" is js.
+=> "StrictMode" : to avoid errors, and react runs the code twice.
+
+=======================================================================================
+
+Functional Component Example:
+
+function Demo(){
+    return <h2>Demo Component</h2>
+}
+
+(or)
+
+function Demo(){
+    return (
+        <>
+            <h2>Demo Component</h2>
+        <>
+    );
+}
+
+=======================================================================================
+
+jsx:
+
+=> JavaScript and XML
+=> HTML like code in React.
+
+=======================================================================================
+
+Babel:
+
+=> A transpiler (translator + compiler) used in react to convert jsx to html 
+    so browser can understand.
+
+=======================================================================================
+
+Modules:
+
+=> In react every single file is a seperate single module.
+=> We need to "import" and "export" them.
+
+Syntax: export default function Name;   
+        import Name from './path';
+
+Examples:
+Method 1:
+        export default function Demo(){
+            .................
+        }
+
+        import {Demo} from './path';
+
+Method 2:
+        export {Demo};
+        import {Demo} from './path';
+
+Types of Module Exports:
+
+1) Default Export   : single module in a single file (component).
+2) Named Export     : multiple modules from single file.
+
+Example:
+    function add(a,b){
+        return a+b;
+    }
+    function sub(a,b){
+        return a-b;
+    }
+
+    export {add, sub};
+
+    --------------------------------------------------
+
+    In App.jsx file
+
+    import {sub, add} from './path'
+
+    function App() {
+
+        const a = 7;
+        const b = 3;
+
+        return (
+          <>
+            <h1>Hello World</h1>
+          
+            <Intro />
+            
+            <h1>Addition of {a} + {b} = {Add(a,b)}</h1>
+            <h1>Subtraction of {a} - {b} = {Sub(a,b)}</h1>
+          
+          </>
+        )
+    }
+
+NOTE: 
+    1) Sequence is not important while importing and exporting Named Components.
+        Only Names should be the same. Names are very very important.
+    2) Only one default export module per file.
+        But there can be many named export modules per file.
+
+ 
