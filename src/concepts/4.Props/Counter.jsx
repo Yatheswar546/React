@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../../index.css'
 
 export default function Counter ( {diff, name}){
 
@@ -15,7 +16,7 @@ export default function Counter ( {diff, name}){
     }
 
     return(
-        <div>
+        <div className="Counter">
             <button onClick={handleAdd}>+</button>
             {counter}
             <button onClick={handleSub}>-</button>
