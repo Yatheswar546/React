@@ -1,6 +1,7 @@
 React:
 
--> Js library
+-> Js library open-sourced by Facebook.
+-> It allows you to create and re-use UI elements.
 -> It can be integrated with anything (Vanilla.js, Next.js, Vue.js, Angular.js)
 
 NOTE: A "library" is a tool you call upon when you need it (you are in control), 
@@ -11,7 +12,7 @@ Features of React:
 2) In react projects we won't redirect to other pages, we stay on single html page, 
     the required components will be replaced accordingly.
 3) We create multiple "routes" to route that component.
-4) Components, these are reusable components.
+4) Components, these are reusable components. (Seperation of Concerns)
 5) Virtual DOM (Unique Selling Point)
 6) Virtual DOM is a replica of real DOM.
 7) Virtual DOM & Real DOM are always on sink.
@@ -30,10 +31,10 @@ Reconcilation: Virtual DOM and Real DOM become same.
 
 Components (The Building Blocks):
 
+=> Components are independent, reusable sections of the UI accompanied by their working logic.
 => There are two types of components:
     1) Class Components      : Depricated, asked only for interviews
     2) Functional Components : Uses functions, regular functions to create UI.
-
 
 =======================================================================================
 

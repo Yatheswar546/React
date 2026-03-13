@@ -1,0 +1,204 @@
+Session-3: 
+
+Material UI:
+=> Read the complete documentation: https://mui.com/material-ui/
+
+=> It is a 3rd party library  for CSS.
+=> We need to install it at first to use it.
+=> Similar to Bootstrap,
+    |-> Bootstrap has "class", MaterialUI has "Variant", "size", "startIcon", "endIcon"
+=> It provides Icons also.
+
+=> "Box" is div in Material UI
+      |-> In Box there is "component" attribute where we can mention either "div" or "section" or "article" etc...
+
+=> "Stack" is flex in MUI (Stack is vertical, flex is row)
+
+=> Grid has 12 cols same as Bootstrap
+
+=> "Component API" section to check the props for each component (Box, Button, Alert,  TextField etc...)
+
+NOTE: we need to import components(Box, Stack, TextField etc....) from MUI
+     Eg: import Stack from '@mui/material/Stack';
+         import Button from '@mui/material/Button';
+            or
+         import {Stack, Button} from '@mui/material';
+
+Project: Sample Form using MUI
+
+===============================================
+
+Session-3: 01:04:25
+
+Pass data to backend using API, we use same form we created above
+
+Controlled Components: React will be controlling the component when we use states 
+
+We need to create functions (handle Functions) for input fields in forms as they become 
+Controlled Components when we use States 
+
+Axios: 
+=> 3rd party library in npm
+=> API call 
+=> instead of fetch 
+
+HomeWork: Use a useState() like this 
+
+const [data, setData] = useState({
+    username: "",
+    password: "",
+    gender: "",
+    age: ""
+})
+
+===============================================
+
+Snackbar
+=> MUI Component 
+=> Used to show notifications
+=> <App /> Should be wrapped inside "<SnackbarProvider>"
+
+=> we use "enqueueSnackbar" method to show notifications.
+=> we get enqueueSnackbar from "useSnackbar()" hook
+
+=> "notistack" is one such library with same functionalities and used widely in industries
+
+Eg: import { useSnackbar } from "notistack";
+    
+    const MyButton = () => {
+        
+        const {enqueueSnackbar, closeSnackbar} = useSnackbar()
+        
+        return (
+            <Button onClick = {() => enqueueSnackbar('Success')}>
+                Show snackbar
+            </Button>
+        )
+    }
+
+=> Some commonly used props: 
+    1) variant : for colors
+    2) autoHideDuration: to close 
+    3) anchorOrigin: for position (at a particular location)
+    4) onClose: to close 
+    5) style 
+    6) transitionDuration 
+    7) onEnter 
+    8) onEntered
+    9) onExit
+    10) onExited
+
+===============================================
+
+************ Session-4: Starts ************
+
+"useEffect" hook in React:
+
+Problem Statement: infinite loop problem
+
+import React, { useState } from "react";
+
+export default function Products(){
+    const [products, setProducts] = useState([]);
+
+    function fetchData(){
+        fetch("https://dummyjson.com/products")
+            .then((res) => res.json())
+            .then((data) => setProducts(data.products));
+    }
+
+    return <div>Products</div>
+}
+
+useEffect: used to handle side-effects in React application.
+=> In the above example "fetchAPI" which is outside of React is making the website slow by infinite loop.
+=> setTimeouts, LocalStorages, Read/Write files etc...
+
+Syntax: useEffect((callback) => { Dependency Array})
+
+Eg: without Dependency list
+    
+    useEffect(() => {
+        console.log(products, "products");
+        fetchData();
+    });
+
+Eg: with Dependency list
+
+    useEffect(() => {
+        console.log(products, "products");
+        fetchData();
+    }, []); //mounting
+
+    In this fetchData() renders only once, because of Dependency List 
+    This is also known as "Mounting Phase".
+
+===============================================
+
+LifeCycle of React Hooks:
+1 Mounting Phase    : fetching the data (initial phase as page loads)
+2. Updating Phase   : 
+3. Unmounting Phase : 
+
+===============================================
+
+Lists in React:
+
+Eg:
+useEffect(() => {
+    console.log(products, "products");
+    fetchData();
+}, []);
+
+return (
+    <div>
+        {products.map((product) => (
+            <p>{product.title}</p>
+        ))}
+    </div>
+);
+
+NOTE: we need to use only "map" not "forEach".
+
+"key" attribute in lists:
+=> each child in list should have unique "key" prop
+=> because if we want to update/delete a particular item in that case it can be a problem as all cards are same.
+=> So we need to have a unique "key" prop for each child.
+=> By default the key is set to "Array Index".
+=> If list elements can change order, use another unique key specific to each element
+=> Array Index are not reliable because indices are not consistent.
+=> Array Indices are used in case of non-CRUD operations.
+
+Eg: using Array Index
+return (
+    <div>
+        {products.map((product, index) => (
+            <ProductCard data={product} key={index} />
+        ))}
+    </div>
+);
+
+using product's id
+return (
+    <div>
+        {products.map((product) => (
+            <ProductCard data={product} key={product.id} />
+        ))}
+    </div>
+);
+
+Project: 
+Create a Product Page that fetch details from json file ("https://dummyjson.com/products")
+use Card from Material UI to display titles
+create a seperate ProductCard.jsx page.
+
+************ Session-4: Ends ************
+===============================================
+
+************ Session-5: Starts ************
+
+
+************ Session-5: Ends ************
+===============================================
+
+
