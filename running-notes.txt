@@ -196,9 +196,224 @@ create a seperate ProductCard.jsx page.
 ===============================================
 
 ************ Session-5: Starts ************
-
+Project Code session
 
 ************ Session-5: Ends ************
 ===============================================
 
+************ Session-6: Starts ************
+APIs:
+1) Mock APIs (Mock Data):
+    => Dummy Data
+    => Used in project developing phase as backend team working on fecthing the data.
+
+Steps to create Mock APIs.
+1) Create a data.js file with dummy data. (array of objects)
+2) Create a component required to display your complete data. (eg: videos.jsx, blogs.jsx etc...)
+3) Create a single component (VideoCard.jsx, BlogCard.jsx etc....)
+
+In Videos.jsx file:
+import React from "react";
+import { data } from "../data.js";
+import VideoCard from "./VideoCard";
+
+export default function Videos() {
+    return(
+        <div>
+            {data.map(video) => (
+                <VideoCard data={video} key={video.id}/>
+            )}
+        </div>
+    )    
+}
+
+In VideoCard.jsx file:
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+
+export default function VideoCard(data) {
+    let {title, previewImage, videoLink, viewCount, releaseDate} = data;
+    
+    const navigate = useNavigate()
+
+    const handleClick=()=>{
+        window.location.href = videoLink;
+    }
+
+  return (
+    <Card sx={{ maxWidth: 345 }}>
+      <CardMedia
+        sx={{ height: 140 }}
+        image="{previewImage}"
+        title="{title}"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="div">
+          {title}
+        </Typography>
+        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+          Releasing on: {releaseDate}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Views: {viewCount}</Button>
+        <Button size="small" onClick={handleClick}>Watch Video</Button>
+      </CardActions>
+    </Card>
+  );
+}
+
+In App.jsx: (call videos)
+
+function App(){
+    return(
+        <>
+            <Videos />
+        </>
+    );
+}
+
+After the backend team is ready with data:
+In Videos.jsx file:
+
+import React, { useEffect } from "react";
+import VideoCard from "./VideoCard";
+import { Grid } from "@mui/material";
+import axios from "axios";
+import { enqueueSnackbar } from "notistack";
+
+export default function Videos() {
+
+    const [videos, setVideos] = useState([])
+
+    async function fetchVideos(){
+        try{
+            let res = await axios.get("https://............");
+            setVideos(res.data.videos);
+            enqueueSnackbar("Fetched videos", {
+                variant: "success", 
+                preventDuplicate: true,
+                anchorOrigin: {horizontal: "right", vertical: "top"}
+            });
+        }
+        catch(err){
+            console.log(err, "err");
+            enqueueSnackbar(err.response.data.message, {variant: "error"});
+        }
+    }
+
+    useEffect(() => {
+        fetchVideos();
+    }, []);
+
+    return(
+        <Grid container spacing={2} sx={{ justifyContent: "center" }}>
+            {videos.map(video) => (
+                <VideoCard data={video} key={video.id}/>
+            )}
+        </Grid>
+    )    
+}
+
+
+=======================================
+MUI Grid:
+=> Same as Bootstrap Grid.
+=> It has 12 columns.
+=> rowSpacing and columnSpacing
+=> container spacing and columns
+
+Project: In the previous created Videos section using API. 
+        Use MUI Grid to display them correctly on screen on all devices.
+
+
+=======================================
+Parallel API Calls in JS:
+
+Promises:
+=> It is an Object that represents eventual completion or failure of an asynchronous operation and its resulting value.
+=> It returns state & value
+=> It was used for calling API calls previously, at present we use fetch()
+
+Problem: In case of multiple API Calls. It will increase the time as one API call will execute only after before API call is finished.
+
+async function fetchData(){
+    let startTime = new Date();
+    let posts = await fetch("https://........./posts");
+    let users = await fetch("https://........./users");
+    let comments = await fetch("https://........./comments");
+    let endTime = new Date();
+    let timeTaken = endTime - startTime;
+    console.log(timeTaken);
+}
+
+export { fetchData };
+
+Solution: Promise Concurrency
+            |-> Promise.all()
+            |-> Promise.allSettled()
+            |-> Promise.any()
+            |-> Promise.race()
+
+let consider timetaken for 3 tasks 
+1 ==> 3 secs
+2 ==> 5 secs
+3 ==> 4 secs 
+
+In normal execution : 3 + 5 + 4 = 12 secs
+
+In Promise Concurrency:
+
+after 3 secs 
+1 ==> done 
+2 ==> 2 secs 
+3 ==> 1 sec 
+
+after 4 secs 
+1 ==> done 
+2 ==> 2 secs 
+3 ==> done
+
+after 5 secs 
+1 ==> done 
+2 ==> done 
+3 ==> done
+
+let postApi = await fetch("https://........./posts");
+let userApi = await fetch("https://........./users");
+let commentsApi = await fetch("https://........./comments");
+    
+
+async function fetchData(){
+    let startTime = new Date();
+    
+    let [postRes, userRes, commentRes] = await Promise.all([
+        fetch(postApi),
+        fetch(userApi),
+        fetch(commentsApi),
+    ]);
+
+    let [posts, users, comments] = await Promise.all([
+        postRes.json(), 
+        userRes.json(), 
+        commentRes.json(),
+    ]);
+
+    console.log(posts, users, comments, "res");
+
+    let endTime = new Date();
+    let timeTaken = endTime - startTime;
+    console.log(timeTaken);
+}
+
+export { fetchData };
+
+NOTE: Promise.all() accepts an array and returns an array. 
+
+************ Session-6: Ends ************
+===============================================
 
