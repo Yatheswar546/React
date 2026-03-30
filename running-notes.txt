@@ -622,7 +622,46 @@ Project Coding
 
 ************ Session-10: Starts ************
 
+=> uuid library to generate unique IDs
 
+New Project: QTify
+
+=> To create a new recat project in local machine
+    npm create vite@latest
+
+    Prerequisites: we need to install "Node" latest version from nodejs.org 
+
+=> To run the project - "npm run dev"
+
+=> "/src/components/" - to create components
+
+=> "/components
+        |->/Header/
+            |-> Header.jsx 
+            |-> Header.css 
+        |->/SongCard/
+            |-> SongCard.jsx 
+            |-> SongCard.module.css 
+
+=> When using "module.css" file
+
+    SongCard.jsx:
+    import React from "react";
+    import styles from "./SongCard.module.css";
+
+    export default function SongCard(){
+        return <div className={styles.card}>Card</div>
+    }
+
+    SongCard.module.css:
+    .card{
+        color: red;
+        border: 1px solid black;
+        padding: 10px;
+        .........
+    }
+
+=> Assignment: Use Swiper.js
 
 ************ Session-10: Ends ************
 ===============================================
