@@ -735,6 +735,7 @@ newCircle.draw();
 newCircle.move(2,9);
 newCircle.draw();
 
+=============================================================================
 
 "this" keyword:
 => points to the object executing the current function.
@@ -779,6 +780,10 @@ user1.findMutualsWith(user2);
 user1.addFriend("Steve");
 user1.printFriendsList();
 
+NOTE: this keyword works with new keyword only.
+
+=============================================================================
+
 "bind" method:
 => When we pass the method as callback, the value of this is lost and when the executor function executes the callback, 
     this is not pointing to the student object anymore.
@@ -822,6 +827,7 @@ user1.printFriendsList();
         const greet = student.greet.bind(student)
         executeObjectFunction(greet);
 
+=============================================================================
 
 ES6 Classes:
 => Js is not a class-based language but ES6 provides "class-like" syntax.
@@ -830,12 +836,15 @@ ES6 Classes:
 => A class is declared with keyword "class".
 
 class Car {
+
+    // data members
     constructor(make, model, color){
         this.make = make;
         this.model = model;
         this.color = color;
     }
 
+    // methods
     start(){
         console.log("Car Start");
     }
@@ -850,3 +859,302 @@ audi.welcomeMessage();
 
 ************ Session-1: Ends ************
 ===============================================
+
+===============================================
+************ Session-2: Starts ************
+
+// User-defined class
+class Car {
+
+    // data members
+    constructor(make, model, color){
+        this.make = make;
+        this.model = model;
+        this.color = color;
+    }
+
+    // methods
+    startEngine(){
+        console.log("Engine Start");
+    }
+}
+
+const audi = new Car("Audi", "Q3", "White");
+audi.startEngine();
+
+
+// In- built classes in JS
+
+=> "Object" is an in-built class in JS which is used to create objects.
+
+Eg: let obj = new Object({ name: "Rahul" });
+    console.log(obj);
+
+    console.log(typeof obj);    // object
+    console.log(typeof Object); // function
+    console.log(typeof Car);    // function
+
+    NOTE: Js is a Prototype-based language that rotates around functions and logics.
+
+// Methods:
+
+let obj = new Object({ name: "Rahul", age: 25, designation: "SDE" });
+console.log(Object.keys(obj));
+console.log(Object.values(obj));
+console.log(Object.entries(obj));
+
+// Task (use methods):
+const employeeData = {
+    John: 100,
+    Pete: 200,
+    Mary: 300
+};
+
+class Util{
+    constructor(employeeData){
+        this.data = employeeData;
+        this.sumOfSalaries = 0;
+    }
+
+    sumSalaries(){
+        const salariesData = Object.values(this.data);
+        let sumOfSalaries = 0;
+        for(let salary of salariesData){
+            sumOfSalaries += salary;
+        }
+
+        this.sumOfSalaries = sumOfSalaries;
+
+        console.log("The total sum of salary is ", sumOfSalaries);
+    }
+
+    averageSalaries(){
+        const salariesData = Object.values(this.data);
+        const totalNumberOfSalaries = salariesData.length;
+        const averageSalary = this.sumOfSalaries / totalNumberOfSalaries;
+
+        console.log("Average Salary is: ", averageSalary);
+    }
+}
+
+const employees = new Util(employeeData);
+employees.sumSalaries();
+employees.averageSalaries();
+
+=============================================================================
+
+Inheritance:
+=> Acquiring properties from parent class to child class and extend the properties to child class.
+=> Class Inheritance is a way for one class to extend another class to create new functionality.
+=> use "extend" keyword after class declaration.
+=> helps in reducing duplication and increase reusability.
+
+Eg:
+class Student {
+    constructor(name){
+        this.fullName = name;
+    }
+    markAttendance(){
+        console.log(this.fullName, "is present.");
+    }
+}
+
+class SportsCaptain extends Student{
+    playFootball(){
+        console.log(this.fullName, "is playing football.");
+    }
+}
+
+const captain = new SportsCaptain("Yathe");
+captain.markAttendance();
+captain.playFootball();
+
+Output:
+Yathe is present.
+Yathe is playing football.
+
+// Task 
+class Employee{
+    constructor(name, department){
+        this.name = name;
+        this.department = department;
+    }
+    markPresent(){
+        console.log("Employee marked as Present");
+    }
+}
+
+class Developer extends Employee{
+    submitCode(){
+        console.log("Code submitted by " + this.name + " from " + this.department);
+    }
+}
+
+const employee = new Developer("Yathe", "SDE");
+employee.markPresent();
+employee.submitCode();
+
+Output:
+Employee marked as Present
+Code submitted by Yathe from SDE
+
+=============================================================================
+
+Method Overriding:
+=> It is a feature that allows a child class to provide a specific implementation
+    of a method already provided by the parent class.
+=> If we define the same method in the child class -> the objects of the child class will call that 
+    particular implementation instead of the parent class implementation.
+
+Eg: 
+class Student {
+    constructor(name){
+        this.fullName = name;
+    }
+    markAttendance(){
+        console.log(this.fullName, "is present.");
+        return this;
+    }
+}
+
+class SportsCaptain extends Student{
+    markAttendance(){
+        console.log("Sports Captain " + this.fullName + " is present");
+    }
+    playFootball(){
+        console.log(this.fullName, "is playing football.");
+    }
+}
+
+const captain = new SportsCaptain("Yathe");
+captain.markAttendance();
+captain.playFootball();
+
+Output:
+Sports Captain Yathe is present
+Yathe is playing football.
+
+=============================================================================
+
+"Super" keyword:
+=> Used to explicity call the parent class implementation.
+   super.method(...) to call a parent method.
+
+Eg: 
+class Student {
+    constructor(name){
+        this.fullName = name;
+    }
+    markAttendance(){
+        console.log(this.fullName, "is present.");
+        return this;
+    }
+}
+
+class SportsCaptain extends Student{
+    markAttendance(){
+        super.markAttendance();
+        console.log("Sports Captain " + this.fullName + " is present");
+    }
+    playFootball(){
+        console.log(this.fullName, "is playing football.");
+    }
+}
+
+const captain = new SportsCaptain("Yathe");
+captain.markAttendance();
+captain.playFootball();
+
+Output:
+Yathe is present.
+Sports Captain Yathe is present
+Yathe is playing football.
+
+=============================================================================
+
+Constructor Overriding:
+=> The child class uses the constructor of its parent class.
+=> If we wanted to define data members only for child class then we need seperate constructor.
+=> But the child class won't able to use parent class constructor. 
+=> Here comes "Constructor Overriding", if we want to use data member from parent class constructor 
+    within child class constructor then we use constructor overriding.
+
+Eg: 
+class Student {
+    constructor(name){
+        this.fullName = name;
+    }
+    markAttendance(){
+        console.log(this.fullName, "is present.");
+        return this;
+    }
+}
+
+class SportsCaptain extends Student{
+
+    constructor(cricketCaptain, footballCaptain, fullName){
+        super(fullName);  // Constructor Overriding
+        this.cc = cricketCaptain;
+        this.fc = footballCaptain;
+    }
+
+    markAttendance(){
+        super.markAttendance();  // Method Overriding
+        console.log("Sports Captain " + this.fullName + " is present");
+        return this;
+    }
+    playFootball(){
+        console.log(this.fullName, "is playing football.");
+    }
+}
+
+const captain = new SportsCaptain(true, true, "Yathe");
+captain.markAttendance();
+captain.playFootball();
+
+Output:
+Yathe is present.
+Sports Captain Yathe is present
+Yathe is playing football.
+
+// Task 
+class Employee{
+    constructor(name, department){
+        this.name = name;
+        this.department = department;
+    }
+    markPresent(){
+        console.log("Employee marked as Present");
+    }
+    getRole(){
+        console.log("Employee of Office");
+    }
+}
+
+class Developer extends Employee{
+
+    constructor(prefLanguage,name){
+        super(name);
+        this.prefLanguage = prefLanguage;
+    }
+
+    submitCode(){
+        console.log("Code submitted by " + this.name + " from " + this.department);
+    }
+
+    getRole(){
+        super.getRole();
+        console.log("Works with " + this.prefLanguage);
+    }
+}
+
+const employee = new Developer("English");
+employee.getRole();
+
+Output:
+Employee of Office
+Works with English
+
+************ Session-2: Ends ************
+===============================================
+
