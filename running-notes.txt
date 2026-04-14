@@ -665,3 +665,188 @@ New Project: QTify
 
 ************ Session-10: Ends ************
 ===============================================
+
+===============================================
+************ FE-202 ************
+===============================================
+
+************ Session-1: Starts ************
+
+OOP (Object Oriented Programming):
+
+=> Class-Based Language: Java, C++ - have a class construct which defines all properties that characterize a set of objects.
+=> Prototype-Based Language: JavaScript - has a notion of a object which serves as a template from which we get the properties of a new object.
+=> Classes were introduced after ES6 in JS.
+
+=> Object Recap (Creation, Adding Properties, Reading Properties etc....)
+
+Constructors:
+=> we can create objects using special function "Constructors"
+=> It help us create a blueprint for creating objects.
+=> "this" keyword - to reference the properties of object inside the constructor.
+
+Constructors Demo:
+---- Constructor Functions ----
+function Car(make, model, color){
+    
+    // data members : stores data
+    this.make = make;
+    this.model = model;
+    this.color = color;
+    
+    // member functions: execute some operations
+    this.start = function() {
+        console.log("Car Start");
+    };
+    this.welcomeMessage = function(){
+        console.log("Welcome to your brand new car, ", this.make, this.model);
+    };
+}
+
+const thar = new Car("Mahindra", "Thar", "Black");
+const ferrari = new Car("Ferrari", "XYZ", "Red");
+const bmw = new Car("BMW", "M5", "Black");
+
+thar.start();
+ferrari.welcomeMessage();
+
+Task : (New Constructor - Circle)
+
+function Circle(radius, x, y){
+
+    this.radius = radius;
+    this.location = {
+        x : x,
+        y : y
+    };
+
+    this.draw = function(){
+        console.log("Current Location: ", this.location);
+    };
+    this.move = function (nextX, nextY) {
+        this.location.x = nextX;
+        this.location.y = nextY;
+    };
+
+}
+
+const newCircle = new Circle(7, 3, 4);
+newCircle.draw();
+newCircle.move(2,9);
+newCircle.draw();
+
+
+"this" keyword:
+=> points to the object executing the current function.
+=> for a regular function: "this" points to the global window object.
+    Eg: function hello(){
+            console.log(this);
+        }
+
+Demo - 2 :
+
+function User(fullName, friendsList = []){
+    this.fullName = fullName;
+    this.friendsList = friendsList;
+    this.mutualFriends = []
+
+    this.addFriend = function(friendName){
+        this.friendsList.push(friendName);
+        console.log(this.friendsList);
+    }
+
+    this.printFriendsList = function(){
+        for( let friend of this.friendsList){
+            console.log(friend);
+        }
+    }
+
+    this.findMutualsWith = function(user2){
+        for(let friend of this.friendsList){
+            if(user2.friendsList.includes(friend)){
+                this.mutualFriends.push(friend);
+            }
+        }
+        console.log(this.mutualFriends);
+    }
+}
+
+const user1 = new User("Rahul", ["John", "Sam", "Robert", "Leonardo"]);
+
+const user2 = new User("Shivam", ["Steve", "Chris", "Joel", "Thomas", "John", "Sam"]);
+
+user1.findMutualsWith(user2);
+user1.addFriend("Steve");
+user1.printFriendsList();
+
+"bind" method:
+=> When we pass the method as callback, the value of this is lost and when the executor function executes the callback, 
+    this is not pointing to the student object anymore.
+
+    Eg: const student = {
+            fullName: "Rohit",
+            greet: function(){
+                console.log("Hello, " + this.fullName);
+            },
+        };
+
+        function executeObjectFunction(callback){
+            callback();
+        }
+
+        executeObjectFunction(student.greet);
+
+        // The above code's output is : Hello, undefined.
+
+
+=> what we can do is pass the value of "this" explicity to the "student.greet" method.
+=> To achieve this we can use "bind" method which can be applied on all methods.
+
+    Eg: const greet = student.greet.bind(student); // bind the object to thee method
+        executeObjectFunction(greet); // Passing the object method as callback
+
+=> The bind method returns a new function.
+=> It helps us set the value of this to the passed value for specific funtion.
+
+    Eg: const student = {
+            fullName: "Rohit",
+            greet: function(){
+                console.log("Hello, " + this.fullName);
+            },
+        };
+
+        function executeObjectFunction(callback){
+            callback();
+        }
+
+        const greet = student.greet.bind(student)
+        executeObjectFunction(greet);
+
+
+ES6 Classes:
+=> Js is not a class-based language but ES6 provides "class-like" syntax.
+=> Under the hood, it is doing the same thing we were doing with Constructor functions.
+=> Classes are blueprints that describes a particular object.
+=> A class is declared with keyword "class".
+
+class Car {
+    constructor(make, model, color){
+        this.make = make;
+        this.model = model;
+        this.color = color;
+    }
+
+    start(){
+        console.log("Car Start");
+    }
+
+    welcomeMessage(){
+        console.log("Welcome to your brand new car, ", this.make, this.model);
+    };
+}
+
+const audi = new Car("Audi", "Q3", "White");
+audi.welcomeMessage();
+
+************ Session-1: Ends ************
+===============================================
