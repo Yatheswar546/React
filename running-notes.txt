@@ -1158,3 +1158,197 @@ Works with English
 ************ Session-2: Ends ************
 ===============================================
 
+
+===============================================
+************ Session-3: Starts ************
+
+Functional Programming:
+=> FP is the process of building software by composing pure functions, 
+    avoiding shared state, mutable (changing) data and side-effects.
+=> FP is declarative (what needs to be done) rather than 
+    imperative(how it needs to be done, eg: OOPS) 
+    and the state flows through pure functions.
+
+Eg: 
+// Imperative Code 
+
+let longPasswords = [];
+for(let i=0; i<passwords.length; i++){
+    const password = passwords[i];
+    if(password.length >= 9){
+        longPasswords.push(password).
+    }
+}
+
+// Declarative Code 
+
+const longPasswords = passwords.filter((password) => password.length >= 9);
+
+
+=> Functional code tends to be more concise, more predictable, and easier to test
+    than imperative or OOP.
+=> Languages uses FP : Erlang, Haskell.
+
+Functions are "First-Class" objects:
+=> In FP, functions are first-class objects i.e. 
+    we can use functions as if they were variables/constants.
+
+Eg: 
+const byTwo = function(value){
+    // function is assigned to a variable
+    return value / 2;
+}
+
+const ans = byTwo(8); // constant
+
+=> We can combine functions with other functions and generate new functions 
+    and higher-order functions.
+
+=============================================================================
+
+Pure Functions:
+=> A function which given the same inputs, always returns the same output (immutability).
+=> Has no "side-effects".
+=> These are functions which returns a predictable and deterministic value.
+
+Eg:
+// Pure function
+function addTwo(a,b){
+    return a+b;
+}
+
+// Impure function
+function addTwo(a,b){
+    console.log(a,b);
+}
+
+Advantages:  
+=> Works as an independent function that gives same output for same inputs.
+=> Readable because of independent behavior.
+=> Straightforward to debug.
+=> Can clone an external state into a pure function, but it doesn't change the purity of function.
+
+=============================================================================
+
+Side-Effects:
+=> A side effect can be perceived as something a function does, which does not pertain to returning a value.
+=> Examples - printing a value, using global variables, doing external operations like changing the values of a different function, 
+    or even mutating the values/objects received as arguments
+=> A function is pure when it does not have side effects.
+
+Examples:
+=> Modifying any external variable or object property (e.g., a global variable, or a variable in the parent function scope chain)
+=> Logging to the console
+=> Writing to a file
+=> Calling any other functions with side-effects
+
+=============================================================================
+
+Avoiding Shared-Data:
+=> In FP we avoid declaring any global variables.
+=> Instead pass the variables around from within a function to another function.
+
+Eg: 
+//Global Variables
+let x = 15;
+let y = 10;
+
+const add = () => {
+  //Impure function using global variables
+  return x + y;
+};
+
+const addFP = (x, y) => {
+  //Pure function only using what's passed to it
+  return x + y;
+};
+
+=============================================================================
+
+Immutability:
+=> An Immutable object is that which can’t be modified after it’s created. 
+=> Conversely, a mutable object is any object which can be modified after it’s created.
+=> Immutability of a pure function means that the function would treat its input values as immutable (once created, cannot be changed)
+=> So if we wish to perform a mutation on the input, we first copy it and then mutate its value.
+
+Eg: An array.push(value) will mutate the original array with the value passed in the push function. 
+Instead to do this in an immutable fashion, we need to copy the state to some other variable and change the value.
+
+function purePush(arr, value) {
+  const nextArr = [...arr]; //copying; to not mutate original state
+
+  //Impure function called on local variable, not changing external state
+  nextArr.push(value);
+  return nextArr; //returing the new state
+}
+
+//Or better
+function purePush(arr, value) {
+  return [...arr, value]; //returns new array with elements from arr and value.
+}
+
+// Task - Pure ToDO list 
+
+const todoDB = [];
+
+const addTodo = (arr, newTodo) => [...arr, newTodo];
+
+const getTodo = (arr, index) => arr[index];
+
+const clearTodo = () => [];
+
+const updateTodo = (arr, index, newTodo) => arr.map((ele, i) => index === i ? newTodo : ele );
+
+const result = addTodo(todoDB, "Play Cricket");
+const updatedResult = addTodo(result, "Play Football");
+
+console.log(updatedResult);
+
+updatedResult = todoDB;
+
+=============================================================================
+
+NOTE: A programming language is said to have First-class Functions 
+      when all three (Callbacks + Closures + Function Expression) are met.
+
+=============================================================================
+
+Higher Order Functions:
+=> A function that accepts and/or returns another function is called a higher-order function.
+=> In JS, functions are first-class citizens because You can pass them around, store them in variables and arrays, 
+    use them as inputs for calculations. You can use them like any piece of data.
+=> The greatest benefit of HOFs is greater reusability.
+
+Eg: 
+const add = (x,y) => {
+    return x + y;
+}
+
+const diff = (x,y) => {
+    return Math.abs(x-y);
+}
+
+//Higher order function taking function as arg.
+const calculate = (callback, x, y) => {
+  const value = callback(x, y);
+  return value;
+};
+
+calculate(add, 4, 5); //9
+
+=============================================================================
+
+Modules:
+=> Module is just a file. One script is one module. As simple as that.
+=> Modules can load each other and use special directives export and import to interchange functionality, 
+    call functions of one module from another one:
+    - export keyword labels variables and functions that should be accessible from outside the current module.
+    - import allows the import of functionality from other modules.
+
+
+
+
+=============================================================================
+
+************ Session-3: Ends ************
+===============================================
