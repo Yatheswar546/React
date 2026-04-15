@@ -1346,9 +1346,79 @@ Modules:
     - import allows the import of functionality from other modules.
 
 
+************ Session-3: Ends ************
+===============================================
+
+===============================================
+************ Session-4: Starts ************
+
+        "NO UNNECESSARILY RE-RENDERS"
+=> If there are more re-renders in a short-span of time then the browser will run slow or get crashed.
+=> A setter method always re-render a component, below is a example.
+
+Eg: App.js
+import { useState } from "react";
+
+export default function App(){
+    // 1st approach: Use simple Js variable
+    let counter = 0;
+    // 2nd approach: Use useState variable
+    const [count, setCount] = useState(0);
+
+    const handleIncrement = () => {
+        setCount((prevValue) => prevValue + 1);
+        counter++;
+        console.log("count: ", counter);
+    };
+
+    console.log("Component re-rendered");
+
+    return(
+        <div className="App">
+            <h2>{count}</h2>
+            <button onClick={handleIncrement}>Increment</button>
+        </div>
+    );
+}
+
+=> To solve the above re-rendering problem the below approaches won't work effectively.
+    1st approach: Use simple Js variable
+    2nd approach: Use useState variable
+=> To solve this issue we use "useRef" hook. (3rd approach)
+
+useRef:
+=> 
+
+Demo code: App.js
+import { useState } from "react";
+
+export default function App(){
+    // 3rd approach: useRef
+    const counterRef = useRef(0);
+
+    const handleIncrement = () => {
+        setCount((prevValue) => prevValue + 1);
+        counter++;
+        console.log("count: ", counter);
+    };
+
+    console.log("Component re-rendered");
+
+    return(
+        <div className="App">
+            <h2>{count}</h2>
+            <button onClick={handleIncrement}>Increment</button>
+        </div>
+    );
+}
+
+
+
 
 
 =============================================================================
 
-************ Session-3: Ends ************
+
+
+************ Session-4: Ends ************
 ===============================================
