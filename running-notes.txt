@@ -1509,10 +1509,20 @@ Uses of "useMemo":
 => Avoiding unnecessary computations on subsequent renders with the same input value.
 => useMemo actually returns calculated values and memoize that value.
 
-
- 
-
-=============================================================================
-
 ************ Session-4: Ends ************
+===============================================
+
+===============================================
+************ Session-5: Starts ************
+
+
+
+
+
+
+
+
+
+
+************ Session-5: Ends ************
 ===============================================
