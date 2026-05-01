@@ -1,26 +1,21 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 import './App.css'
-import { Routes, Route } from 'react-router-dom'
 
-import Navbar from "./concepts/6.ReactRouter/Navbar";
-import Home from "./concepts/6.ReactRouter/pages/Home";
-import About from "./concepts/6.ReactRouter/pages/About";
-import Services from "./concepts/6.ReactRouter/pages/Services";
-import Contact from "./concepts/6.ReactRouter/pages/Contact";
+import Intro from './concepts/01. Introduction/Intro'
+import { Add, Sub } from './concepts/01. Introduction/NamedModule'
 
 function App() {
 
+  const a = 7;
+  const b = 3;
+
   return (
     <>
-        <Navbar />
-
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/about" element={<About />}/>
-          <Route path="/services" element={<Services />}/>
-          <Route path="/contact" element={<Contact />}/>
-        </Routes>
+      <Intro />
+      
+      <h1>Addition of {a} + {b} = {Add(a,b)}</h1>
+      <h1>Subtraction of {a} - {b} = {Sub(a,b)}</h1>
 
     </>
   )

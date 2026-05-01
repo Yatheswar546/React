@@ -1526,3 +1526,361 @@ Uses of "useMemo":
 
 ************ Session-5: Ends ************
 ===============================================
+
+ChatGPT Prompts:
+
+Hey gp, 
+
+Imagine you are React.js developer and help me in the below scenario. 
+I am creating a JavaScript notes on as topics as possible. I am preparing this notes for the following reasons. 
+
+1) as a running notes for my interview preparation 
+2) to consider this notes as a reference when I teach students 
+3) to post it in GitHub as a public repo so others could also see.
+
+The below is the present folder structure I have.
+
+React
+|
+|--> node_modules
+|
+|--> public
+|
+|--> src
+        |---> assests
+        |---> concepts 
+                |---> 01. Introduction
+                        |---> Intro.jsx
+                        |---> NamedModule.jsx
+                        |---> notes.txt
+                |---> 02. FunctionalComponents
+                        |---> Functional.jsx
+                        |---> notes.txt
+                |---> 03. Hooks
+                        |---> Counter.jsx
+                        |---> notes.txt
+                |---> 04. Props
+                        |---> Counter.jsx
+                        |---> notes.txt
+                |---> 05. ConditionalRendering
+                        |---> ConditionalRendering.jsx
+                        |---> notes.txt
+                |---> 06. ReactRouter
+                        |---> pages
+                                |---> About.jsx
+                                |---> Contact.jsx
+                                |---> Home.jsx
+                                |---> Services.jsx
+                        |---> Navbar.jsx
+                        |---> notes.txt
+        |---> App.css
+        |---> App.jsx
+        |---> index.css
+        |---> main.jsx
+        |---> index.html 
+        |---> package-lock.json
+        |---> package.json
+        |---> README.md
+        |---> vite.config.js
+
+The above is the 1st part of my query, go through this and understand and 
+let me know if you didn't understand any part so I will repeat again.
+If not I will continue my query
+        
+Good, now the 2nd part is I have the running notes for remaining concepts. 
+I need your help to make a perfect React notes that can be understood for a beginner also without any Problem.
+Also I need your help in teaching me React, as I am also confused with some of these topics. 
+
+One more thing, we must prepare this notes in such a way that in each concept we will be coding some part as a practical example.
+Those examples should be very clear, simple and easy to understand for beginner and more towards practical applications.
+
+And for each concept we have a notes.txt file at present but we need to make a README.md file from that with as much as information possible
+with live examples, interview questions, practice problems moreover for a interview preparation in the present world with new concepts.
+
+Let me know if you understood this part or ask me if you had doubts at any points.
+If not I will share the files one-by-one so we can start preparing the notes.
+
+-------------------------------------------
+
+1st Concept: Introduction 
+
+main.jsx:
+import { StrictMode, React } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import { BrowserRouter } from 'react-router-dom'
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  </BrowserRouter>
+)
+
+
+App.jsx
+// import reactLogo from './assets/react.svg'
+// import viteLogo from '/vite.svg'
+import './App.css'
+
+import Intro from './concepts/01. Introduction/Intro'
+import { Add, Sub } from './concepts/01. Introduction/NamedModule'
+
+function App() {
+
+  const a = 7;
+  const b = 3;
+
+  return (
+    <>
+      <Intro />
+      
+      <h1>Addition of {a} + {b} = {Add(a,b)}</h1>
+      <h1>Subtraction of {a} - {b} = {Sub(a,b)}</h1>
+
+    </>
+  )
+}
+
+export default App
+
+index.css 
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button{
+  padding: 10px;
+  margin: 0 20px;
+  font-size: 25px;
+}
+
+.counter{
+  font-size: 30px;
+}
+
+.Counter{
+  margin-top: 20px;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+} 
+
+App.css
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+Inside "./concepts/01. Introduction/" folder:
+Intro.jsx 
+import '../../index.css';
+
+export default function Intro() {
+    return (
+        <>
+            <h1>Demo Component</h1>
+        </>
+    )
+}
+
+NamedModule.jsx
+function Add(a,b){
+    return a+b;
+}
+
+function Sub(a,b) { 
+    return a-b;
+ }
+
+export {Add, Sub};
+
+notes.txt 
+React:
+
+-> Js library open-sourced by Facebook.
+-> It allows you to create and re-use UI elements.
+-> It can be integrated with anything (Vanilla.js, Next.js, Vue.js, Angular.js)
+
+NOTE: A "library" is a tool you call upon when you need it (you are in control), 
+    while a "framework" provides a structure that calls your code for you (it is in control). 
+
+Features of React:
+1) It contains single html file. It is a "Single Page Application"
+2) In react projects we won't redirect to other pages, we stay on single html page, 
+    the required components will be replaced accordingly.
+3) We create multiple "routes" to route that component.
+4) Components, these are reusable components. (Seperation of Concerns)
+5) Virtual DOM (Unique Selling Point)
+6) Virtual DOM is a replica of real DOM.
+7) Virtual DOM & Real DOM are always on sink.
+
+          copy/replica                   Update                         Reconcilation
+Real DOM -------------->  Virtual DOM -----------> Updated Virtual DOM --------------> Updated Real DOM
+            duplicate                 Diffing Algo.
+
+Diffing Algorithm: 
+=> Used to find out the difference between two tress (Real & Virtual DOM).
+=> It gives the node that is different in Virtual DOM to Real DOM and the changes are applied.
+
+Reconcilation: Virtual DOM and Real DOM become same.
+
+=======================================================================================
+
+Components (The Building Blocks):
+
+=> Components are independent, reusable sections of the UI accompanied by their working logic.
+=> There are two types of components:
+    1) Class Components      : Depricated, asked only for interviews
+    2) Functional Components : Uses functions, regular functions to create UI.
+
+=======================================================================================
+
+Important Libraries:
+
+1) react 
+2) react-dom/client (  createRoot()  )
+
+=> index.html : single HTML file
+=> main.js    : main file, it access index.html file and creates root element using "createRoot()". 
+                but we can't do any changes do this. It contains "App" component.
+=> App.js     : topmost parent, the "App" component.
+                it is the starting point everything we create here will go in "App.js".
+
+=> "root.render" is same as "appendChild" is js.
+=> "StrictMode" : to avoid errors, and react runs the code twice.
+
+=======================================================================================
+
+Functional Component Example:
+
+function Demo(){
+    return <h2>Demo Component</h2>
+}
+
+(or)
+
+function Demo(){
+    return (
+        <>
+            <h2>Demo Component</h2>
+        <>
+    );
+}
+
+=======================================================================================
+
+jsx:
+
+=> JavaScript and XML
+=> HTML like code in React.
+
+=======================================================================================
+
+Babel:
+
+=> A transpiler (translator + compiler) used in react to convert jsx to html 
+    so browser can understand.
+
+=======================================================================================
+
+Modules:
+
+=> In react every single file is a seperate single module.
+=> We need to "import" and "export" them.
+
+Syntax: export default function Name;   
+        import Name from './path';
+
+Examples:
+Method 1:
+        export default function Demo(){
+            .................
+        }
+
+        import {Demo} from './path';
+
+Method 2:
+        export {Demo};
+        import {Demo} from './path';
+
+Types of Module Exports:
+
+1) Default Export   : single module in a single file (component).
+2) Named Export     : multiple modules from single file.
+
+Example:
+    function add(a,b){
+        return a+b;
+    }
+    function sub(a,b){
+        return a-b;
+    }
+
+    export {add, sub};
+
+    --------------------------------------------------
+
+    In App.jsx file
+
+    import {sub, add} from './path'
+
+    function App() {
+
+        const a = 7;
+        const b = 3;
+
+        return (
+          <>
+            <h1>Hello World</h1>
+          
+            <Intro />
+            
+            <h1>Addition of {a} + {b} = {Add(a,b)}</h1>
+            <h1>Subtraction of {a} - {b} = {Sub(a,b)}</h1>
+          
+          </>
+        )
+    }
+
+NOTE: 
+    1) Sequence is not important while importing and exporting Named Components.
+        Only Names should be the same. Names are very very important.
+    2) Only one default export module per file.
+        But there can be many named export modules per file.
+
+
+This is the complete notes and codes I wrote, Analyze them and do the changes 
+and create a README.md file as I told you earlier.
