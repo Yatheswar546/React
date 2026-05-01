@@ -7,13 +7,24 @@ import './App.css'
 
 // import Functional from './concepts/02. FunctioncalComponents/Functional';
 
-import Counter from './concepts/03. Hooks/Counter'
+// import Counter from './concepts/03. Hooks/Counter'
+
+import Counter from './concepts/04. Props/Counter'
 
 function App() {
 
   return (
     <>
-      <Counter />
+      
+      <h1>Counter by 1</h1>
+      <Counter diff={1} name={"Yathe"} />
+
+      <h1>Counter by 5</h1>
+      <Counter diff={5} />
+
+      <h1>Counter by 10</h1>
+      <Counter diff={10} />
+
     </>
   )
 }
