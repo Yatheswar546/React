@@ -9,22 +9,15 @@ import './App.css'
 
 // import Counter from './concepts/03. Hooks/Counter'
 
-import Counter from './concepts/04. Props/Counter'
+// import Counter from './concepts/04. Props/Counter'
+
+import ToggleCounter from './concepts/05. ConditionalRendering/ConditionalRendering';
 
 function App() {
 
   return (
     <>
-      
-      <h1>Counter by 1</h1>
-      <Counter diff={1} name={"Yathe"} />
-
-      <h1>Counter by 5</h1>
-      <Counter diff={5} />
-
-      <h1>Counter by 10</h1>
-      <Counter diff={10} />
-
+      <ToggleCounter />
     </>
   )
 }

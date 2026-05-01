@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Counter from '../4.Props/Counter'
+import Counter from '../04. Props/Counter';
 
 export default function ToggleCounter() {
     const [showCounter, setShowCounter] = useState(false);

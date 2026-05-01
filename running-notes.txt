@@ -1602,149 +1602,82 @@ If not I will share the files one-by-one so we can start preparing the notes.
 
 -------------------------------------------
 
-4th Concept: Props 
+5th Concept: ConditionalRendering 
 
 notes.txt
-Props (Properties):
+Conditional Rendering:
 
-=> Props are properties that are used to pass data between React Components. 
-=> They are used in creating Dynamic Components.
-
-                     Props
-        Parent -------------------> Child 
-                  Unidirectional
+=> To display components based on specific conditions.
+=> The code is written similar way to ternary operator.
 
 Eg:
-Let us  say I have 3 Counters on screen and each has different functionalities.
-i.e. one counter should increase and decrease by 1
-     one counter should increase and decrease by 5
-     one counter should increase and decrease by 10.
+1) Redirecting to Login/Signup Pages 
+2) Read More buttons
+3) Nav buttons 
+4) Toggle effects (to show and hide a particular component)
 
-To achieve this we use props, we pass data(difference in this case) to the function(counter).
-So the function will do the operations according to that value.
+Eg: Let us consider a scenario where I need to show & hide the counter 
+    by clicking on counter button
 
 Example Code:
 
-In Counter.jsx
+// In ConditionalRendering.jsx
 
-import { useState } from "react";
+import { useState } from 'react';
+import Counter from '../4.Props/Counter'
 
-export default function Counter ( {diff}){
+export default function ToggleCounter() {
+    const [showCounter, setShowCounter] = useState(false);
 
-    let [counter, setCounter] = useState(0);
+    function handleToggle() {
 
-    function handleAdd(){
-        setCounter(counter + diff);
+        // 1st Method:
+        // if(showCounter){
+        //     setShowCounter(false);
+        // } else{
+        //     setShowCounter(true);
+        // }
+        
+        // 2nd Method:
+        // showCounter ? setShowCounter(false) : setShowCounter(true);
+        
+        // 3rd Method:
+        setShowCounter(!showCounter)
     }
+    return (
+        <div>
+            <button onClick={handleToggle}>
+                {showCounter ? "Hide Counter" : "Show Counter"}
+            </button>
 
-    function handleSub(){
-        setCounter(counter - diff);
-    }
-
-    return(
-        <div className='Counter'>
-            <button onClick={handleAdd}>+</button>
-            {counter}
-            <button onClick={handleSub}>-</button>
+            {showCounter && <Counter diff={1} name="Yathe" />}
         </div>
-    );
+    )
 
 }
 
-------------------------------------------------------------------------
+------------------------------------------------------
 
 In App.jsx
 
 import './App.css'
-import Counter from './concepts/4.Props/Counter'
+import ToggleCounter from './concepts/5.ConditionalRendering/ConditionalRendering'
 
 function App() {
 
   return (
     <>
-
-      <h1>Counter by 1</h1>
-      <Counter diff={1}/>
-
-      <h1>Counter by 5</h1>
-      <Counter diff={5}/>
-
-      <h1>Counter by 10</h1>
-      <Counter diff={10}/>
-
+      <ToggleCounter />  
     </>
   )
 }
 
 export default App
 
-
-====================================================================================================
-
-NOTE:
-
-=> Props are Objects {key: value} pairs because we can send multiple values.
-
-Example Code:
-
-In Counter.jsx
-
-import { useState } from "react";
-
-export default function Counter ( {diff, name}){
-
-    console.log(`props: ${diff}, ${name}`);
-
-    let [counter, setCounter] = useState(0);
-
-    function handleAdd(){
-        setCounter(counter + diff);
-    }
-
-    function handleSub(){
-        setCounter(counter - diff);
-    }
-
-    return(
-        <div>
-            <button onClick={handleAdd}>+</button>
-            {counter}
-            <button onClick={handleSub}>-</button>
-            {name}
-        </div>
-    );
-
-}
-
-------------------------------------------------------------------------
-
-In App.jsx
-
-function App() {
-
-  return (
-    <>
-
-      <h1>Counter with Name</h1>
-      <Counter diff={1} name="Yathe"/>
-
-      <h1>Counter by 5</h1>
-      <Counter diff={5} />
-
-      <h1>Counter by 10</h1>
-      <Counter diff={10} />
-
-    </>
-  )
-}
-
-Output: 
-props: 1, Yathe
-props: 5, undefined
-props: 10, undefined
-
 The remaining css files are same and I hope you remember the folder structure
 
-This is the complete notes and codes I wrote for Props. As you can see I wrote the as a story telling like previous topic
+This is the complete notes and codes I wrote for ConditionalRendering. As you can see I wrote the as a story telling like previous topic
 explaining about each point one-by-one.
 Analyze them and do the changes so the flow is easy to understand for everyone and create a README.md file with our primary goals as we discussed earlier.
+
+1st generate README file and later explain how to code is actually working in all 3 methods, especially how useState is used here
