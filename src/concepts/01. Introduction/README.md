@@ -1,5 +1,13 @@
 # 📘 React Introduction
 
+## 🚀 What You Will Learn
+
+- What is React
+- How React works internally
+- Virtual DOM & Diffing
+- Components and JSX
+- Import & Export in React
+
 ## 1. Introduction
 
 **React** is an open-source JavaScript library developed by Meta Platforms for building user interfaces.
@@ -46,14 +54,14 @@ With React:
 
 ### 🔹 Component-Based Architecture
 
-* UI divided into reusable parts called Components (Seperation of Concerns)
+* UI divided into reusable parts called Components (Separation of Concerns)
 * We create multiple "routes" to route that component.
 
 ### 🔹 Virtual DOM
 
 * Virtual DOM (Unique Selling Point)
 * Virtual DOM is a replica of real DOM. 
-* Virtual DOM & Real DOM are always on sink.
+* Virtual DOM & Real DOM are always on sync.
 
 Flow:
 
@@ -100,7 +108,7 @@ Real DOM
 
 ### 🔹 Integration
 
-* React can be integrated with anything (Vanilla.js, Next.js, Vue.js, Angular.js etc...)
+* React can be integrated with other libraries and frameworks (like Vanilla.js, Next.js). It can also be used inside existing projects.
 
 ---
 
@@ -121,7 +129,9 @@ Real DOM
 
 ### 🔹 main.jsx
 
-* main file, it access index.html file and creates root element using "createRoot()" but `we can't do any changes do this. It contains "App" component.`
+* main file, it access index.html file and creates root element using "createRoot()"
+ 
+`we generally don’t modify this file often, but you can make changes if needed (like adding providers, routing, etc.). It contains "App" component.`
 
 ```js
 import { StrictMode } from 'react'
@@ -178,7 +188,7 @@ They are independent and accompanied by their own working logic
 ### Types:
 
 * Functional Components ✅              → Uses functions, regular functions to create UI.
-* Class Components ❌ (rarely used now) → Depricated, asked only for interviews 
+* Class Components ❌ (rarely used now) → Deprecated, asked only for interviews 
 
 ---
 
@@ -224,7 +234,7 @@ function Demo() {
 
 ## 9. Modules (Import & Export)
 
-* In react every single file is a seperate single module. We need to "import" and "export" them
+* In react every single file is a separate single module. We need to "import" and "export" them
 
 ### Types of Exports
 
