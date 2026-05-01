@@ -2,12 +2,21 @@
 
 ## 1. Introduction
 
-**React** is a JavaScript library developed by Meta Platforms for building user interfaces.
+**React** is an open-source JavaScript library developed by Meta Platforms for building user interfaces.
 
 It helps developers create reusable UI components and build fast, scalable web applications.
 
 👉 In simple terms:
 React allows you to break UI into small reusable pieces called **components**.
+
+---
+
+## NOTE: Library vs Framework
+
+👉 A "library" is a tool you call upon when you need it (you are in control) while a "framework" provides a structure that calls your code for you (it is in control).
+
+* **Library (React)** → You control the flow
+* **Framework**       → Framework controls your code
 
 ---
 
@@ -33,12 +42,18 @@ With React:
 
 * React apps use one HTML file (`index.html`)
 * No full page reloads
+* In react projects we won't redirect to other pages, we stay on single html page, the required components will be replaced accordingly.
 
 ### 🔹 Component-Based Architecture
 
-* UI divided into reusable parts
+* UI divided into reusable parts called Components (Seperation of Concerns)
+* We create multiple "routes" to route that component.
 
 ### 🔹 Virtual DOM
+
+* Virtual DOM (Unique Selling Point)
+* Virtual DOM is a replica of real DOM. 
+* Virtual DOM & Real DOM are always on sink.
 
 Flow:
 
@@ -54,24 +69,20 @@ Real DOM -------------->  Virtual DOM -----------> Updated Virtual DOM ---------
 
 ---
 
-### Small improvement (recommended version)
+### Small improvement (another flow of representation)
 
-```markdown
 ```
-
 Real DOM
-│
-├── copy/replica ──> Virtual DOM
-│                        │
-│                        ├── Update (state/props change)
-│                        ↓
-│                  Updated Virtual DOM
-│                        │
-│                        ├── Diffing Algorithm
-│                        ↓
-└────────────── Reconciliation ──────────────> Updated Real DOM
-
-```
+   │
+   ├── copy/replica ──> Virtual DOM
+   │                        │
+   │                        ├── Update (state/props change)
+   │                        ↓
+   │                  Updated Virtual DOM
+   │                        │
+   │                        ├── Diffing Algorithm
+   │                        ↓
+   └────────────── Reconciliation ──────────────> Updated Real DOM
 ```
 ---
 
@@ -79,22 +90,21 @@ Real DOM
 
 ### 🔹 Diffing Algorithm
 
-* Finds difference between old and new Virtual DOM
+* Finds difference between old and new Virtual DOM (It compares them as DOM Tree model)
+* It gives the node that is different in Virtual DOM to Real DOM and the changes are applied.
 
 ### 🔹 Reconciliation
 
 * Updates only required parts in Real DOM
+* Virtual DOM and Real DOM become same.
+
+### 🔹 Integration
+
+* React can be integrated with anything (Vanilla.js, Next.js, Vue.js, Angular.js etc...)
 
 ---
 
-## 4. Library vs Framework
-
-* **Library (React)** → You control the flow
-* **Framework** → Framework controls your code
-
----
-
-## 5. Project Structure Overview
+## 4. Project Structure Overview
 
 ### 🔹 index.html
 
@@ -103,7 +113,15 @@ Real DOM
 
 ---
 
+### 🔹 Important Libraries
+
+* react 
+* react-dom/client (  createRoot()  )
+* "root.render" is same as "appendChild" is js
+
 ### 🔹 main.jsx
+
+* main file, it access index.html file and creates root element using "createRoot()" but `we can't do any changes do this. It contains "App" component.`
 
 ```js
 import { StrictMode } from 'react'
@@ -122,13 +140,15 @@ createRoot(document.getElementById('root')).render(
 
 ### 🔹 Key Points:
 
-* `createRoot()` → creates React root
-* `StrictMode` → detects issues (runs twice in dev)
+* `createRoot()`  → creates React root
+* `StrictMode`    → detects issues (runs twice in dev)
 * `BrowserRouter` → enables routing
 
 ---
 
 ### 🔹 App.jsx
+
+* Topmost parent, the "App" component. It is the starting point everything we create here will go in "App.js"
 
 ```jsx
 import Intro from './concepts/01. Introduction/Intro'
@@ -150,20 +170,19 @@ function App() {
 export default App
 ```
 
----
-
-## 6. Components
+## 5. Components (The Building Blocks)
 
 Components are reusable building blocks of UI.
+They are independent and accompanied by their own working logic
 
 ### Types:
 
-* Functional Components ✅
-* Class Components ❌ (rarely used now)
+* Functional Components ✅              → Uses functions, regular functions to create UI.
+* Class Components ❌ (rarely used now) → Depricated, asked only for interviews 
 
 ---
 
-## 7. Functional Component Example
+## 6. Functional Component Example
 
 ```jsx
 function Demo(){
@@ -171,9 +190,22 @@ function Demo(){
 }
 ```
 
+**or**
+
+```js
+function Demo() {
+  return (
+    <>
+      <h2>Hello World</h2>
+      <h2>Demo Component</h2>
+    </>
+  );
+}
+```
+
 ---
 
-## 8. JSX
+## 7. JSX (JavaScript + XML)
 
 * JavaScript + HTML-like syntax
 
@@ -183,15 +215,22 @@ function Demo(){
 
 ---
 
-## 9. Babel
+## 8. Babel
 
 * Converts JSX → JavaScript
+* A transpiler (translator + compiler) used in react to convert jsx to html so browser can understand.
 
 ---
 
-## 10. Modules (Import & Export)
+## 9. Modules (Import & Export)
 
-### Default Export
+* In react every single file is a seperate single module. We need to "import" and "export" them
+
+### Types of Exports
+
+### 1. Default Export
+
+* Single module in a single file (Component)
 
 ```jsx
 export default function Demo(){}
@@ -203,7 +242,9 @@ import Demo from './Demo'
 
 ---
 
-### Named Export
+### 2. Named Export
+
+* Multiple modules from single file.
 
 ```jsx
 function Add(a,b){
@@ -227,13 +268,14 @@ import { Add, Sub } from './NamedModule'
 
 * Only one default export per file
 * Multiple named exports allowed
+* Sequence is not important while importing and exporting Named Components
 * Names must match exactly
 
 ---
 
 ## 11. Practical Example
 
-### Intro Component
+### Intro Component (Intro.jsx)
 
 ```jsx
 export default function Intro() {
@@ -255,6 +297,31 @@ function Sub(a,b){
 }
 
 export { Add, Sub }
+```
+
+### App.jsx
+
+```js
+import {Sub, Add} from './NamedModule.jsx';
+
+function App() {
+
+    const a = 7;
+    const b = 3;
+
+    return (
+      <>
+        <h1>Hello World</h1>
+
+        <Intro />
+
+        <h1>Addition of {a} + {b} = {Add(a,b)}</h1>
+        <h1>Subtraction of {a} - {b} = {Sub(a,b)}</h1>
+
+      </>
+    );
+}
+
 ```
 
 ---
