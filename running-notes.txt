@@ -1602,82 +1602,165 @@ If not I will share the files one-by-one so we can start preparing the notes.
 
 -------------------------------------------
 
-5th Concept: ConditionalRendering 
+6th Concept: React Router
 
 notes.txt
-Conditional Rendering:
+=> In general we use <a> tags in html for redirecting to other pages/sections.
+=> But using of these <a> tags will reload the entire page including the DOM tree 
+    which results in increased load time.
+=> And also sometimes the same code (<head>, <nav>, <footer>) is used in multiple pages 
+    are loaded each time.
 
-=> To display components based on specific conditions.
-=> The code is written similar way to ternary operator.
+=> This is because of Multi-Page Application(MPA), this issue is resolved in React 
+    as React is a Single-Page Application(SPA). 
 
-Eg:
-1) Redirecting to Login/Signup Pages 
-2) Read More buttons
-3) Nav buttons 
-4) Toggle effects (to show and hide a particular component)
+=> In React this routing is done using "React-Router".
 
-Eg: Let us consider a scenario where I need to show & hide the counter 
-    by clicking on counter button
+====================================================================================
 
-Example Code:
+React-Router:
 
-// In ConditionalRendering.jsx
+React Router is the standard third-party library used to handle 
+client-side routing in React applications.
 
-import { useState } from 'react';
-import Counter from '../4.Props/Counter'
+=> we need to use third-party library "Router"
+=> we need to install react-router using "npm install react-router-dom"
 
-export default function ToggleCounter() {
-    const [showCounter, setShowCounter] = useState(false);
+=> BrowseRouter : It stores the current location in the browser's address bar using clean URLs.
 
-    function handleToggle() {
+=> we need to wrap the app inside "BrowseRouter" so we can use it in entire project.
 
-        // 1st Method:
-        // if(showCounter){
-        //     setShowCounter(false);
-        // } else{
-        //     setShowCounter(true);
-        // }
-        
-        // 2nd Method:
-        // showCounter ? setShowCounter(false) : setShowCounter(true);
-        
-        // 3rd Method:
-        setShowCounter(!showCounter)
-    }
-    return (
-        <div>
-            <button onClick={handleToggle}>
-                {showCounter ? "Hide Counter" : "Show Counter"}
-            </button>
+=> <Route />
+    <Route /> is the fundamental unit used to map a URL path to a React component.
+    It is children.
+    It takes element path as props and redirect to that component(page)
 
-            {showCounter && <Counter diff={1} name="Yathe" />}
-        </div>
-    )
+=> <Routes />
+    It is the container component that wraps all individual route definitions.
+    It is the parent which is a collection of all Routes.
+    It examines all its children (<Route /> elements) and renders only the best match for the current URL.
 
-}
+=> <Link> : used to navigate to other components. It is replacement of <a> in html.
+            in this "to" is used to give the path.
 
-------------------------------------------------------
+====================================================================================
 
-In App.jsx
+Example Code for a Navbar 
+
+File Structure
+
+src
+│
+├── concepts
+│     └──6.ReactRouter 
+|            ├── pages
+|            │     ├── Home.jsx
+|            │     ├── About.jsx
+|            │     ├── Services.jsx
+|            │     └── Contact.jsx
+|            └── Navbar.jsxNavbar.jsx
+│
+│
+├── App.jsx
+└── main.jsx
+
+main.jsx:
+
+// we need wrap the <App /> in <BrowseRouter /> 
+
+import { StrictMode, React } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+import App from './App.jsx'
+import { BrowserRouter } from 'react-router-dom'
+
+createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  </BrowserRouter>
+)
+
+------------------------------------------------------------------------------
+
+App.jsx
+
+// we need to import Route & Routes and all the components
 
 import './App.css'
-import ToggleCounter from './concepts/5.ConditionalRendering/ConditionalRendering'
+import { Routes, Route } from 'react-router-dom'
+
+import Navbar from "./concepts/6.ReactRouter/Navbar";
+import Home from "./concepts/6.ReactRouter/pages/Home";
+import About from "./concepts/6.ReactRouter/pages/About";
+import Services from "./concepts/6.ReactRouter/pages/Services";
+import Contact from "./concepts/6.ReactRouter/pages/Contact";
 
 function App() {
 
   return (
     <>
-      <ToggleCounter />  
+        <Navbar />
+
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/about" element={<About />}/>
+          <Route path="/services" element={<Services />}/>
+          <Route path="/contact" element={<Contact />}/>
+        </Routes>
+
     </>
   )
 }
 
 export default App
 
+------------------------------------------------------------------------------
+
+Navbar.jsx
+
+// we use Link tag here to give the respective paths
+
+import { Link } from "react-router-dom";
+
+export default function Navbar() {  
+
+    return(
+        <nav>
+            <Link to="/">Home</Link> |
+            <Link to="/about">About</Link> |
+            <Link to="/services">Services</Link> |
+            <Link to="/contact">Contact</Link> |
+        </nav>
+    )
+
+}
+
+------------------------------------------------------------------------------
+
+Home.jsx, About.jsx, Services.jsx, Contact.jsx 
+
+export default function Home(){
+    return <h1>Home Page</h1>
+}
+
+export default function About(){
+    return <h1>About Page</h1>
+}
+
+export default function Services(){
+    return <h1>Service Page</h1>
+}
+
+export default function Contact(){
+    return <h1>Contact Page</h1>
+}
+
 The remaining css files are same and I hope you remember the folder structure
 
-This is the complete notes and codes I wrote for ConditionalRendering. As you can see I wrote the as a story telling like previous topic
+This is the complete notes and codes I wrote for ReactRouter. As you can see I wrote the as a story telling like previous topic
 explaining about each point one-by-one.
 Analyze them and do the changes so the flow is easy to understand for everyone and create a README.md file with our primary goals as we discussed earlier.
 
-1st generate README file and later explain how to code is actually working in all 3 methods, especially how useState is used here
+Also in the README file right after the codes explain how to code is actually working one-by-one, especially how Link, Route, Router are used here.

@@ -71,7 +71,7 @@ src
 |            │     ├── About.jsx
 |            │     ├── Services.jsx
 |            │     └── Contact.jsx
-|           └── Navbar.jsxNavbar.jsx
+|            └── Navbar.jsxNavbar.jsx
 │
 │
 ├── App.jsx
