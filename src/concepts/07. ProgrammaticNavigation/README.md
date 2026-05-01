@@ -41,7 +41,7 @@ Sometimes navigation depends on logic, not user clicks on links.
 const navigate = useNavigate();
 ```
 
-👉 It returns a function used to navigate between pages
+👉 It returns a function that allows navigation between routes programmatically
 
 ---
 
@@ -93,8 +93,8 @@ export default function Cart() {
 
 ```jsx id="9t2fjm"
 import { Routes, Route } from "react-router-dom";
-import GoToCart from "./concepts/07.ProgrammaticNavigation/GoToCart";
-import Cart from "./concepts/07.ProgrammaticNavigation/Cart";
+import Dashboard from './concepts/07. ProgrammaticNavigation/pages/Dashboard';
+import Login from './concepts/07. ProgrammaticNavigation/LoginPage';
 
 function App() {
   return (
@@ -112,7 +112,7 @@ export default App;
 
 ## 6. Visual Flow
 
-```id="7z6p0v"
+```
 User clicks button
         │
         ▼
@@ -182,7 +182,7 @@ export default function Login() {
     function handleLogin(e) {
         e.preventDefault();
 
-        if(username === "admin") {
+        if(username.trim() === "admin") {
             navigate("/dashboard");
         } else {
             alert("Invalid User");
@@ -190,15 +190,18 @@ export default function Login() {
     }
 
     return (
-        <form onSubmit={handleLogin}>
-            <input 
-                type="text"
-                placeholder="Enter username"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            <button type="submit">Login</button>
-        </form>
+        <div>
+            <h1 className="loginHeading">Login Form</h1>
+            <form onSubmit={handleLogin}>
+                <input 
+                    type="text"
+                    placeholder="Enter name"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                />
+                <button type="submit" className="formButton">Login</button>
+            </form>
+        </div>
     );
 }
 ```
@@ -210,6 +213,93 @@ export default function Login() {
 ```jsx id="j7g2qk"
 export default function Dashboard() {
     return <h1>Welcome to Dashboard</h1>;
+}
+```
+
+---
+
+### 📁 App.jsx
+
+```jsx id="9t2fjm"
+import { Routes, Route } from "react-router-dom";
+import Dashboard from './concepts/07. ProgrammaticNavigation/pages/Dashboard';
+import Login from './concepts/07. ProgrammaticNavigation/LoginPage';
+
+function App() {
+  return (
+    <>  
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </>
+  );
+}
+
+export default App;
+```
+
+### 📁 App.css
+
+```css
+#root {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+```
+
+### 📁 index.css
+
+```css
+.loginHeading {
+  margin-bottom: 20px;
+  font-size: 48px;
+}
+
+form {
+  background: #7ee369;
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #2563eb;
+}
+
+.formButton {
+  width: 100%;
+  padding: 12px;
+  margin: 0;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  background-color: #1d4ed8;
 }
 ```
 
@@ -233,7 +323,7 @@ export default function Dashboard() {
 navigate("/home", { replace: true });
 ```
 
-👉 Prevents going back
+👉 Replaces current history entry, so user cannot go back to previous page using browser back button
 
 ---
 
@@ -251,6 +341,23 @@ navigate(-1);
 
 ```js id="t4c1zo"
 navigate(1);
+```
+
+---
+
+### 🔹 Passing Data During Navigation
+
+```js
+navigate("/dashboard", { state: { user: username } });
+```
+
+👉 Access it using:
+
+```js
+import { useLocation } from "react-router-dom";
+
+const location = useLocation();
+console.log(location.state.user);
 ```
 
 ---
@@ -307,6 +414,12 @@ Using `navigate("/dashboard")`
 ### 5. What does navigate(-1) do?
 
 Navigates back to previous page.
+
+---
+
+### 6. Can we pass data using navigate?
+
+✅ Yes, using `state` parameter
 
 ---
 

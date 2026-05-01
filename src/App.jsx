@@ -13,24 +13,26 @@ import './App.css'
 
 // import ToggleCounter from './concepts/05. ConditionalRendering/ConditionalRendering';
 
-import { Router, Route, Routes } from 'react-router-dom';
-import Navbar from './concepts/06. ReactRouter/Navbar'
-import About from './concepts/06. ReactRouter/pages/About';
-import Contact from './concepts/06. ReactRouter/pages/Contact';
-import Home from './concepts/06. ReactRouter/pages/Home';
-import Services from './concepts/06. ReactRouter/pages/Services';
+// import { Route, Routes } from 'react-router-dom';
+// import Navbar from './concepts/06. ReactRouter/Navbar'
+// import About from './concepts/06. ReactRouter/pages/About';
+// import Contact from './concepts/06. ReactRouter/pages/Contact';
+// import Home from './concepts/06. ReactRouter/pages/Home';
+// import Services from './concepts/06. ReactRouter/pages/Services';
+
+import { Route, Routes } from 'react-router-dom';
+// import GoToCart from './concepts/07. ProgrammaticNavigation/GoToCart';
+// import Cart from './concepts/07. ProgrammaticNavigation/pages/Cart';
+import Dashboard from './concepts/07. ProgrammaticNavigation/pages/Dashboard';
+import Login from './concepts/07. ProgrammaticNavigation/LoginPage';
 
 function App() {
 
   return (
-    <>
-      <Navbar />
-
+    <>  
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/About" element={<About />} />
-        <Route path="/Contact" element={<Contact />} />
-        <Route path="/Services" element={<Services />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </>
   );

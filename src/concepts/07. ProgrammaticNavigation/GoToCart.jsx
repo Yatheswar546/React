@@ -9,10 +9,10 @@ export default function GoToCart() {
     }
 
     return (
-        <>
+        <div>
             <h1>Products Page</h1>
-            <button onClick={handleClick()}>Go to Cart</button>
-        </>
+            <button onClick={handleClick}>Go to Cart</button>
+        </div>
     );
 
 }

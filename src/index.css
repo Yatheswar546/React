@@ -13,12 +13,18 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
+* {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
   min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 h1 {
@@ -39,6 +45,54 @@ button{
 .Counter{
   margin-top: 20px;
 }
+
+/* Form Styling Start */
+
+.loginHeading {
+  margin-bottom: 20px;
+  font-size: 48px;
+}
+
+form {
+  background: #7ee369;
+  padding: 30px;
+  border-radius: 12px;
+  width: 320px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+input:focus {
+  border-color: #2563eb;
+}
+
+.formButton {
+  width: 100%;
+  padding: 12px;
+  margin: 0;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.formButton:hover {
+  background-color: #1d4ed8;
+}
+
+/* Form Styling End */
 
 @media (prefers-color-scheme: light) {
   :root {
