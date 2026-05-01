@@ -329,6 +329,8 @@ function App() {
 ### Output
 
 ```
+Hello World
+Demo Component
 Addition of 7 + 3 = 10
 Subtraction of 7 - 3 = 4
 ```
