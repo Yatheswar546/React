@@ -136,9 +136,9 @@ Counter shows / hides
 
 ---
 
-# 🔍 How the Code Actually Works
+## 🔍 How the Code Actually Works
 
-## Step 1: Initial State
+### Step 1: Initial State
 
 ```js
 const [showCounter, setShowCounter] = useState(false);
@@ -155,7 +155,7 @@ showCounter = false
 
 ---
 
-## Step 2: Button Click
+### Step 2: Button Click
 
 ```js
 <button onClick={handleToggle}>
@@ -167,7 +167,7 @@ showCounter = false
 
 ---
 
-## 🔹 Method 1: if-else
+### 🔹 Method 1: if-else
 
 ```js
 if(showCounter){
@@ -184,7 +184,7 @@ if(showCounter){
 
 ---
 
-## 🔹 Method 2: Ternary
+### 🔹 Method 2: Ternary
 
 ```js
 showCounter ? setShowCounter(false) : setShowCounter(true);
@@ -194,7 +194,7 @@ showCounter ? setShowCounter(false) : setShowCounter(true);
 
 ---
 
-## 🔹 Method 3: Best Method
+### 🔹 Method 3: Best Method
 
 ```js
 setShowCounter(!showCounter);
@@ -211,7 +211,7 @@ setShowCounter(!showCounter);
 
 ---
 
-## Step 3: Re-render Happens
+### Step 3: Re-render Happens
 
 When state updates:
 
@@ -223,7 +223,7 @@ setShowCounter(...)
 
 ---
 
-## Step 4: UI Updates
+### Step 4: UI Updates
 
 ### Button Text
 
