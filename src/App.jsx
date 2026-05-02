@@ -1,12 +1,12 @@
 import './App.css'
 
-import Products from './concepts/09. useEffect/Products';
+import ListProducts from './concepts/10. Lists_in_React/ListProducts';
 
 function App() {
 
   return (
     <>  
-      <Products />
+      <ListProducts />
     </>
   );
 }
