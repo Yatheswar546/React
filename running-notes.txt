@@ -1515,7 +1515,9 @@ Uses of "useMemo":
 ===============================================
 ************ Session-5: Starts ************
 
-
+UseCallback : Optimizing Expensive Functions
+UseContext  : Avoid Prop drilling in React 
+Custom Hooks
 
 
 
@@ -1602,35 +1604,64 @@ If not I will share the files one-by-one so we can start preparing the notes.
 
 -------------------------------------------
 
-7th Concept: Programmatic Navigation
+9th Concept: useEffect and LifeCycle of React0
 
 notes.txt
-Programmatic Navigation:
+"useEffect" hook in React:
 
-=> Navigation needs to be done based on the result of an event or a logic.
-Eg: Form Submission, Buttons 
+Problem Statement: infinite loop problem
 
-=> "useNavigate()" is used to achieve Programmatic Navigation.
+import React, { useState } from "react";
 
-Eg:  const navigate = useNavigate();
+export default function Products(){
+    const [products, setProducts] = useState([]);
 
-     function handleClick(){
-        navigate('/cart');
-     }
+    function fetchData(){
+        fetch("https://dummyjson.com/products")
+            .then((res) => res.json())
+            .then((data) => setProducts(data.products));
+    }
 
-     <button onClick = {handleClick}> Go to Cart </button>
+    return <div>Products</div>
+}
 
-The next topic is about Programmatic Navigation and I have written only a small notes on this, I didn't write any codes also
-to show as example. So help me in preparing this folder you can add as much information as you want and also help me with the coding part 
-for better understanding.
+useEffect: used to handle side-effects in React application.
+=> In the above example "fetchAPI" which is outside of React is making the website slow by infinite loop.
+=> setTimeouts, LocalStorages, Read/Write files etc...
+
+Syntax: useEffect((callback) => { Dependency Array})
+
+Eg: without Dependency list
+    
+    useEffect(() => {
+        console.log(products, "products");
+        fetchData();
+    });
+
+Eg: with Dependency list
+
+    useEffect(() => {
+        console.log(products, "products");
+        fetchData();
+    }, []); //mounting
+
+    In this fetchData() renders only once, because of Dependency List 
+    This is also known as "Mounting Phase".
+
+===============================================
+
+Ok gp, as you said let's go with useEffect next, I have written only a small notes on this with less code.
+So help me in preparing this folder you can add as much information as you want and also help me with the coding part 
+for better understanding. You can add as much content as you want and also as you said we need to deep dive into this so create more content
 
 And at-last we need to create a README.md file with our primary goals as we discussed earlier.
 
+Coming to remaining files, I hope you remember the folder structure and codes we written so far
 
-The remaining css files are same and I hope you remember the folder structure
-
-This is the complete notes and codes I wrote for ReactRouter. As you can see I wrote the as a story telling like previous topic
+This is the complete notes and codes I wrote for useEffect. As you can see I wrote the as a story telling like previous topic
 explaining about each point one-by-one.
 Analyze them and do the changes so the flow is easy to understand for everyone and create a README.md file with our primary goals as we discussed earlier.
 
-Also in the README file right after the codes explain how to code is actually working one-by-one, especially how Link, Route, Router are used here.
+Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
+
+After this we will go to next topic Life Cycle of React Hooks.
