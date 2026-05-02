@@ -130,9 +130,9 @@ Cart component renders
 
 ---
 
-# 🔍 How the Code Actually Works
+## 🔍 How the Code Actually Works
 
-## Step 1: useNavigate Hook
+### Step 1: useNavigate Hook
 
 ```js id="1f5lqv"
 const navigate = useNavigate();
@@ -142,7 +142,7 @@ const navigate = useNavigate();
 
 ---
 
-## Step 2: Button Click
+### Step 2: Button Click
 
 ```js id="7kgqmc"
 <button onClick={handleClick}>
@@ -152,7 +152,7 @@ const navigate = useNavigate();
 
 ---
 
-## Step 3: Navigation Happens
+### Step 3: Navigation Happens
 
 ```js id="1rzz1y"
 navigate("/cart");
