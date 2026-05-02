@@ -167,7 +167,7 @@ showCounter = false
 
 ---
 
-### 🔹 Method 1: if-else
+#### 🔹 Method 1: if-else
 
 ```js
 if(showCounter){
@@ -184,7 +184,7 @@ if(showCounter){
 
 ---
 
-### 🔹 Method 2: Ternary
+#### 🔹 Method 2: Ternary
 
 ```js
 showCounter ? setShowCounter(false) : setShowCounter(true);
@@ -194,7 +194,7 @@ showCounter ? setShowCounter(false) : setShowCounter(true);
 
 ---
 
-### 🔹 Method 3: Best Method
+#### 🔹 Method 3: Best Method
 
 ```js
 setShowCounter(!showCounter);
