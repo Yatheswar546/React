@@ -309,7 +309,7 @@ createRoot(document.getElementById('root')).render(
 ---
 
 
-# 🎨 7. index.css
+### 🎨 7. index.css
 
 ```css
 .ProtectedRouteContainer {
