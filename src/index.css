@@ -94,6 +94,24 @@ input:focus {
 
 /* Form Styling End */
 
+/* Protected Route styling Start */
+.ProtectedRouteContainer {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.ProtectedRouteContainer input {
+  padding: 10px;
+  margin: 10px;
+  width: 200px;
+}
+
+.ProtectedRouteContainer button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
+/* Protected Route styling End  */
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
