@@ -251,9 +251,9 @@ Component renders
 
 ---
 
-# 🔍 How the Code Actually Works
+## 🔍 How the Code Actually Works
 
-## Step 1: BrowserRouter
+### Step 1: BrowserRouter
 
 ```jsx id="3hvtf2"
 <BrowserRouter>
@@ -266,7 +266,7 @@ Component renders
 
 ---
 
-## Step 2: Link (Navigation)
+### Step 2: Link (Navigation)
 
 ```jsx id="o1w5rp"
 <Link to="/about">About</Link>
@@ -280,7 +280,7 @@ Component renders
 
 ---
 
-## Step 3: Routes
+### Step 3: Routes
 
 ```jsx id="o7l4gm"
 <Routes>
@@ -293,7 +293,7 @@ Component renders
 
 ---
 
-## Step 4: Route
+### Step 4: Route
 
 ```jsx id="8a3lre"
 <Route path="/about" element={<About />} />
@@ -306,7 +306,7 @@ Component renders
 
 ---
 
-## Step 5: Full Flow
+### Step 5: Full Flow
 
 1. User clicks "About"
 2. URL → `/about`
