@@ -198,7 +198,7 @@ All product titles are displayed
 
 ---
 
-## ⚠️ Problem in above code
+### ⚠️ Problem in above code
 
 React will show a warning:
 
@@ -212,7 +212,7 @@ React will show a warning:
 
 ---
 
-## Why React needs key?
+### Why React needs key?
 
 👉 React uses keys to:
 
@@ -232,7 +232,7 @@ React will show a warning:
 
 ---
 
-## 🔍 How this works
+### 🔍 How this works
 
 * Each product has a unique `id`
 * React uses this `id` to track elements
@@ -258,7 +258,7 @@ Without key:
 
 ---
 
-## Why index is bad?
+### Why index is bad?
 
 👉 Because:
 
@@ -268,7 +268,7 @@ Without key:
 
 ---
 
-## Example problem
+### Example problem
 
 If you delete first item:
 
@@ -287,7 +287,7 @@ If you delete first item:
 
 ---
 
-## ✅ When to use index
+### ✅ When to use index
 
 👉 Only when:
 
