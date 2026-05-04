@@ -681,6 +681,8 @@ OOP (Object Oriented Programming):
 
 => Object Recap (Creation, Adding Properties, Reading Properties etc....)
 
+===============================================
+
 Constructors:
 => we can create objects using special function "Constructors"
 => It help us create a blueprint for creating objects.

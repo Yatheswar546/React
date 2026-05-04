@@ -15,5 +15,33 @@ Parallel API calls
 Lifting State Up (search bar + displaying content like videos/images etc... from backend)
 Debouncing
 
+Before moving to Phase a recap of Js OOPS concepts:
+OOP
+Constructors
+this keyword
+bind keyword
+ES6 Classes
+User-defined classes and In-built classes
+Inheritance
+Method Overriding
+Super keyword
+Constructor Overriding
+Functional Programming (Imperative and Declarative codes)
+Pure Functions
+Side-Effects
+Avoiding Shared-Data
+Immutability
+Higher Order Functions
+Modules
 
 Phase 3:
+useRef 
+useMemo 
+useCallback
+useContext
+Custom Hooks 
+
+
+Phase 4:
+Tailwind.css
+Material UI
