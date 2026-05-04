@@ -1460,6 +1460,8 @@ When to use "useState" and "useRef".
 
 useMemo:
 
+=> useMemo is used for performance optimization by caching results and avoiding expensive calculations
+
 => Expensive function: A function that is executed multiple times but gives same input increasing bandwidth.
 Eg: 
 function square(num){
@@ -1662,6 +1664,7 @@ To fix the above issue we can use "useCallback" hook.
 useCallback:
 
 => useCallback is a React Hook that lets you cache a function definition between re-renders.
+=> useCallback function is used to memoize functions and avoid calling them unless certain dependencies changes
 
 Example:
 const handler = UseCallback(() => {
@@ -1756,6 +1759,8 @@ We can fix this using "useContext" hook.
 
 useContext:
 
+=> useContext will automatically pass all the state and data variables declared in the context to all the child components of that ParentComponent.
+
 => "createContext" lets you create a 'context' that components can provide or read.
 
 => we will create a context which holds a value at global and that value can be used at any component 
@@ -1836,30 +1841,36 @@ function GrandchildComponent() {
 
 Custom Hooks in React:
 
-=> In React, a 'custom hook' is a Js function that starts with the prefix "use" and 
-    enables you to reuse the stateful logic across multiple components.
+=> In React, a 'custom hook' is a reusable function that starts with the prefix "use" and 
+    allows you to share and reuse stateful or side-effectful logic across multiple components.
 => Custom hooks allow you to extract and share logic such as state management, side effects,
     and event handling without duplicating code.
 
     Custom Hooks Examples in React: https://github.com/streamich/react-use
 
-Example:
+NOTE: We cannot use custom Hook in a normal function we must use inside a Custom Hook(prefix "use") function only
+
+Example 1:
 
 TempComponent.jsx
 
 import { useState } from 'react';
+import { useLocalStorageInput } from './hooks/useLocalStorageInput';
 
 const LOCAL_STORAGE_KEY = "temp_key"
 
 export const TempComponent = () => {
 
-    const [input, setInput] = useState(
-        localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Crio'
-    );
+    // const [input, setInput] = useState(
+    //     localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Crio'
+    // );
 
-    useEffect(() => {
-        localStorage.setItem(LOCAL_STORAGE_KEY, input)
-    }, [input]);
+    // useEffect(() => {
+    //     localStorage.setItem(LOCAL_STORAGE_KEY, input)
+    // }, [input]);
+
+    // after using useLocalStorageInput file completely we don't need above code
+    const { input, setInput } = useLocalStorageInput(LOCAL_STORAGE_KEY, "Crio");
 
     return (
         <div>
@@ -1928,6 +1939,58 @@ export default function App() {
         </div>
     );
 }
+
+Example 2 (Custom Hook that returns "window size"):
+
+import { useState, useEffect } from 'react';
+
+const useWindowSize = () => {
+    const [windowsize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);;
+
+    return windowsize;
+};
+
+export default useWindowSize;
+
+Example 3 (useLocalStorage custom Hook):
+
+import { useState, useEffect } from 'react';
+
+const useLocalStorage = (key, initialValue = "") => {
+
+    const [value, setValue] = useState(() => {
+        const storedValue = localStorage.getItem(key);
+        
+        return storedValue ? JSON.parse(storedValue) : initialValue;
+    });
+
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
+
+    return [value, setValue];
+};
+
+export default useLocalStorage;
+
 
 ************ Session-5: Ends ************
 ===============================================
