@@ -71,7 +71,8 @@ with live examples, interview questions, practice problems moreover for a interv
 Let me know if you understood this part or ask me if you had doubts at any points.
 If not I will share the files one-by-one so we can start preparing the notes.
 
--------------------------------------------
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
 
 10th Concept: Lists in React
 
@@ -130,3 +131,10 @@ for better understanding. As you can see I wrote the as a story telling like pre
 Analyze them and do the changes so the flow is easy to understand for everyone and create a README.md file with our primary goals as we discussed earlier.
 
 Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
+
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+
+
+Hey gp, 
+Thank you for the suggested RoadMap. It is very good especially dividing into 4 phases. 
