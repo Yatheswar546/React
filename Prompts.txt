@@ -138,3 +138,41 @@ Also in the README file right after the codes explain how to code is actually wo
 
 Hey gp, 
 Thank you for the suggested RoadMap. It is very good especially dividing into 4 phases. 
+But I made a few changes below go through that also once and let me know your opinions in a simple way no need of large answers
+
+Phase 1:
+
+useEffect 
+LifeCycle of React 
+Lists 
+Controlled Components (forms)
+
+
+Phase 2:
+APIs
+Fetch vs Axios
+useEffect + API Integration
+Pass data to backend (POST request)
+Parallel API calls
+Lifting State Up (search bar + displaying content like videos/images etc... from backend)
+Debouncing
+
+Before moving to Phase a recap of Js OOPS concepts:
+We don't create repo for this as the topics are already in my JavaScript Repository.
+We simple create a README file mentioning that please refer to these concepts from JavaScript Repository
+before moving further into React and we will provide that link 
+
+Phase 3:
+useRef 
+useMemo 
+useCallback
+useContext
+Custom Hooks 
+
+
+Phase 4:
+Tailwind.css
+Material UI
+
+
+What are your thoughts on this
