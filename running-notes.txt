@@ -12,11 +12,11 @@ Material UI:
 => "Box" is div in Material UI
       |-> In Box there is "component" attribute where we can mention either "div" or "section" or "article" etc...
 
-=> "Stack" is flex in MUI (Stack is vertical, flex is row)
+=> "Stack" is flex in MUI only difference is Stack is vertical whereas flex is row
 
-=> Grid has 12 cols same as Bootstrap
+=> MUI Grid has 12 cols same as Bootstrap Grid
 
-=> "Component API" section to check the props for each component (Box, Button, Alert,  TextField etc...)
+=> "Component API" section to check the props for each component (Box, Button, Alert, TextField etc...)
 
 NOTE: we need to import components(Box, Stack, TextField etc....) from MUI
      Eg: import Stack from '@mui/material/Stack';
@@ -61,7 +61,7 @@ Snackbar
 => we use "enqueueSnackbar" method to show notifications.
 => we get enqueueSnackbar from "useSnackbar()" hook
 
-=> "notistack" is one such library with same functionalities and used widely in industries
+=> "notistack" is one such library with same functionalities and used widely at industry level
 
 Eg: import { useSnackbar } from "notistack";
     
@@ -77,10 +77,10 @@ Eg: import { useSnackbar } from "notistack";
     }
 
 => Some commonly used props: 
-    1) variant : for colors
-    2) autoHideDuration: to close 
-    3) anchorOrigin: for position (at a particular location)
-    4) onClose: to close 
+    1) variant          : for colors
+    2) autoHideDuration : to close 
+    3) anchorOrigin     : for position (at a particular location)
+    4) onClose          : to close 
     5) style 
     6) transitionDuration 
     7) onEnter 
@@ -205,7 +205,7 @@ Project Code session
 APIs:
 1) Mock APIs (Mock Data):
     => Dummy Data
-    => Used in project developing phase as backend team working on fecthing the data.
+    => Used in project developing phase as backend team working on fetching the data.
 
 Steps to create Mock APIs.
 1) Create a data.js file with dummy data. (array of objects)
@@ -321,6 +321,7 @@ export default function Videos() {
 
 
 =======================================
+
 MUI Grid:
 => Same as Bootstrap Grid.
 => It has 12 columns.
@@ -330,8 +331,8 @@ MUI Grid:
 Project: In the previous created Videos section using API. 
         Use MUI Grid to display them correctly on screen on all devices.
 
-
 =======================================
+
 Parallel API Calls in JS:
 
 Promises:
@@ -341,7 +342,7 @@ Promises:
 
 Problem: In case of multiple API Calls. It will increase the time as one API call will execute only after before API call is finished.
 
-async function fetchData(){
+async function fetchData() {
     let startTime = new Date();
     let posts = await fetch("https://........./posts");
     let users = await fetch("https://........./users");
@@ -432,7 +433,7 @@ Solution: (Debouncing)
 
 Task: 
 Create a search bar in a header without debouncing.
-Observe the API call made everytime we type.
+Observe the API call made every-time we type.
 Later apply Debouncing and observe the change.
 (Use axios get method to fetch the details of posts/videos when typing in search bar
   and useEffect() method)
@@ -803,15 +804,14 @@ NOTE: this keyword works with new keyword only.
 
         // The above code's output is : Hello, undefined.
 
-
-=> what we can do is pass the value of "this" explicity to the "student.greet" method.
+=> what we can do is pass the value of "this" explicitly to the "student.greet" method.
 => To achieve this we can use "bind" method which can be applied on all methods.
 
     Eg: const greet = student.greet.bind(student); // bind the object to thee method
         executeObjectFunction(greet); // Passing the object method as callback
 
 => The bind method returns a new function.
-=> It helps us set the value of this to the passed value for specific funtion.
+=> It helps us set the value of this to the passed value for specific function.
 
     Eg: const student = {
             fullName: "Rohit",
@@ -1074,7 +1074,7 @@ Yathe is playing football.
 
 Constructor Overriding:
 => The child class uses the constructor of its parent class.
-=> If we wanted to define data members only for child class then we need seperate constructor.
+=> If we wanted to define data members only for child class then we need separate constructor.
 => But the child class won't able to use parent class constructor. 
 => Here comes "Constructor Overriding", if we want to use data member from parent class constructor 
     within child class constructor then we use constructor overriding.

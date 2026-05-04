@@ -89,71 +89,8 @@ Eg: import { useSnackbar } from "notistack";
     10) onExited
 
 ===============================================
-
-************ Session-4: Starts ************
-
-
-Lists in React:
-
-Eg:
-useEffect(() => {
-    console.log(products, "products");
-    fetchData();
-}, []);
-
-
-return (
-    <div>
-        {products.map((product) => (
-            <p>{product.title}</p>
-        ))}
-    </div>
-);
-
-NOTE: we need to use only "map" not "forEach".
-
-"key" attribute in lists:
-=> each child in list should have unique "key" prop
-=> because if we want to update/delete a particular item in that case it can be a problem as all cards are same.
-=> So we need to have a unique "key" prop for each child.
-=> By default the key is set to "Array Index".
-=> If list elements can change order, use another unique key specific to each element
-=> Array Index are not reliable because indices are not consistent.
-=> Array Indices are used in case of non-CRUD operations.
-
-Eg: using Array Index
-return (
-    <div>
-        {products.map((product, index) => (
-            <ProductCard data={product} key={index} />
-        ))}
-    </div>
-);
-
-using product's id
-return (
-    <div>
-        {products.map((product) => (
-            <ProductCard data={product} key={product.id} />
-        ))}
-    </div>
-);
-
-Project: 
-Create a Product Page that fetch details from json file ("https://dummyjson.com/products")
-use Card from Material UI to display titles
-create a seperate ProductCard.jsx page.
-
-************ Session-4: Ends ************
-===============================================
-
-************ Session-5: Starts ************
-Project Code session
-
-************ Session-5: Ends ************
-===============================================
-
 ************ Session-6: Starts ************
+
 APIs:
 1) Mock APIs (Mock Data):
     => Dummy Data
