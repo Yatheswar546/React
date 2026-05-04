@@ -1887,7 +1887,7 @@ export const RandomComponent = () => {
     // }, [input]);
 
     // after using useLocalStorageInput file completely we don't need above code
-    const {} = useLocalStorageInput();
+    const { input, setInput } = useLocalStorageInput(LOCAL_STORAGE_KEY, "random");
 
     return (
         <div>
