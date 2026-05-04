@@ -1503,6 +1503,44 @@ useMemo can help us achieve the same "memoization" with less lines of code in an
 2. Memoization of function handlers.
 3. Memoization of entire component.
 
+Example:
+import React, { useState, useMemo } from "react";
+
+function SquareComponent({ input }) {
+    function square(number) {
+        console.log("Square ", number);
+        return number * number;
+    }
+}
+
+const memoizedSquare = useMemo(() => square(input), [input]);
+
+return (
+    <div>
+        <h1>Memoized Square Function</h1>
+        <p>Result: {memoizedSquare}</p>
+    </div>
+);
+
+function MyComponent() {
+    const [render, setRender] = useState(false);
+    const [number, setNumber] = useState(1);
+
+    const handleIncrement = () => setNumber(number + 1);
+
+    console.log("Component Re-rendered");
+
+    return (
+        <>
+            <SquareComponent input={number} />
+            <button onClick={() => setRender(!render)}>Re-Render</button>
+            <button onClick={handleIncrement}>Increment Number</button>
+        </>
+    );
+}
+
+export default MyComponent;
+
 Uses of "useMemo":
 => By using useMemo, React automatically handles the caching for us.
 => It ensures that computation is only performed when the input prop changes.
@@ -1518,6 +1556,7 @@ Uses of "useMemo":
 UseCallback : Optimizing Expensive Functions
 UseContext  : Avoid Prop drilling in React 
 Custom Hooks
+
 
 
 
