@@ -1849,22 +1849,85 @@ TempComponent.jsx
 
 import { useState } from 'react';
 
+const LOCAL_STORAGE_KEY = "temp_key"
+
 export const TempComponent = () => {
 
-    const [input, setInput] = useState('Crio');
+    const [input, setInput] = useState(
+        localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Crio'
+    );
+
+    useEffect(() => {
+        localStorage.setItem(LOCAL_STORAGE_KEY, input)
+    }, [input]);
 
     return (
         <div>
-            {" "}
+            <h1>Temp Component</h1>
             <input value={input} onChange={(e) => setInput(e.target.value)} />
         </div>
     );
 };
 
+RandomComponent.jsx
+
+import { useState } from 'react';
+import { useLocalStorageInput } from './hooks/useLocalStorageInput';
+
+const LOCAL_STORAGE_KEY = "random_key"
+
+export const RandomComponent = () => {
+
+    // const [input, setInput] = useState(
+    //     localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Random'
+    // );
+    // 
+    // useEffect(() => {
+    //     localStorage.setItem(LOCAL_STORAGE_KEY, input)
+    // }, [input]);
+
+    // after using useLocalStorageInput file completely we don't need above code
+    const {} = useLocalStorageInput();
+
+    return (
+        <div>
+            <h1>Random Component</h1>
+            <input value={input} onChange={(e) => setInput(e.target.value)} />
+        </div>
+    );
+};
+
+
+useLocalStorageInput.jsx (inside hooks folder)
+
+import { useState, useEffect } from 'react';
+
+export const useLocalStorageInput = (key, defaultValue) => {
+
+    const [input, setInput] = useState(localStorage.getItem(key) ?? defaultValue);
+
+    useEffect(() => {
+        localStorage.setItem(key, input);
+    }, [input]);
+
+    return {input, setInput} ;
+
+};
+
 App.jsx
 import React, { useState, useContext } from "react";
 import { TempComponent } from './TempComponent';
+import { RandomComponent } from './RandomComponent';
 
+export default function App() {
+    
+    return (
+        <div>
+            <TempComponent />
+            <RandomComponent />
+        </div>
+    );
+}
 
 ************ Session-5: Ends ************
 ===============================================
