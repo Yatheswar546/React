@@ -1593,11 +1593,7 @@ export default function ParentComponent() {
     const [input, setInput] = useState(1);
     console.log("Parent Component Rendered");
 
-    // const handler = (prevInput) => setInput(prevInput + 1);
-
-    const handler = UseCallback(() => {
-        setInput(input + 1);   
-    }, [input]);
+    const handler = (prevInput) => setInput(prevInput + 1);
 
     const statehandler = () => {
         setState(!state);
@@ -1622,10 +1618,20 @@ Along with Parent Component, Child component is also re-rendered which is an "un
 
 We can optimize this behavior using "memoize" technique
 
+===============================================
+
 Step 1: Memoize the child component (Square component)
 
 => Components only re-renders if their "state" or "props" changes
 => So, we can memoize the child component using "React.memo"
+
+React.memo:
+
+=> React.memo is a higher order component (HOC) provided by React that
+    performs a shallow equality check on the component's props.
+=> It determines if the component should be re-rendered by comparing 
+    the previous and current props.
+=> If the props haven't changed, React.memo prevents the re-rendering of the component.
 
 Example:
 
@@ -1645,15 +1651,219 @@ function SquareComponent({ handler, input }) {
 
 export default React.memo(SquareComponent);
 
-React.memo:
+In the above code, we use "React.memo" but still we are facing the same issue.
+Because in SquareComponent when we pass the props(handler) as handler is a function the function reference is passed as Pass by Reference concept.
+Whenever we call ParentComponent, a new memory location is created for handler function and the new memory reference is passed to child component.
 
-=> React.memo is a higher order component (HOC) provided by React that
-    performs a shallow equality check on the component's props.
-=> It determines if the component should be re-rendered by comparing 
-    the previous and current props.
-=> If the props haven't changed, React.memo prevents the re-rendering of the component.
+===============================================
+
+To fix the above issue we can use "useCallback" hook.
+
+useCallback:
+
+=> useCallback is a React Hook that lets you cache a function definition between re-renders.
+
+Example:
+const handler = UseCallback(() => {
+    setInput(input + 1);   
+}, [input]);
 
 
+NOTE:
+useMemo      --> memoize the value 
+useCallback  --> memoize the function object, function, arrays references
+
+===============================================
+
+Prop Drilling:
+
+=> Components used to get props that they don't need it
+
+Let us consider a scenario, we have "n" components
+component A -> has state A 
+component B (Child of component A)
+component C (Child of component B)
+component D (Child of component C)
+component E (Child of component D)
+.
+.
+.
+.
+.
+component n (Child of previous component) -> it requires state A 
+
+Now, in the above scenario "component n" requires state A from "component A". 
+It has to pass through all components B, C, D, E..... upto "n" even though the middle components don't need state A.
+
+The above scenario is called "Prop Drilling".
+
+Example: on Prop-Drilling
+
+App.jsx
+import React, { useState } from "react";
+import ParentComponent from './ParentComponent';
+
+function App() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <>
+            <ParentComponent count={count} setCount={setCount} />
+        </>
+    );
+}
+
+ParentComponent.jsx
+import React from "react;
+import ChildComponent from './ChildComponent';
+
+function ParentComponent({ count, setCount }) {
+    return (
+        <div>
+            <ChildComponent count={count} setCount={setCount} />
+        </div>
+    );
+}
+
+ChildComponent.jsx
+import React from "react";
+import GrandchildComponent from './GrandchildComponent;
+
+function GrandchildComponent({ count, setCount }) {
+    return (
+        <div>
+            <GrandchildComponent count={count} setCount={setCount} />
+        </div>
+    );
+}
+
+GrandchildComponent.jsx 
+import React from "react";
+
+
+function GrandchildComponent({ count, setCount }) {
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+        </div>
+    );
+}
+
+We can fix this using "useContext" hook.
+
+===============================================
+
+useContext:
+
+=> "createContext" lets you create a 'context' that components can provide or read.
+
+=> we will create a context which holds a value at global and that value can be used at any component 
+=> Provider :
+=> Consumer :
+
+Steps to use "useContext" Hook:
+
+1. Create a Context with "useContext" hook in React.
+
+CountContext.jsx 
+import React from 'react';
+
+export const CountContext = React.createContext();
+
+2. Wrap App.js with "contextProvider" by passing values that need access in all the children components.
+
+App.jsx
+import React, { useState } from 'react';
+import { CountContext } from './CountContext';
+import ParentComponent from './ParentComponent';
+
+function App() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <div>
+            <CountContext.Provider value={{ count, setCount }}>
+                <ParentComponent />
+            </CountContext.Provider>
+        </div>
+    );
+}
+
+3. Now we can directly access the count variable declared in App.js component in any component (GrandchildComponent.js)
+    without passing it as props through every children component
+
+ParentComponent.jsx
+import React from 'react';
+import ChildComponent from './ChildComponent';
+
+function ParentComponent() {
+    return (
+        <div>
+            <ChildComponent />
+        </div>
+    );
+}
+
+ChildComponent.jsx 
+import React from 'react';
+import GrandchildComponent from './GrandchildComponent';
+
+function ChildComponent() {
+    return (
+        <div>
+            <GrandchildComponent />
+        </div>
+    );
+}
+
+GrandchildComponent.jsx 
+import React, { useContext } from 'react';
+import { CountContext } from './CountContext';
+
+function GrandchildComponent() {
+    const { count, setCount } = useContext(CountContext);
+
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+        </div>
+    );
+}
+
+===============================================
+
+Custom Hooks in React:
+
+=> In React, a 'custom hook' is a Js function that starts with the prefix "use" and 
+    enables you to reuse the stateful logic across multiple components.
+=> Custom hooks allow you to extract and share logic such as state management, side effects,
+    and event handling without duplicating code.
+
+    Custom Hooks Examples in React: https://github.com/streamich/react-use
+
+Example:
+
+TempComponent.jsx
+
+import { useState } from 'react';
+
+export const TempComponent = () => {
+
+    const [input, setInput] = useState('Crio');
+
+    return (
+        <div>
+            {" "}
+            <input value={input} onChange={(e) => setInput(e.target.value)} />
+        </div>
+    );
+};
+
+App.jsx
+import React, { useState, useContext } from "react";
+import { TempComponent } from './TempComponent';
 
 
 ************ Session-5: Ends ************
