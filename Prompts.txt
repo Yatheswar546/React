@@ -1,0 +1,132 @@
+ChatGPT Prompts:
+
+Hey gp, 
+
+Imagine you are React.js developer and help me in the below scenario. 
+I am creating a JavaScript notes on as topics as possible. I am preparing this notes for the following reasons. 
+
+1) as a running notes for my interview preparation 
+2) to consider this notes as a reference when I teach students 
+3) to post it in GitHub as a public repo so others could also see.
+
+The below is the present folder structure I have.
+
+React
+|
+|--> node_modules
+|
+|--> public
+|
+|--> src
+        |---> assests
+        |---> concepts 
+                |---> 01. Introduction
+                        |---> Intro.jsx
+                        |---> NamedModule.jsx
+                        |---> notes.txt
+                |---> 02. FunctionalComponents
+                        |---> Functional.jsx
+                        |---> notes.txt
+                |---> 03. Hooks
+                        |---> Counter.jsx
+                        |---> notes.txt
+                |---> 04. Props
+                        |---> Counter.jsx
+                        |---> notes.txt
+                |---> 05. ConditionalRendering
+                        |---> ConditionalRendering.jsx
+                        |---> notes.txt
+                |---> 06. ReactRouter
+                        |---> pages
+                                |---> About.jsx
+                                |---> Contact.jsx
+                                |---> Home.jsx
+                                |---> Services.jsx
+                        |---> Navbar.jsx
+                        |---> notes.txt
+        |---> App.css
+        |---> App.jsx
+        |---> index.css
+        |---> main.jsx
+        |---> index.html 
+        |---> package-lock.json
+        |---> package.json
+        |---> README.md
+        |---> vite.config.js
+
+The above is the 1st part of my query, go through this and understand and 
+let me know if you didn't understand any part so I will repeat again.
+If not I will continue my query
+        
+Good, now the 2nd part is I have the running notes for remaining concepts. 
+I need your help to make a perfect React notes that can be understood for a beginner also without any Problem.
+Also I need your help in teaching me React, as I am also confused with some of these topics. 
+
+One more thing, we must prepare this notes in such a way that in each concept we will be coding some part as a practical example.
+Those examples should be very clear, simple and easy to understand for beginner and more towards practical applications.
+
+And for each concept we have a notes.txt file at present but we need to make a README.md file from that with as much as information possible
+with live examples, interview questions, practice problems moreover for a interview preparation in the present world with new concepts.
+
+Let me know if you understood this part or ask me if you had doubts at any points.
+If not I will share the files one-by-one so we can start preparing the notes.
+
+-------------------------------------------
+
+10th Concept: Lists in React
+
+notes.txt
+Lists in React:
+
+Eg:
+useEffect(() => {
+    console.log(products, "products");
+    fetchData();
+}, []);
+
+return (
+    <div>
+        {products.map((product) => (
+            <p>{product.title}</p>
+        ))}
+    </div>
+);
+
+NOTE: we need to use only "map" not "forEach".
+
+"key" attribute in lists:
+=> each child in list should have unique "key" prop
+=> because if we want to update/delete a particular item in that case it can be a problem as all cards are same.
+=> So we need to have a unique "key" prop for each child.
+=> By default the key is set to "Array Index".
+=> If list elements can change order, use another unique key specific to each element
+=> Array Index are not reliable because indices are not consistent.
+=> Array Indices are used in case of non-CRUD operations.
+
+Eg: using Array Index
+return (
+    <div>
+        {products.map((product, index) => (
+            <ProductCard data={product} key={index} />
+        ))}
+    </div>
+);
+
+using product's id
+return (
+    <div>
+        {products.map((product) => (
+            <ProductCard data={product} key={product.id} />
+        ))}
+    </div>
+);
+
+===============================================
+
+Good gp, now next topic "Lists in React", I have written only a small notes on this with less code.
+So help me in preparing this folder you can add as much information as you want and also help me with the coding part 
+for better understanding. As you can see I wrote the as a story telling like previous topic explaining about each point one-by-one.
+
+Analyze them and do the changes so the flow is easy to understand for everyone and create a README.md file with our primary goals as we discussed earlier.
+
+Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
