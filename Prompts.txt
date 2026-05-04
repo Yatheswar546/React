@@ -141,20 +141,18 @@ Thank you for the suggested RoadMap. It is very good especially dividing into 4 
 But I made a few changes below go through that also once and let me know your opinions in a simple way no need of large answers
 
 Phase 1:
-
 useEffect 
 LifeCycle of React 
 Lists 
 Controlled Components (forms)
 
-
 Phase 2:
 APIs
 Fetch vs Axios
 useEffect + API Integration
+Lifting State Up (search bar + displaying content like videos/images etc... from backend)
 Pass data to backend (POST request)
 Parallel API calls
-Lifting State Up (search bar + displaying content like videos/images etc... from backend)
 Debouncing
 
 Before moving to Phase a recap of Js OOPS concepts:
@@ -169,10 +167,42 @@ useCallback
 useContext
 Custom Hooks 
 
+Phase 4:
+Tailwind.css
+Material UI
+
+What are your thoughts on this
+
+--------------------------------------------------------
+--------------------------------------------------------
+
+Phase 1:
+useEffect 
+LifeCycle of React 
+Lists 
+Controlled Components (forms)
+
+Phase 2:
+APIs
+Fetch vs Axios
+useEffect + API Integration
+Pass data to backend (POST request)
+Parallel API calls
+Lifting State Up (search bar + displaying content like videos/images etc... from backend)
+Debouncing
+
+Before moving to Phase a recap of Js OOPS concepts 
+
+Phase 3:
+useRef 
+useMemo 
+useCallback
+useContext
+Custom Hooks 
 
 Phase 4:
 Tailwind.css
 Material UI
 
-
-What are your thoughts on this
+The above is the finalized version of notes, can you also mention which examples would be better to learn for each concept 
+so a beginner can also easily understand their real-life use cases 
