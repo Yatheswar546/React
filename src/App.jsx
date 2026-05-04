@@ -1,12 +1,20 @@
+import { useState } from 'react';
 import './App.css'
 
-import ListProducts from './concepts/10. Lists_in_React/ListProducts';
+import CounterWithTimer from './concepts/09. useEffect/CounterWithTimer';
 
 function App() {
 
+  const [show, setShow] = useState(true);
+
   return (
     <>  
-      <ListProducts />
+      <button onClick={() => setShow(!show)}>
+        {show ? "Hide Timer" : "Show Timer"}
+      </button>
+
+      {show && <CounterWithTimer />}
+
     </>
   );
 }

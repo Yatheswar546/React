@@ -270,6 +270,143 @@ useEffect(() => {
 
 ---
 
+## 🔥 Practical Example (Lifecycle with Timer)
+
+### 📁 CounterWithTimer.jsx
+
+```jsx
+import { useEffect, useState } from "react";
+
+export default function CounterWithTimer() {
+
+    const [count, setCount] = useState(0);
+
+    useEffect(() => {
+
+        console.log("Mounted: Timer started");
+
+        const timer = setInterval(() => {
+            setCount(prev => prev + 1);
+        }, 1000);
+
+        // Cleanup (Unmounting phase)
+        return () => {
+            clearInterval(timer);
+            console.log("Unmounted: Timer stopped");
+        };
+
+    }, []);
+
+    return (
+        <div>
+            <h1>Timer Counter</h1>
+            <h2>{count}</h2>
+        </div>
+    );
+}
+```
+
+---
+
+### 📁 App.jsx (To Test Lifecycle)
+
+```jsx
+import { useState } from "react";
+import CounterWithTimer from "./CounterWithTimer";
+
+export default function App() {
+
+    const [show, setShow] = useState(true);
+
+    return (
+        <div>
+
+            <button onClick={() => setShow(!show)}>
+                {show ? "Hide Timer" : "Show Timer"}
+            </button>
+
+            {show && <CounterWithTimer />}
+
+        </div>
+    );
+}
+```
+
+---
+
+## 🔍 How This Code Works (Step-by-Step)
+
+### 🟢 Step 1: Mounting Phase
+
+```js
+useEffect(() => { ... }, []);
+```
+
+👉 Component loads
+👉 useEffect runs once
+👉 Timer starts
+
+---
+
+### 🔵 Step 2: Updating Phase
+
+```js
+setCount(prev => prev + 1);
+```
+
+👉 Runs every 1 second
+👉 State updates
+👉 Component re-renders
+
+---
+
+### 🔴 Step 3: Unmounting Phase
+
+When you click **"Hide Timer"**:
+
+```js
+return () => {
+    clearInterval(timer);
+};
+```
+
+👉 Cleanup runs
+👉 Timer stops
+👉 Prevents memory leaks
+
+---
+
+## 🧠 What This Example Teaches
+
+* Mount → useEffect runs once
+* Update → state changes trigger re-render
+* Unmount → cleanup function runs
+* Why cleanup is important
+
+---
+
+## 💡 Real-Life Use Cases
+
+* Stopwatch / timers
+* Live dashboards
+* Auto-refresh systems
+* Tracking apps
+
+---
+
+## ⚠️ Important Note
+
+If you remove cleanup:
+
+```js
+clearInterval(timer);
+```
+
+👉 Timer keeps running in background
+👉 Causes bugs + memory leaks
+
+---
+
 ## 9. Cleanup Function (VERY IMPORTANT)
 
 👉 Used to prevent memory leaks
