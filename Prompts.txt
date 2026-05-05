@@ -149,23 +149,103 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
+Good gp, POST Request is also done, now let's move to next concept "Parallel API Calls",
+I written a notes on it with some codes. Below is the notes for it, go through it
 
-Good gp, useEffect + API Integration is also done, now let's move to next concept "POST Request (Send Data to Backend)"
+16th Concept: Parallel API Calls
 
-13th Concept: POST Request (Send Data to Backend)
+notes.txt 
+Parallel API Calls in JS:
 
-For this I haven't written any special notes on this we have to built a folder with required codes and information 
-based on the information and codes we have written so far.
+Promises:
+=> It is an Object that represents eventual completion or failure of an asynchronous operation and its resulting value.
+=> It returns state & value
+=> It was used for calling API calls previously, at present we use fetch()
 
-Previously you mentioned we use "Create New User / Add Product" as example for this concept and form submission which is a real-world scenario.
-So let's use that and write codes and notes on this so beginners can also easily understand and maintain the flow that is easy to understand for everyone.
+Problem: In case of multiple API Calls. It will increase the time as one API call will execute only after before API call is finished.
+
+async function fetchData(){
+    let startTime = new Date();
+    let posts = await fetch("https://........./posts");
+    let users = await fetch("https://........./users");
+    let comments = await fetch("https://........./comments");
+    let endTime = new Date();
+    let timeTaken = endTime - startTime;
+    console.log(timeTaken);
+}
+
+export { fetchData };
+
+Solution: Promise Concurrency
+            |-> Promise.all()
+            |-> Promise.allSettled()
+            |-> Promise.any()
+            |-> Promise.race()
+
+let consider timetaken for 3 tasks 
+1 ==> 3 secs
+2 ==> 5 secs
+3 ==> 4 secs 
+
+In normal execution : 3 + 5 + 4 = 12 secs
+
+In Promise Concurrency:
+
+after 3 secs 
+1 ==> done 
+2 ==> 2 secs 
+3 ==> 1 sec 
+
+after 4 secs 
+1 ==> done 
+2 ==> 2 secs 
+3 ==> done
+
+after 5 secs 
+1 ==> done 
+2 ==> done 
+3 ==> done
+
+let postApi = await fetch("https://........./posts");
+let userApi = await fetch("https://........./users");
+let commentsApi = await fetch("https://........./comments");
+    
+async function fetchData(){
+    let startTime = new Date();
+    
+    let [postRes, userRes, commentRes] = await Promise.all([
+        fetch(postApi),
+        fetch(userApi),
+        fetch(commentsApi),
+    ]);
+
+    let [posts, users, comments] = await Promise.all([
+        postRes.json(), 
+        userRes.json(), 
+        commentRes.json(),
+    ]);
+
+    console.log(posts, users, comments, "res");
+
+    let endTime = new Date();
+    let timeTaken = endTime - startTime;
+    console.log(timeTaken);
+}
+
+export { fetchData };
+
+NOTE: Promise.all() accepts an array and returns an array. 
+
+
+As you can see I explained in a story way explaining one-by-one and with few examples. 
+Analyze them and add more information on this as much as you can, and also add better examples and real-life scenarios and codes,
+so everyone could understand it better way. Maintain the flow easy.
 
 At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
 
 Also in the README file right after the codes explain how the code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
 
 
-notes.txt
 
 
 Help me in creating a folder with required information and codes that explains fetch vs axios concept very well and 
