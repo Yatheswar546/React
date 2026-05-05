@@ -150,19 +150,19 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 
 
-Good gp, Fetch vs Axios is done, now let's move to next concept "useEffect + API Integration"
+Good gp, useEffect + API Integration is also done, now let's move to next concept "POST Request (Send Data to Backend)"
 
-13th Concept: useEffect + API Integration
+13th Concept: POST Request (Send Data to Backend)
 
 For this I haven't written any special notes on this we have to built a folder with required codes and information 
 based on the information and codes we have written so far.
 
-Previously you mentioned we use "Search Products on Load" as example for this concept. So let's use that and
-write codes and notes on this so beginners can also easily understand and maintain the flow that is easy to understand for everyone.
+Previously you mentioned we use "Create New User / Add Product" as example for this concept and form submission which is a real-world scenario.
+So let's use that and write codes and notes on this so beginners can also easily understand and maintain the flow that is easy to understand for everyone.
 
-at last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
+At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
 
-Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
+Also in the README file right after the codes explain how the code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
 
 
 notes.txt
