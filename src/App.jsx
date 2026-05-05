@@ -1,12 +1,14 @@
 import './App.css'
 
-import ProductsSearch from './concepts/14. useEffectAPIIntegration/ProductsSearch';
+import AddProduct from './concepts/15. POSTRequest/AddProduct';
+import ProductList from './concepts/15. POSTRequest/ProductList';
 
 function App() {
 
   return (
-    <>  
-      <ProductsSearch />
+    <>   
+      <AddProduct />
+      <ProductList />
     </>
   );
 }
