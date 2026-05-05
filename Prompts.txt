@@ -74,67 +74,6 @@ If not I will share the files one-by-one so we can start preparing the notes.
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
-10th Concept: Lists in React
-
-notes.txt
-Lists in React:
-
-Eg:
-useEffect(() => {
-    console.log(products, "products");
-    fetchData();
-}, []);
-
-return (
-    <div>
-        {products.map((product) => (
-            <p>{product.title}</p>
-        ))}
-    </div>
-);
-
-NOTE: we need to use only "map" not "forEach".
-
-"key" attribute in lists:
-=> each child in list should have unique "key" prop
-=> because if we want to update/delete a particular item in that case it can be a problem as all cards are same.
-=> So we need to have a unique "key" prop for each child.
-=> By default the key is set to "Array Index".
-=> If list elements can change order, use another unique key specific to each element
-=> Array Index are not reliable because indices are not consistent.
-=> Array Indices are used in case of non-CRUD operations.
-
-Eg: using Array Index
-return (
-    <div>
-        {products.map((product, index) => (
-            <ProductCard data={product} key={index} />
-        ))}
-    </div>
-);
-
-using product's id
-return (
-    <div>
-        {products.map((product) => (
-            <ProductCard data={product} key={product.id} />
-        ))}
-    </div>
-);
-
-===============================================
-
-Good gp, now next topic "Lists in React", I have written only a small notes on this with less code.
-So help me in preparing this folder you can add as much information as you want and also help me with the coding part 
-for better understanding. As you can see I wrote the as a story telling like previous topic explaining about each point one-by-one.
-
-Analyze them and do the changes so the flow is easy to understand for everyone and create a README.md file with our primary goals as we discussed earlier.
-
-Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
-
---------------------------------------------------------------------------------------
---------------------------------------------------------------------------------------
-
 
 Hey gp, 
 Thank you for the suggested RoadMap. It is very good especially dividing into 4 phases. 
@@ -206,3 +145,22 @@ Material UI
 
 The above is the finalized version of notes, can you also mention which examples would be better to learn for each concept 
 so a beginner can also easily understand their real-life use cases 
+
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+
+11th Concept: Controlled Components
+
+notes.txt
+Controlled Components: React will be controlling the component when we use states 
+
+We need to create functions (handle Functions) for input fields in forms as they become 
+Controlled Components when we use States 
+
+Ok gp, now let's move to next topic "Controlled Components" as you said, I have written only a small notes on this not even any code.
+So help me in preparing this folder you can add as much information as you want and also help me with the coding part 
+for better understanding. As you can see I wrote the as a story telling like previous topic explaining about each point one-by-one.
+
+Analyze them and do the changes so the flow is easy to understand for everyone and create a README.md file with our primary goals as we discussed earlier.
+
+Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.

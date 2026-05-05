@@ -32,11 +32,6 @@ Session-3: 01:04:25
 
 Pass data to backend using API, we use same form we created above
 
-Controlled Components: React will be controlling the component when we use states 
-
-We need to create functions (handle Functions) for input fields in forms as they become 
-Controlled Components when we use States 
-
 Axios: 
 => 3rd party library in npm
 => API call 
