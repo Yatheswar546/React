@@ -152,7 +152,7 @@ so a beginner can also easily understand their real-life use cases
 Good gp, The explanation you gave on Lifting State Up is awesome, now let's move to next concept "Debouncing",
 I written a notes on it with some codes. Below is the notes of it, go through it
 
-17h Concept: Parallel API Calls
+18th Concept: Parallel API Calls
 
 notes.txt 
 Debouncing:
@@ -169,7 +169,7 @@ Solution: (Debouncing)
 
 Task: 
 Create a search bar in a header without debouncing.
-Observe the API call made everytime we type.
+Observe the API call made every-time we type.
 Later apply Debouncing and observe the change.
 (Use axios get method to fetch the details of posts/videos when typing in search bar
   and useEffect() method)
@@ -251,16 +251,14 @@ function Header(){
     )
 }
 
-As you can see I explained in a story way explaining one-by-one with the example of Search Bar and videos as content. You can use the posts idea which we used earlier and also remove the "debounceSearch" as of now because we haven't touch that topic yet.
+As you can see I explained in a story way explaining one-by-one wihtout debouncing and after using debouncing.  You can use the posts idea which we used earlier.
 
 Analyze them and add more information on this as much as you can, and also add better examples and real-life scenarios and codes, so everyone could understand it better way. Maintain the flow easy.
+Give both the examples of before and after using "Debouncing" with codes also.
 
 At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
 
-Also in the README file, as the Lifting State Up concept is related to DOM also, so create a DOM visualization for better understanding and right after the codes explain how the code is actually working one-by-one bas we did for previous folders because if all the folders(concepts) have some flow then it would be easy.
-
-
-
+Also in the README file, right after the codes explain how the code is actually working one-by-one bas we did for previous folders because if all the folders(concepts) have some flow then it would be easy.
 
 Help me in creating a folder with required information and codes that explains fetch vs axios concept very well and 
 at last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
