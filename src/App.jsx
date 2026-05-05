@@ -1,15 +1,12 @@
 import './App.css'
 
-// import ProductsFetch from './concepts/13. FetchvsAxios/ProductsFetch';
-// import ProductsAxios from './concepts/13. FetchvsAxios/ProductsAxios';
-// import ProductsFetchWithError from './concepts/13. FetchvsAxios/ProductsFetchWithError';
-import ProductsFetchWithLoading from './concepts/13. FetchvsAxios/ProductsFetchWithLoading';
+import ProductsSearch from './concepts/14. useEffectAPIIntegration/ProductsSearch';
 
 function App() {
 
   return (
     <>  
-      <ProductsFetchWithLoading />
+      <ProductsSearch />
     </>
   );
 }
