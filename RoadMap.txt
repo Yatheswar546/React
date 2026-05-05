@@ -510,7 +510,7 @@ Promise.all([fetchUsers(), fetchPosts()])
 ---
 
 ## 10. Lifting State Up
-
+ 
 👉 Example: **Search Bar + Product List**
 
 * Parent holds state

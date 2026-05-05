@@ -11,7 +11,7 @@ Phase 2:
 ✅ Fetch vs Axios
 ✅ useEffect + API Integration
 ✅ Pass data to backend (POST request)
-Parallel API calls
+✅ Parallel API calls
 Lifting State Up (search bar + displaying content like videos/images etc... from backend)
 Debouncing
 
