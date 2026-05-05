@@ -32,20 +32,6 @@ Session-3: 01:04:25
 
 Pass data to backend using API, we use same form we created above 
 
-Axios: 
-=> 3rd party library in npm
-=> API call 
-=> instead of fetch 
-
-HomeWork: Use a useState() like this 
-
-const [data, setData] = useState({
-    username: "",
-    password: "",
-    gender: "",
-    age: ""
-})
-
 ===============================================
 
 Snackbar
@@ -85,6 +71,7 @@ Eg: import { useSnackbar } from "notistack";
 
 ===============================================
 ************ Session-6: Starts ************
+
 
 MUI Grid:
 => Same as Bootstrap Grid.
