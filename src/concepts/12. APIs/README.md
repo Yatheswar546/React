@@ -88,21 +88,21 @@ export default function ProductsMock() {
 
 ---
 
-## 🔍 How This Works
+### 🔍 How This Works
 
-### Step 1:
+#### Step 1:
 
 Data comes from local file
 
-### Step 2:
+#### Step 2:
 
 `map()` loops through data
 
-### Step 3:
+#### Step 3:
 
 Each item → ProductCard
 
-### Step 4:
+#### Step 4:
 
 UI renders
 
@@ -168,33 +168,33 @@ export default function App() {
 
 ---
 
-## 🔍 How This Works
+### 🔍 How This Works
 
-### Step 1:
+#### Step 1:
 
 Component loads
 
 ---
 
-### Step 2:
+#### Step 2:
 
 useEffect runs
 
 ---
 
-### Step 3:
+#### Step 3:
 
 API is called
 
 ---
 
-### Step 4:
+#### Step 4:
 
 Data stored in state
 
 ---
 
-### Step 5:
+#### Step 5:
 
 UI updates
 
@@ -220,7 +220,7 @@ Step 3 → Connect frontend & backend
 
 ---
 
-## 9. Common Mistakes
+## 10. Common Mistakes
 
 * Calling API outside useEffect
 * Not handling errors
@@ -229,7 +229,7 @@ Step 3 → Connect frontend & backend
 
 ---
 
-## 10. Interview Questions
+## 11. Interview Questions
 
 ### What is an API?
 
@@ -249,7 +249,7 @@ To continue frontend work before backend is ready.
 
 ---
 
-## 11. Practice Problems
+## 12. Practice Problems
 
 1. Create mock user list
 2. Replace with API
@@ -259,7 +259,7 @@ To continue frontend work before backend is ready.
 
 ---
 
-## 12. Summary
+## 13. Summary
 
 * APIs connect frontend and backend
 * Mock data helps development
