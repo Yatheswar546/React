@@ -1,16 +1,52 @@
 import './App.css'
 
-import SequentialCalls from './concepts/16. ParallelAPICalls/SequentialCalls';
-import ParallelCalls from './concepts/16. ParallelAPICalls/ParallelCalls';
+import { useEffect, useState } from 'react';
+import Header from './concepts/17. LiftingStateUp/Header';
+import Products from './concepts/17. LiftingStateUp/Products';
 
-function App() {
+// import Header from './concepts/17. LiftingStateUp/WrongImplementation/Header';
+// import Products from './concepts/17. LiftingStateUp/WrongImplementation/Products';
+
+// export default function App() {
+
+//   return (
+//     <>
+//       <Header />
+//       <Products />
+//     </>
+//   );
+
+// }
+
+export default function App() {
+
+  const [search, setSearch] = useState("");
+  const [products, setProducts] = useState([]);
+
+  async function fetchProducts() {
+    try {
+      const res = await fetch('https://dummyjson.com/products');
+      const data = await res.json();
+
+      const filtered = data.products.filter(product => 
+        product.title.toLowerCase().includes(search.toLowerCase())
+      );
+
+      setProducts(filtered);
+
+    } catch(err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    fetchProducts();
+  }, [search]);
 
   return (
     <>   
-      <SequentialCalls />
-      <ParallelCalls />
+      <Header search={search} setSearch={setSearch} />
+      <Products products={products} />
     </>
   );
 }
-
-export default App;
