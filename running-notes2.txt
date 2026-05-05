@@ -30,7 +30,7 @@ Project: Sample Form using MUI
 
 Session-3: 01:04:25
 
-Pass data to backend using API, we use same form we created above
+Pass data to backend using API, we use same form we created above 
 
 Axios: 
 => 3rd party library in npm
@@ -89,7 +89,7 @@ Eg: import { useSnackbar } from "notistack";
 APIs:
 1) Mock APIs (Mock Data):
     => Dummy Data
-    => Used in project developing phase as backend team working on fecthing the data.
+    => Used in project developing phase as backend team working on fetching the data.
 
 Steps to create Mock APIs.
 1) Create a data.js file with dummy data. (array of objects)
