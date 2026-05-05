@@ -4,20 +4,6 @@ import { useEffect, useState } from 'react';
 import Header from './concepts/17. LiftingStateUp/Header';
 import Products from './concepts/17. LiftingStateUp/Products';
 
-// import Header from './concepts/17. LiftingStateUp/WrongImplementation/Header';
-// import Products from './concepts/17. LiftingStateUp/WrongImplementation/Products';
-
-// export default function App() {
-
-//   return (
-//     <>
-//       <Header />
-//       <Products />
-//     </>
-//   );
-
-// }
-
 export default function App() {
 
   const [search, setSearch] = useState("");
@@ -26,6 +12,12 @@ export default function App() {
   async function fetchProducts() {
     try {
       const res = await fetch('https://dummyjson.com/products');
+
+      // Proper fetch Error Handling 
+      if (!res.ok) {
+        throw new Error("Failed to fetch data");
+      }
+      
       const data = await res.json();
 
       const filtered = data.products.filter(product => 
