@@ -1,3 +1,5 @@
+1st Suggestion
+
 Good question. This is exactly where many people lose direction.
 
 Short answer:
@@ -136,6 +138,8 @@ This is the most important hook 🔥
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ============================================================================================
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+2nd Suggestion:
 
 You’re at a really important point now. If you arrange the next topics well, your repo will feel like a **complete React course**, not just notes.
 
@@ -381,6 +385,8 @@ Let’s continue 🔥
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 ============================================================================================
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+3rd and Final Suggestion:
 
 This is a very good move 👍
 Choosing the **right examples** is what makes your notes stand out and easy to teach.
