@@ -11,7 +11,7 @@
 
 ---
 
-# 1. Introduction
+## 1. Introduction
 
 👉 In React, data flows **top → down (parent → child)**
 
@@ -24,7 +24,7 @@
 
 ---
 
-# 2. Problem Statement
+## 2. Problem Statement
 
 👉 Example:
 
@@ -41,7 +41,7 @@ Header ❌→ Products
 
 ---
 
-# 3. Solution: Lifting State Up
+## 3. Solution: Lifting State Up
 
 👉 Move state to **common parent**
 
@@ -55,7 +55,7 @@ Header ❌→ Products
 
 ---
 
-# 🎯 Core Idea
+## 🎯 Core Idea
 
 ```text
 Lifting State Up → Move shared state to parent
@@ -63,14 +63,14 @@ Lifting State Up → Move shared state to parent
 
 ---
 
-# 4. ❌ Wrong Implementation (No Lifting State)
+## 4. ❌ Wrong Implementation (No Lifting State)
 
 👉 Each component has its own state
 👉 No connection between them
 
 ---
 
-## 📄 Header.jsx
+### 📄 Header.jsx
 
 ```jsx
 import { useState } from "react";
@@ -92,7 +92,7 @@ export default function Header() {
 
 ---
 
-## 📄 Products.jsx
+### 📄 Products.jsx
 
 ```jsx
 import { useEffect, useState } from "react";
@@ -127,7 +127,7 @@ export default function Products() {
 
 ---
 
-## ❌ Problem
+### ❌ Problem
 
 ```text
 Header search ❌ NOT connected to Products search
@@ -139,13 +139,13 @@ Header search ❌ NOT connected to Products search
 
 ---
 
-# 5. ✅ Correct Implementation (Lifting State Up)
+## 5. ✅ Correct Implementation (Lifting State Up)
 
 👉 Move state to parent and share it
 
 ---
 
-## 📄 ProductCard.jsx 
+### 📄 ProductCard.jsx 
 
 ```js
 export default function ProductCard({ data }) {
@@ -161,7 +161,7 @@ export default function ProductCard({ data }) {
 
 ---
 
-## 📄 Header.jsx (Search Input)
+### 📄 Header.jsx (Search Input)
 
 ```jsx
 export default function Header({ search, setSearch }) {
@@ -178,7 +178,7 @@ export default function Header({ search, setSearch }) {
 
 ---
 
-## 📄 Products.jsx (Display List)
+### 📄 Products.jsx (Display List)
 
 ```jsx
 import ProductCard from "./ProductCard";
@@ -199,7 +199,7 @@ export default function Products({ products }) {
 
 ---
 
-## 📄 App.jsx (Parent, MAIN LOGIC - LIFTED STATE)
+### 📄 App.jsx (Parent, MAIN LOGIC - LIFTED STATE)
 
 ```jsx
 import { useEffect, useState } from "react";
@@ -248,7 +248,7 @@ export default function App() {
 
 ---
 
-## 🔍 How the Code Works (Step-by-Step)
+### 🔍 How the Code Works (Step-by-Step)
 
 #### Step 1: State in Parent
 
@@ -298,7 +298,7 @@ product.title.includes(search)
 
 ---
 
-## 🧠 Visual Flow
+### 🧠 Visual Flow
 
 ```text
 User types in Header
@@ -316,9 +316,9 @@ UI re-renders
 
 ---
 
-# 6. 🔍 Difference: useEffect vs Lifting State
+## 6. 🔍 Difference: useEffect vs Lifting State
 
-## 🎯 Short Answer
+### 🎯 Short Answer
 
 👉 **useEffect + API Integration**
 = *“When and how to fetch data from API”*
@@ -328,7 +328,7 @@ UI re-renders
 
 ---
 
-## 🧠 Simple Analogy
+### 🧠 Simple Analogy
 
 * API Integration → *Cooking food* 🍳
 * Lifting State → *Serving food to everyone at table* 🍽️
@@ -337,9 +337,9 @@ Both happen together, but they solve different problems.
 
 ---
 
-## 🔑 Key Difference
+### 🔑 Key Difference
 
-### 1. useEffect + API Integration
+#### 1. useEffect + API Integration
 
 👉 Focus: **Side effects (API calls)**
 
@@ -357,7 +357,7 @@ Component loads
 
 ---
 
-### 2. Lifting State Up
+#### 2. Lifting State Up
 
 👉 Focus: **Sharing state between components**
 
@@ -374,7 +374,7 @@ User types in Header
 
 ---
 
-## 💡 One-Line Comparison
+### 💡 One-Line Comparison
 
 ```text
 👉 useEffect → controls WHEN logic runs **logic (API)**
@@ -383,9 +383,9 @@ User types in Header
 
 ---
 
-## 🧠 When Do We Use Each?
+### 🧠 When Do We Use Each?
 
-### Use useEffect when:
+#### Use useEffect when:
 
 * Calling API
 * Running side effects
@@ -393,7 +393,7 @@ User types in Header
 
 ---
 
-### Use Lifting State when:
+#### Use Lifting State when:
 
 * Two components need same data
 * Components are siblings
@@ -401,7 +401,7 @@ User types in Header
 
 ---
 
-## 🔥 Combined View (Very Important)
+### 🔥 Combined View (Very Important)
 
 In real apps, BOTH are used together:
 
@@ -419,7 +419,7 @@ Products gets updated data
 
 ---
 
-## 🎯 How to Explain in Interview
+### 🎯 How to Explain in Interview
 
 👉 Simple answer:
 
@@ -428,7 +428,7 @@ Products gets updated data
 
 ---
 
-# 7. Real-World Use Cases
+## 7. Real-World Use Cases
 
 * Search functionality
 * Filters (price, category)
@@ -437,7 +437,7 @@ Products gets updated data
 
 ---
 
-# 8. Common Mistakes
+## 8. Common Mistakes
 
 * Keeping state in multiple components ❌
 * Trying to share data between siblings directly ❌
@@ -446,34 +446,34 @@ Products gets updated data
 
 ---
 
-# 9. Interview Questions (With Answers)
+## 9. Interview Questions (With Answers)
 
-### What is Lifting State Up?
+#### What is Lifting State Up?
 
 Moving state to a common parent to share between components
 
 ---
 
-### Why is it needed?
+#### Why is it needed?
 
 > When multiple components need the same data, keeping separate state causes inconsistency.
 > So we lift the state to a common parent and share it via props.
 
 ---
 
-### Difference between useEffect and Lifting State?
+#### Difference between useEffect and Lifting State?
 
 useEffect handles side effects, lifting state handles data sharing
 
 ---
 
-### When should we use it?
+#### When should we use it?
 
 When multiple components need same data
 
 ---
 
-# 10. Practice Problems
+## 10. Practice Problems
 
 1. Search + filter products
 2. Shared counter between components
@@ -482,7 +482,7 @@ When multiple components need same data
 
 ---
 
-# 11. Summary
+## 11. Summary
 
 * React follows top-down data flow
 * Siblings cannot share state directly
@@ -493,7 +493,7 @@ When multiple components need same data
 
 ---
 
-# 🔚 Final Thought
+## 🔚 Final Thought
 
 Lifting State Up is the backbone of:
 
