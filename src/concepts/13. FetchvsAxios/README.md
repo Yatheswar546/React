@@ -1,7 +1,3 @@
-# 📘 README.md
-
----
-
 # 📘 Fetch vs Axios in React
 
 ## 🚀 What You Will Learn
@@ -205,7 +201,7 @@ export default function ProductsAxios() {
 
 ---
 
-# 📄 App.jsx (optional switch)
+### 📄 App.jsx (optional switch)
 
 ```jsx
 import ProductsFetch from "./concepts/13.FetchVsAxios/ProductsFetch";
@@ -532,7 +528,7 @@ export default function ProductsBestPractice() {
 
 ---
 
-# 🎯 Final Understanding
+## 🎯 Final Understanding
 
 👉 Fetch needs:
 
