@@ -1,14 +1,14 @@
 import './App.css'
 
-import AddProduct from './concepts/15. POSTRequest/AddProduct';
-import ProductList from './concepts/15. POSTRequest/ProductList';
+import SequentialCalls from './concepts/16. ParallelAPICalls/SequentialCalls';
+import ParallelCalls from './concepts/16. ParallelAPICalls/ParallelCalls';
 
 function App() {
 
   return (
     <>   
-      <AddProduct />
-      <ProductList />
+      <SequentialCalls />
+      <ParallelCalls />
     </>
   );
 }
