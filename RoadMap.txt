@@ -524,7 +524,7 @@ Promise.all([fetchUsers(), fetchPosts()])
 
 ## 11. Debouncing
 
-👉 Example: **Search Input with delay**
+👉 Example: **Search Input with delay** 
 
 * Wait 500ms before API call
 

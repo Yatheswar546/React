@@ -12,7 +12,7 @@ Phase 2:
 ✅ useEffect + API Integration
 ✅ Pass data to backend (POST request)
 ✅ Parallel API calls
-Lifting State Up (search bar + displaying content like videos/images etc... from backend)
+✅ Lifting State Up (search bar + displaying content like videos/images etc... from backend)
 Debouncing
 
 Before moving to Phase a recap of Js OOPS concepts:

@@ -149,42 +149,81 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
-Good gp, Parallel API Calls is done, now let's move to next concept "Lifting State Up",
+Good gp, The explanation you gave on Lifting State Up is awesome, now let's move to next concept "Debouncing",
 I written a notes on it with some codes. Below is the notes of it, go through it
 
 17h Concept: Parallel API Calls
 
 notes.txt 
-Lifting State Up
+Debouncing:
+=> It is a programming practice that ensures a func. is not called too frequently 
+    by delaying its execution until a specified time has passed since the last invocation.
+=> Use Cases: Search Autocomplete, Window Resizing, Button clicks etc...
 
-Problem Statement:
-The videos we are searching in search bar in Header.js should be updated in videos section in Videos.js
-But videos and header are not parent-child so props won't work in this case.
-So, how to achieve this ?
+Problem Statement: 
+In general in search input fields whenever we type a single letter the API call is done multiple times.
+Because of this API is called multiple times increasing in bandwidth and decreasing the performance.
 
-Solution:
-Header and Videos are siblings to each other in App.js
-We can share the data to common parent (App.js) and then share the data to children (Header & Videos).
-This is called as "Lifting the State Up".
+Solution: (Debouncing)
+=> Debouncing is used to make a particular function to run after a specific time reducing the load.
 
-Example Code:
-App.js:
+Task: 
+Create a search bar in a header without debouncing.
+Observe the API call made everytime we type.
+Later apply Debouncing and observe the change.
+(Use axios get method to fetch the details of posts/videos when typing in search bar
+  and useEffect() method)
 
-function App(){
+Example code: Without Debouncing
 
+function Header(){
     const [searchKey, setSearchKey] = useState("");
-    const [timer, setTimer] = useState("");
-    const [videos, setVideos] = useState([]);
 
-    const url = searchKey
-        ? `https://................videos?title=${searchKey}` : 
-        : `https://................videos`;
+    const handleChange = (e) => {
+        setSearchKey(e.target.value);
+    };
 
     const fetchVideos = async () => {
         try{
-            let res = await axios.get(url);
+            let res = await axios.get(
+                `https://................videos?title=${searchKey}`,
+            );
             console.log(res.data);
-            setVideos(res.data.videos);
+        } catch (err) {
+            console.log(err, "error");
+        }
+    };
+
+    useEffect(() => {
+        fetchVideos();
+    }, [searchKey]);   // calls the function only when searchKey is updated. known as "update phase in useEffect".
+
+    return(
+        <TextField
+            type="text"
+            placeholder="Search here..."
+            value={searchKey}
+            onChange={(e) => handleChange(e)}
+        />
+    )
+}
+
+Example code: With Debouncing
+
+function Header(){
+    const [searchKey, setSearchKey] = useState("");
+    const [timer, setTimer] = useState("");
+
+    const handleChange = (e) => {
+        setSearchKey(e.target.value);
+    };
+
+    const fetchVideos = async () => {
+        try{
+            let res = await axios.get(
+                `https://................videos?title=${searchKey}`,
+            );
+            console.log(res.data);
         } catch (err) {
             console.log(err, "error");
         }
@@ -200,24 +239,7 @@ function App(){
 
     useEffect(() => {
         debounceSearch(1000);
-    }, [searchKey]); 
-
-    return(
-        <>
-            <Header searchKey={searchKey} setSearchKey={setSearchKey} />
-            <Videos videos={videos}/>
-        </>
-    )
-
-}
-
-
-Header.js
-function Header(searchKey, setSearchKey){
-
-    const handleChange = (e) => {
-        setSearchKey(e.target.value);
-    };
+    }, [searchKey]);   // calls the function only when searchKey is updated. known as "update phase in useEffect".
 
     return(
         <TextField
@@ -228,20 +250,6 @@ function Header(searchKey, setSearchKey){
         />
     )
 }
-
-Videos.js
-
-export default function Videos(videos){
-
-    return(
-        <Grid container spacing={2} sx={{ justifyContent: "center" }}>
-            {videos.map((video) => (
-                <VideoCard data={video} key={video.id} />
-            ))}
-        </Grid>
-    );
-}
-
 
 As you can see I explained in a story way explaining one-by-one with the example of Search Bar and videos as content. You can use the posts idea which we used earlier and also remove the "debounceSearch" as of now because we haven't touch that topic yet.
 

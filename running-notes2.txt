@@ -28,12 +28,6 @@ Project: Sample Form using MUI
 
 ===============================================
 
-Session-3: 01:04:25
-
-Pass data to backend using API, we use same form we created above 
-
-===============================================
-
 Snackbar
 => MUI Component 
 => Used to show notifications
@@ -72,7 +66,6 @@ Eg: import { useSnackbar } from "notistack";
 ===============================================
 ************ Session-6: Starts ************
 
-
 MUI Grid:
 => Same as Bootstrap Grid.
 => It has 12 columns.
@@ -82,131 +75,7 @@ MUI Grid:
 Project: In the previous created Videos section using API. 
         Use MUI Grid to display them correctly on screen on all devices.
 
-
-=======================================
-
-
-************ Session-6: Ends ************
-===============================================
-
-************ Session-7: Starts ************
-
-Debouncing:
-=> It is a programming practice that ensures a func. is not called too frequently 
-    by delaying its execution until a specified time has passed since the last invocation.
-=> Use Cases: Search Autocomplete, Window Resizing, Button clicks etc...
-
-Problem Statement: 
-In general in search input fields whenever we type a single letter the API call is done multiple times.
-Because of this API is called multiple times increasing in bandwidth and decreasing the performance.
-
-Solution: (Debouncing)
-=> Debouncing is used to make a particular function to run after a specific time reducing the load.
-
-Task: 
-Create a search bar in a header without debouncing.
-Observe the API call made everytime we type.
-Later apply Debouncing and observe the change.
-(Use axios get method to fetch the details of posts/videos when typing in search bar
-  and useEffect() method)
-
-Example code: Without Debouncing
-
-function Header(){
-    const [searchKey, setSearchKey] = useState("");
-
-    const handleChange = (e) => {
-        setSearchKey(e.target.value);
-    };
-
-    const fetchVideos = async () => {
-        try{
-            let res = await axios.get(
-                `https://................videos?title=${searchKey}`,
-            );
-            console.log(res.data);
-        } catch (err) {
-            console.log(err, "error");
-        }
-    };
-
-    useEffect(() => {
-        fetchVideos();
-    }, [searchKey]);   // calls the function only when searchKey is updated. known as "update phase in useEffect".
-
-    return(
-        <TextField
-            type="text"
-            placeholder="Search here..."
-            value={searchKey}
-            onChange={(e) => handleChange(e)}
-        />
-    )
-}
-
-Example code: With Debouncing
-
-function Header(){
-    const [searchKey, setSearchKey] = useState("");
-    const [timer, setTimer] = useState("");
-
-    const handleChange = (e) => {
-        setSearchKey(e.target.value);
-    };
-
-    const fetchVideos = async () => {
-        try{
-            let res = await axios.get(
-                `https://................videos?title=${searchKey}`,
-            );
-            console.log(res.data);
-        } catch (err) {
-            console.log(err, "error");
-        }
-    };
-
-    function debounceSearch(func, delay){
-        if(timer) clearTimeout(timer);
-        let timerId = setTimeout(() => {
-            fetchVideos()
-        }, delay);
-        setTimer(timerId);
-    }
-
-    useEffect(() => {
-        debounceSearch(1000);
-    }, [searchKey]);   // calls the function only when searchKey is updated. known as "update phase in useEffect".
-
-    return(
-        <TextField
-            type="text"
-            placeholder="Search here..."
-            value={searchKey}
-            onChange={(e) => handleChange(e)}
-        />
-    )
-}
-
 =================================================
-
-
-************ Session-7: Ends ************
-===============================================
-
-************ Session-8: Starts ************
-
-Project Coding
-
-************ Session-8: Ends ************
-===============================================
-
-************ Session-9: Starts ************
-
-Project Coding
-
-************ Session-9: Ends ************
-===============================================
-
 ************ Session-10: Starts ************
 
 => uuid library to generate unique IDs
