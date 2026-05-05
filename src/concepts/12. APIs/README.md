@@ -1,7 +1,3 @@
-# 📘 README.md
-
----
-
 # 📘 APIs in React
 
 ## 🚀 What You Will Learn
