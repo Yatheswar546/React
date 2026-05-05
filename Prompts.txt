@@ -150,28 +150,23 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 
 
-Very good gp, now let's move to next concept Fetch vs Axios.
-Below is the notes I written on Axios only. 
+Good gp, Fetch vs Axios is done, now let's move to next concept "useEffect + API Integration"
 
-12th Concept: APIs
+13th Concept: useEffect + API Integration
+
+For this I haven't written any special notes on this we have to built a folder with required codes and information 
+based on the information and codes we have written so far.
+
+Previously you mentioned we use "Search Products on Load" as example for this concept. So let's use that and
+write codes and notes on this so beginners can also easily understand and maintain the flow that is easy to understand for everyone.
+
+at last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
+
+Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
+
 
 notes.txt
 
-Axios: 
-=> 3rd party library in npm
-=> API call 
-=> instead of fetch 
-
-Example : Use a useState() like this 
-
-const [data, setData] = useState({
-    username: "",
-    password: "",
-    gender: "",
-    age: ""
-})
-
-As you can see I haven't written much I just wrote 3 points.
 
 Help me in creating a folder with required information and codes that explains fetch vs axios concept very well and 
 at last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
