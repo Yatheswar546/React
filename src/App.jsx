@@ -1,13 +1,15 @@
 import './App.css'
 
-// import ProductsMock from './concepts/12. APIs/ProductsMock';
-import ProductsAPI from './concepts/12. APIs/ProductsAPI';
+// import ProductsFetch from './concepts/13. FetchvsAxios/ProductsFetch';
+// import ProductsAxios from './concepts/13. FetchvsAxios/ProductsAxios';
+// import ProductsFetchWithError from './concepts/13. FetchvsAxios/ProductsFetchWithError';
+import ProductsFetchWithLoading from './concepts/13. FetchvsAxios/ProductsFetchWithLoading';
 
 function App() {
 
   return (
     <>  
-      <ProductsAPI />
+      <ProductsFetchWithLoading />
     </>
   );
 }

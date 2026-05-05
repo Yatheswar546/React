@@ -1,14 +1,14 @@
 Phase 1:
 
-useEffect 
-LifeCycle of React 
-Lists 
-Controlled Components (forms)
+✅ useEffect 
+✅ LifeCycle of React 
+✅ Lists 
+✅ Controlled Components (forms)
 
 
 Phase 2:
-APIs
-Fetch vs Axios
+✅ APIs
+✅ Fetch vs Axios
 useEffect + API Integration
 Pass data to backend (POST request)
 Parallel API calls
