@@ -1,14 +1,13 @@
 import './App.css'
 
-// import SingleInput from './concepts/11. ControlledComponents/SingleInput';
-// import LoginForm from './concepts/11. ControlledComponents/LoginForm';
-// import AddProduct from './concepts/11. ControlledComponents/AddProduct';
+// import ProductsMock from './concepts/12. APIs/ProductsMock';
+import ProductsAPI from './concepts/12. APIs/ProductsAPI';
 
 function App() {
 
   return (
     <>  
-      <AddProduct />
+      <ProductsAPI />
     </>
   );
 }
