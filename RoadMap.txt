@@ -397,7 +397,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 # 🟢 PHASE 1 (Core React)
 
-## 1. useEffect
+✅ ## 1. useEffect
 
 👉 Example: **Product List (API fetch)**
 
@@ -410,7 +410,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 ---
 
-## 2. Lifecycle (inside useEffect)
+✅ ## 2. Lifecycle (inside useEffect)
 
 👉 Example: **Timer / Counter with cleanup**
 
@@ -423,7 +423,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 ---
 
-## 3. Lists
+✅ ## 3. Lists
 
 👉 Example: **Product Cards UI**
 
@@ -435,7 +435,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 ---
 
-## 4. Controlled Components (Forms)
+✅ ## 4. Controlled Components (Forms)
 
 👉 Example: **Login Form / Signup Form**
 
@@ -450,7 +450,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 # 🔵 PHASE 2 (Real-world + API)
 
-## 5. APIs
+✅ ## 5. APIs
 
 👉 Example: **Display Users / Products from API**
 
@@ -460,7 +460,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 ---
 
-## 6. Fetch vs Axios
+✅ ## 6. Fetch vs Axios
 
 👉 Example:
 
@@ -473,7 +473,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 ---
 
-## 7. useEffect + API Integration
+✅ ## 7. useEffect + API Integration
 
 👉 Example: **Search Products on Load**
 
@@ -483,7 +483,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 ---
 
-## 8. POST Request (Send Data to Backend)
+✅ ## 8. POST Request (Send Data to Backend)
 
 👉 Example: **Create New User / Add Product**
 
@@ -493,7 +493,7 @@ I’ll keep it simple and practical. These are **best beginner + real-world exam
 
 ---
  
-## 9. Parallel API Calls
+✅ ## 9. Parallel API Calls
 
 👉 Example:
 
@@ -509,7 +509,7 @@ Promise.all([fetchUsers(), fetchPosts()])
 
 ---
 
-## 10. Lifting State Up
+✅ ## 10. Lifting State Up
  
 👉 Example: **Search Bar + Product List**
 
@@ -522,7 +522,7 @@ Promise.all([fetchUsers(), fetchPosts()])
 
 ---
 
-## 11. Debouncing
+✅ ## 11. Debouncing
 
 👉 Example: **Search Input with delay** 
 
@@ -534,7 +534,7 @@ Promise.all([fetchUsers(), fetchPosts()])
 
 ---
 
-# 🟡 JS Recap (Bridge Phase)
+✅ # 🟡 JS Recap (Bridge Phase)
 
 👉 Just mention:
 

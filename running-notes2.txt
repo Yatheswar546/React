@@ -126,685 +126,6 @@ New Project: QTify
 ************ FE-202 ************
 ===============================================
 
-************ Session-1: Starts ************
-
-OOP (Object Oriented Programming):
-
-=> Class-Based Language: Java, C++ - have a class construct which defines all properties that characterize a set of objects.
-=> Prototype-Based Language: JavaScript - has a notion of a object which serves as a template from which we get the properties of a new object.
-=> Classes were introduced after ES6 in JS.
-
-=> Object Recap (Creation, Adding Properties, Reading Properties etc....)
-
-Constructors:
-=> we can create objects using special function "Constructors"
-=> It help us create a blueprint for creating objects.
-=> "this" keyword - to reference the properties of object inside the constructor.
-
-Constructors Demo:
----- Constructor Functions ----
-function Car(make, model, color){
-    
-    // data members : stores data
-    this.make = make;
-    this.model = model;
-    this.color = color;
-    
-    // member functions: execute some operations
-    this.start = function() {
-        console.log("Car Start");
-    };
-    this.welcomeMessage = function(){
-        console.log("Welcome to your brand new car, ", this.make, this.model);
-    };
-}
-
-const thar = new Car("Mahindra", "Thar", "Black");
-const ferrari = new Car("Ferrari", "XYZ", "Red");
-const bmw = new Car("BMW", "M5", "Black");
-
-thar.start();
-ferrari.welcomeMessage();
-
-Task : (New Constructor - Circle)
-
-function Circle(radius, x, y){
-
-    this.radius = radius;
-    this.location = {
-        x : x,
-        y : y
-    };
-
-    this.draw = function(){
-        console.log("Current Location: ", this.location);
-    };
-    this.move = function (nextX, nextY) {
-        this.location.x = nextX;
-        this.location.y = nextY;
-    };
-
-}
-
-const newCircle = new Circle(7, 3, 4);
-newCircle.draw();
-newCircle.move(2,9);
-newCircle.draw();
-
-=============================================================================
-
-"this" keyword:
-=> points to the object executing the current function.
-=> for a regular function: "this" points to the global window object.
-    Eg: function hello(){
-            console.log(this);
-        }
-
-Demo - 2 :
-
-function User(fullName, friendsList = []){
-    this.fullName = fullName;
-    this.friendsList = friendsList;
-    this.mutualFriends = []
-
-    this.addFriend = function(friendName){
-        this.friendsList.push(friendName);
-        console.log(this.friendsList);
-    }
-
-    this.printFriendsList = function(){
-        for( let friend of this.friendsList){
-            console.log(friend);
-        }
-    }
-
-    this.findMutualsWith = function(user2){
-        for(let friend of this.friendsList){
-            if(user2.friendsList.includes(friend)){
-                this.mutualFriends.push(friend);
-            }
-        }
-        console.log(this.mutualFriends);
-    }
-}
-
-const user1 = new User("Rahul", ["John", "Sam", "Robert", "Leonardo"]);
-
-const user2 = new User("Shivam", ["Steve", "Chris", "Joel", "Thomas", "John", "Sam"]);
-
-user1.findMutualsWith(user2);
-user1.addFriend("Steve");
-user1.printFriendsList();
-
-NOTE: this keyword works with new keyword only.
-
-=============================================================================
-
-"bind" method:
-=> When we pass the method as callback, the value of this is lost and when the executor function executes the callback, 
-    this is not pointing to the student object anymore.
-
-    Eg: const student = {
-            fullName: "Rohit",
-            greet: function(){
-                console.log("Hello, " + this.fullName);
-            },
-        };
-
-        function executeObjectFunction(callback){
-            callback();
-        }
-
-        executeObjectFunction(student.greet);
-
-        // The above code's output is : Hello, undefined.
-
-
-=> what we can do is pass the value of "this" explicity to the "student.greet" method.
-=> To achieve this we can use "bind" method which can be applied on all methods.
-
-    Eg: const greet = student.greet.bind(student); // bind the object to thee method
-        executeObjectFunction(greet); // Passing the object method as callback
-
-=> The bind method returns a new function.
-=> It helps us set the value of this to the passed value for specific funtion.
-
-    Eg: const student = {
-            fullName: "Rohit",
-            greet: function(){
-                console.log("Hello, " + this.fullName);
-            },
-        };
-
-        function executeObjectFunction(callback){
-            callback();
-        }
-
-        const greet = student.greet.bind(student)
-        executeObjectFunction(greet);
-
-=============================================================================
-
-ES6 Classes:
-=> Js is not a class-based language but ES6 provides "class-like" syntax.
-=> Under the hood, it is doing the same thing we were doing with Constructor functions.
-=> Classes are blueprints that describes a particular object.
-=> A class is declared with keyword "class".
-
-class Car {
-
-    // data members
-    constructor(make, model, color){
-        this.make = make;
-        this.model = model;
-        this.color = color;
-    }
-
-    // methods
-    start(){
-        console.log("Car Start");
-    }
-
-    welcomeMessage(){
-        console.log("Welcome to your brand new car, ", this.make, this.model);
-    };
-}
-
-const audi = new Car("Audi", "Q3", "White");
-audi.welcomeMessage();
-
-************ Session-1: Ends ************
-===============================================
-
-===============================================
-************ Session-2: Starts ************
-
-// User-defined class
-class Car {
-
-    // data members
-    constructor(make, model, color){
-        this.make = make;
-        this.model = model;
-        this.color = color;
-    }
-
-    // methods
-    startEngine(){
-        console.log("Engine Start");
-    }
-}
-
-const audi = new Car("Audi", "Q3", "White");
-audi.startEngine();
-
-
-// In- built classes in JS
-
-=> "Object" is an in-built class in JS which is used to create objects.
-
-Eg: let obj = new Object({ name: "Rahul" });
-    console.log(obj);
-
-    console.log(typeof obj);    // object
-    console.log(typeof Object); // function
-    console.log(typeof Car);    // function
-
-    NOTE: Js is a Prototype-based language that rotates around functions and logics.
-
-// Methods:
-
-let obj = new Object({ name: "Rahul", age: 25, designation: "SDE" });
-console.log(Object.keys(obj));
-console.log(Object.values(obj));
-console.log(Object.entries(obj));
-
-// Task (use methods):
-const employeeData = {
-    John: 100,
-    Pete: 200,
-    Mary: 300
-};
-
-class Util{
-    constructor(employeeData){
-        this.data = employeeData;
-        this.sumOfSalaries = 0;
-    }
-
-    sumSalaries(){
-        const salariesData = Object.values(this.data);
-        let sumOfSalaries = 0;
-        for(let salary of salariesData){
-            sumOfSalaries += salary;
-        }
-
-        this.sumOfSalaries = sumOfSalaries;
-
-        console.log("The total sum of salary is ", sumOfSalaries);
-    }
-
-    averageSalaries(){
-        const salariesData = Object.values(this.data);
-        const totalNumberOfSalaries = salariesData.length;
-        const averageSalary = this.sumOfSalaries / totalNumberOfSalaries;
-
-        console.log("Average Salary is: ", averageSalary);
-    }
-}
-
-const employees = new Util(employeeData);
-employees.sumSalaries();
-employees.averageSalaries();
-
-=============================================================================
-
-Inheritance:
-=> Acquiring properties from parent class to child class and extend the properties to child class.
-=> Class Inheritance is a way for one class to extend another class to create new functionality.
-=> use "extend" keyword after class declaration.
-=> helps in reducing duplication and increase reusability.
-
-Eg:
-class Student {
-    constructor(name){
-        this.fullName = name;
-    }
-    markAttendance(){
-        console.log(this.fullName, "is present.");
-    }
-}
-
-class SportsCaptain extends Student{
-    playFootball(){
-        console.log(this.fullName, "is playing football.");
-    }
-}
-
-const captain = new SportsCaptain("Yathe");
-captain.markAttendance();
-captain.playFootball();
-
-Output:
-Yathe is present.
-Yathe is playing football.
-
-// Task 
-class Employee{
-    constructor(name, department){
-        this.name = name;
-        this.department = department;
-    }
-    markPresent(){
-        console.log("Employee marked as Present");
-    }
-}
-
-class Developer extends Employee{
-    submitCode(){
-        console.log("Code submitted by " + this.name + " from " + this.department);
-    }
-}
-
-const employee = new Developer("Yathe", "SDE");
-employee.markPresent();
-employee.submitCode();
-
-Output:
-Employee marked as Present
-Code submitted by Yathe from SDE
-
-=============================================================================
-
-Method Overriding:
-=> It is a feature that allows a child class to provide a specific implementation
-    of a method already provided by the parent class.
-=> If we define the same method in the child class -> the objects of the child class will call that 
-    particular implementation instead of the parent class implementation.
-
-Eg: 
-class Student {
-    constructor(name){
-        this.fullName = name;
-    }
-    markAttendance(){
-        console.log(this.fullName, "is present.");
-        return this;
-    }
-}
-
-class SportsCaptain extends Student{
-    markAttendance(){
-        console.log("Sports Captain " + this.fullName + " is present");
-    }
-    playFootball(){
-        console.log(this.fullName, "is playing football.");
-    }
-}
-
-const captain = new SportsCaptain("Yathe");
-captain.markAttendance();
-captain.playFootball();
-
-Output:
-Sports Captain Yathe is present
-Yathe is playing football.
-
-=============================================================================
-
-"Super" keyword:
-=> Used to explicity call the parent class implementation.
-   super.method(...) to call a parent method.
-
-Eg: 
-class Student {
-    constructor(name){
-        this.fullName = name;
-    }
-    markAttendance(){
-        console.log(this.fullName, "is present.");
-        return this;
-    }
-}
-
-class SportsCaptain extends Student{
-    markAttendance(){
-        super.markAttendance();
-        console.log("Sports Captain " + this.fullName + " is present");
-    }
-    playFootball(){
-        console.log(this.fullName, "is playing football.");
-    }
-}
-
-const captain = new SportsCaptain("Yathe");
-captain.markAttendance();
-captain.playFootball();
-
-Output:
-Yathe is present.
-Sports Captain Yathe is present
-Yathe is playing football.
-
-=============================================================================
-
-Constructor Overriding:
-=> The child class uses the constructor of its parent class.
-=> If we wanted to define data members only for child class then we need seperate constructor.
-=> But the child class won't able to use parent class constructor. 
-=> Here comes "Constructor Overriding", if we want to use data member from parent class constructor 
-    within child class constructor then we use constructor overriding.
-
-Eg: 
-class Student {
-    constructor(name){
-        this.fullName = name;
-    }
-    markAttendance(){
-        console.log(this.fullName, "is present.");
-        return this;
-    }
-}
-
-class SportsCaptain extends Student{
-
-    constructor(cricketCaptain, footballCaptain, fullName){
-        super(fullName);  // Constructor Overriding
-        this.cc = cricketCaptain;
-        this.fc = footballCaptain;
-    }
-
-    markAttendance(){
-        super.markAttendance();  // Method Overriding
-        console.log("Sports Captain " + this.fullName + " is present");
-        return this;
-    }
-    playFootball(){
-        console.log(this.fullName, "is playing football.");
-    }
-}
-
-const captain = new SportsCaptain(true, true, "Yathe");
-captain.markAttendance();
-captain.playFootball();
-
-Output:
-Yathe is present.
-Sports Captain Yathe is present
-Yathe is playing football.
-
-// Task 
-class Employee{
-    constructor(name, department){
-        this.name = name;
-        this.department = department;
-    }
-    markPresent(){
-        console.log("Employee marked as Present");
-    }
-    getRole(){
-        console.log("Employee of Office");
-    }
-}
-
-class Developer extends Employee{
-
-    constructor(prefLanguage,name){
-        super(name);
-        this.prefLanguage = prefLanguage;
-    }
-
-    submitCode(){
-        console.log("Code submitted by " + this.name + " from " + this.department);
-    }
-
-    getRole(){
-        super.getRole();
-        console.log("Works with " + this.prefLanguage);
-    }
-}
-
-const employee = new Developer("English");
-employee.getRole();
-
-Output:
-Employee of Office
-Works with English
-
-************ Session-2: Ends ************
-===============================================
-
-
-===============================================
-************ Session-3: Starts ************
-
-Functional Programming:
-=> FP is the process of building software by composing pure functions, 
-    avoiding shared state, mutable (changing) data and side-effects.
-=> FP is declarative (what needs to be done) rather than 
-    imperative(how it needs to be done, eg: OOPS) 
-    and the state flows through pure functions.
-
-Eg: 
-// Imperative Code 
-
-let longPasswords = [];
-for(let i=0; i<passwords.length; i++){
-    const password = passwords[i];
-    if(password.length >= 9){
-        longPasswords.push(password).
-    }
-}
-
-// Declarative Code 
-
-const longPasswords = passwords.filter((password) => password.length >= 9);
-
-
-=> Functional code tends to be more concise, more predictable, and easier to test
-    than imperative or OOP.
-=> Languages uses FP : Erlang, Haskell.
-
-Functions are "First-Class" objects:
-=> In FP, functions are first-class objects i.e. 
-    we can use functions as if they were variables/constants.
-
-Eg: 
-const byTwo = function(value){
-    // function is assigned to a variable
-    return value / 2;
-}
-
-const ans = byTwo(8); // constant
-
-=> We can combine functions with other functions and generate new functions 
-    and higher-order functions.
-
-=============================================================================
-
-Pure Functions:
-=> A function which given the same inputs, always returns the same output (immutability).
-=> Has no "side-effects".
-=> These are functions which returns a predictable and deterministic value.
-
-Eg:
-// Pure function
-function addTwo(a,b){
-    return a+b;
-}
-
-// Impure function
-function addTwo(a,b){
-    console.log(a,b);
-}
-
-Advantages:  
-=> Works as an independent function that gives same output for same inputs.
-=> Readable because of independent behavior.
-=> Straightforward to debug.
-=> Can clone an external state into a pure function, but it doesn't change the purity of function.
-
-=============================================================================
-
-Side-Effects:
-=> A side effect can be perceived as something a function does, which does not pertain to returning a value.
-=> Examples - printing a value, using global variables, doing external operations like changing the values of a different function, 
-    or even mutating the values/objects received as arguments
-=> A function is pure when it does not have side effects.
-
-Examples:
-=> Modifying any external variable or object property (e.g., a global variable, or a variable in the parent function scope chain)
-=> Logging to the console
-=> Writing to a file
-=> Calling any other functions with side-effects
-
-=============================================================================
-
-Avoiding Shared-Data:
-=> In FP we avoid declaring any global variables.
-=> Instead pass the variables around from within a function to another function.
-
-Eg: 
-//Global Variables
-let x = 15;
-let y = 10;
-
-const add = () => {
-  //Impure function using global variables
-  return x + y;
-};
-
-const addFP = (x, y) => {
-  //Pure function only using what's passed to it
-  return x + y;
-};
-
-=============================================================================
-
-Immutability:
-=> An Immutable object is that which can’t be modified after it’s created. 
-=> Conversely, a mutable object is any object which can be modified after it’s created.
-=> Immutability of a pure function means that the function would treat its input values as immutable (once created, cannot be changed)
-=> So if we wish to perform a mutation on the input, we first copy it and then mutate its value.
-
-Eg: An array.push(value) will mutate the original array with the value passed in the push function. 
-Instead to do this in an immutable fashion, we need to copy the state to some other variable and change the value.
-
-function purePush(arr, value) {
-  const nextArr = [...arr]; //copying; to not mutate original state
-
-  //Impure function called on local variable, not changing external state
-  nextArr.push(value);
-  return nextArr; //returing the new state
-}
-
-//Or better
-function purePush(arr, value) {
-  return [...arr, value]; //returns new array with elements from arr and value.
-}
-
-// Task - Pure ToDO list 
-
-const todoDB = [];
-
-const addTodo = (arr, newTodo) => [...arr, newTodo];
-
-const getTodo = (arr, index) => arr[index];
-
-const clearTodo = () => [];
-
-const updateTodo = (arr, index, newTodo) => arr.map((ele, i) => index === i ? newTodo : ele );
-
-const result = addTodo(todoDB, "Play Cricket");
-const updatedResult = addTodo(result, "Play Football");
-
-console.log(updatedResult);
-
-updatedResult = todoDB;
-
-=============================================================================
-
-NOTE: A programming language is said to have First-class Functions 
-      when all three (Callbacks + Closures + Function Expression) are met.
-
-=============================================================================
-
-Higher Order Functions:
-=> A function that accepts and/or returns another function is called a higher-order function.
-=> In JS, functions are first-class citizens because You can pass them around, store them in variables and arrays, 
-    use them as inputs for calculations. You can use them like any piece of data.
-=> The greatest benefit of HOFs is greater reusability.
-
-Eg: 
-const add = (x,y) => {
-    return x + y;
-}
-
-const diff = (x,y) => {
-    return Math.abs(x-y);
-}
-
-//Higher order function taking function as arg.
-const calculate = (callback, x, y) => {
-  const value = callback(x, y);
-  return value;
-};
-
-calculate(add, 4, 5); //9
-
-=============================================================================
-
-Modules:
-=> Module is just a file. One script is one module. As simple as that.
-=> Modules can load each other and use special directives export and import to interchange functionality, 
-    call functions of one module from another one:
-    - export keyword labels variables and functions that should be accessible from outside the current module.
-    - import allows the import of functionality from other modules.
-
-
-************ Session-3: Ends ************
-===============================================
-
 ===============================================
 ************ Session-4: Starts ************
 
@@ -975,8 +296,440 @@ UseCallback : Optimizing Expensive Functions
 UseContext  : Avoid Prop drilling in React 
 Custom Hooks
 
+How to memoize functions or Child components ?
+
+SquareComponent.jsx
+
+import React from "react";
+
+function SquareComponent({ handler, input }) {
+    const square = (num) => {
+        console.log("Square ", num);
+        return num*num;
+    }
+
+    return (
+        <>
+            <h1>{square(input)}</h1>
+            <button onClick={handler}>Increment</button>
+        </>
+    );
+}
+
+export default (SquareComponent);
+
+In the above SquareComponent, it receives two props:
+1) input: Number to calculate square
+2) handler: function to update the input value
+
+App.jsx:
+
+import { useState, useCallback, useRef, useMemo } from "react";
+
+export default function ParentComponent() {
+    const [state, setState] = useState(false);
+    const [input, setInput] = useState(1);
+    console.log("Parent Component Rendered");
+
+    const handler = (prevInput) => setInput(prevInput + 1);
+
+    const statehandler = () => {
+        setState(!state);
+    };
+
+    return (
+        <>
+            <button onClick={statehandler}>
+                Change State of Parent Component
+            </button>
+            <SquareComponent handler={handler} input={input} />
+        </>
+    );
+}
+
+In the above ParentComponent, it has two state variables:
+1) state : To re-render component
+2) input: Number to calculate square
+
+In tha above example, when we click on "Change State of Parent Component" button.
+Along with Parent Component, Child component is also re-rendered which is an "unnecessary re-render"
+
+We can optimize this behavior using "memoize" technique
+
+===============================================
+
+Step 1: Memoize the child component (Square component)
+
+=> Components only re-renders if their "state" or "props" changes
+=> So, we can memoize the child component using "React.memo"
+
+React.memo:
+
+=> React.memo is a higher order component (HOC) provided by React that
+    performs a shallow equality check on the component's props.
+=> It determines if the component should be re-rendered by comparing 
+    the previous and current props.
+=> If the props haven't changed, React.memo prevents the re-rendering of the component.
+
+Example:
+
+function SquareComponent({ handler, input }) {
+    const square = (num) => {
+        console.log("Square ", num);
+        return num;
+    }
+
+    return (
+        <>
+            <h1>Square Component</h1>
+            <button onClick={handler}>Increment</button>
+        </>
+    );
+}
+
+export default React.memo(SquareComponent);
+
+In the above code, we use "React.memo" but still we are facing the same issue.
+Because in SquareComponent when we pass the props(handler) as handler is a function the function reference is passed as Pass by Reference concept.
+Whenever we call ParentComponent, a new memory location is created for handler function and the new memory reference is passed to child component.
+
+===============================================
+
+To fix the above issue we can use "useCallback" hook.
+
+useCallback:
+
+=> useCallback is a React Hook that lets you cache a function definition between re-renders.
+=> useCallback function is used to memoize functions and avoid calling them unless certain dependencies changes
+
+Example:
+const handler = UseCallback(() => {
+    setInput(input + 1);   
+}, [input]);
 
 
+NOTE:
+useMemo      --> memoize the value 
+useCallback  --> memoize the function object, function, arrays references
+
+===============================================
+
+Prop Drilling:
+
+=> Components used to get props that they don't need it
+
+Let us consider a scenario, we have "n" components
+component A -> has state A 
+component B (Child of component A)
+component C (Child of component B)
+component D (Child of component C)
+component E (Child of component D)
+.
+.
+.
+.
+.
+component n (Child of previous component) -> it requires state A 
+
+Now, in the above scenario "component n" requires state A from "component A". 
+It has to pass through all components B, C, D, E..... upto "n" even though the middle components don't need state A.
+
+The above scenario is called "Prop Drilling".
+
+Example: on Prop-Drilling
+
+App.jsx
+import React, { useState } from "react";
+import ParentComponent from './ParentComponent';
+
+function App() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <>
+            <ParentComponent count={count} setCount={setCount} />
+        </>
+    );
+}
+
+ParentComponent.jsx
+import React from "react;
+import ChildComponent from './ChildComponent';
+
+function ParentComponent({ count, setCount }) {
+    return (
+        <div>
+            <ChildComponent count={count} setCount={setCount} />
+        </div>
+    );
+}
+
+ChildComponent.jsx
+import React from "react";
+import GrandchildComponent from './GrandchildComponent;
+
+function GrandchildComponent({ count, setCount }) {
+    return (
+        <div>
+            <GrandchildComponent count={count} setCount={setCount} />
+        </div>
+    );
+}
+
+GrandchildComponent.jsx 
+import React from "react";
+
+
+function GrandchildComponent({ count, setCount }) {
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+        </div>
+    );
+}
+
+We can fix this using "useContext" hook.
+
+===============================================
+
+useContext:
+
+=> useContext will automatically pass all the state and data variables declared in the context to all the child components of that ParentComponent.
+
+=> "createContext" lets you create a 'context' that components can provide or read.
+
+=> we will create a context which holds a value at global and that value can be used at any component 
+=> Provider :
+=> Consumer :
+
+Steps to use "useContext" Hook:
+
+1. Create a Context with "useContext" hook in React.
+
+CountContext.jsx 
+import React from 'react';
+
+export const CountContext = React.createContext();
+
+2. Wrap App.js with "contextProvider" by passing values that need access in all the children components.
+
+App.jsx
+import React, { useState } from 'react';
+import { CountContext } from './CountContext';
+import ParentComponent from './ParentComponent';
+
+function App() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <div>
+            <CountContext.Provider value={{ count, setCount }}>
+                <ParentComponent />
+            </CountContext.Provider>
+        </div>
+    );
+}
+
+3. Now we can directly access the count variable declared in App.js component in any component (GrandchildComponent.js)
+    without passing it as props through every children component
+
+ParentComponent.jsx
+import React from 'react';
+import ChildComponent from './ChildComponent';
+
+function ParentComponent() {
+    return (
+        <div>
+            <ChildComponent />
+        </div>
+    );
+}
+
+ChildComponent.jsx 
+import React from 'react';
+import GrandchildComponent from './GrandchildComponent';
+
+function ChildComponent() {
+    return (
+        <div>
+            <GrandchildComponent />
+        </div>
+    );
+}
+
+GrandchildComponent.jsx 
+import React, { useContext } from 'react';
+import { CountContext } from './CountContext';
+
+function GrandchildComponent() {
+    const { count, setCount } = useContext(CountContext);
+
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+        </div>
+    );
+}
+
+===============================================
+
+Custom Hooks in React:
+
+=> In React, a 'custom hook' is a reusable function that starts with the prefix "use" and 
+    allows you to share and reuse stateful or side-effectful logic across multiple components.
+=> Custom hooks allow you to extract and share logic such as state management, side effects,
+    and event handling without duplicating code.
+
+    Custom Hooks Examples in React: https://github.com/streamich/react-use
+
+NOTE: We cannot use custom Hook in a normal function we must use inside a Custom Hook(prefix "use") function only
+
+Example 1:
+
+TempComponent.jsx
+
+import { useState } from 'react';
+import { useLocalStorageInput } from './hooks/useLocalStorageInput';
+
+const LOCAL_STORAGE_KEY = "temp_key"
+
+export const TempComponent = () => {
+
+    // const [input, setInput] = useState(
+    //     localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Crio'
+    // );
+
+    // useEffect(() => {
+    //     localStorage.setItem(LOCAL_STORAGE_KEY, input)
+    // }, [input]);
+
+    // after using useLocalStorageInput file completely we don't need above code
+    const { input, setInput } = useLocalStorageInput(LOCAL_STORAGE_KEY, "Crio");
+
+    return (
+        <div>
+            <h1>Temp Component</h1>
+            <input value={input} onChange={(e) => setInput(e.target.value)} />
+        </div>
+    );
+};
+
+RandomComponent.jsx
+
+import { useState } from 'react';
+import { useLocalStorageInput } from './hooks/useLocalStorageInput';
+
+const LOCAL_STORAGE_KEY = "random_key"
+
+export const RandomComponent = () => {
+
+    // const [input, setInput] = useState(
+    //     localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Random'
+    // );
+    // 
+    // useEffect(() => {
+    //     localStorage.setItem(LOCAL_STORAGE_KEY, input)
+    // }, [input]);
+
+    // after using useLocalStorageInput file completely we don't need above code
+    const { input, setInput } = useLocalStorageInput(LOCAL_STORAGE_KEY, "random");
+
+    return (
+        <div>
+            <h1>Random Component</h1>
+            <input value={input} onChange={(e) => setInput(e.target.value)} />
+        </div>
+    );
+};
+
+
+useLocalStorageInput.jsx (inside hooks folder)
+
+import { useState, useEffect } from 'react';
+
+export const useLocalStorageInput = (key, defaultValue) => {
+
+    const [input, setInput] = useState(localStorage.getItem(key) ?? defaultValue);
+
+    useEffect(() => {
+        localStorage.setItem(key, input);
+    }, [input]);
+
+    return {input, setInput} ;
+
+};
+
+App.jsx
+import React, { useState, useContext } from "react";
+import { TempComponent } from './TempComponent';
+import { RandomComponent } from './RandomComponent';
+
+export default function App() {
+    
+    return (
+        <div>
+            <TempComponent />
+            <RandomComponent />
+        </div>
+    );
+}
+
+Example 2 (Custom Hook that returns "window size"):
+
+import { useState, useEffect } from 'react';
+
+const useWindowSize = () => {
+    const [windowsize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        };
+
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);;
+
+    return windowsize;
+};
+
+export default useWindowSize;
+
+Example 3 (useLocalStorage custom Hook):
+
+import { useState, useEffect } from 'react';
+
+const useLocalStorage = (key, initialValue = "") => {
+
+    const [value, setValue] = useState(() => {
+        const storedValue = localStorage.getItem(key);
+        
+        return storedValue ? JSON.parse(storedValue) : initialValue;
+    });
+
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
+
+    return [value, setValue];
+};
+
+export default useLocalStorage;
+
+
+************ Session-5: Ends ************
+===============================================
 
 
 
