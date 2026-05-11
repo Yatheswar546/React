@@ -152,7 +152,7 @@ so a beginner can also easily understand their real-life use cases
 Good gp, The explanation you gave on Lifting State Up is awesome, now let's move to next concept "Debouncing",
 I written a notes on it with some codes. Below is the notes of it, go through it
 
-18th Concept: Parallel API Calls
+18th Concept: Debouncing
 
 notes.txt 
 Debouncing:
