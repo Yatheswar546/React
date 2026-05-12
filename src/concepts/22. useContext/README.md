@@ -708,11 +708,11 @@ Re-render optimization problem
 
 ## 12. Common Mistakes
 
-❌ Using Context for everything
-❌ Forgetting Provider
-❌ Wrong Context import
-❌ Creating too many contexts
-❌ Confusing Context with state management libraries
+* Using Context for everything  ❌
+* Forgetting Provider  ❌
+* Wrong Context import  ❌
+* Creating too many contexts  ❌
+* Confusing Context with state management libraries  ❌
 
 ---
 
