@@ -1,7 +1,7 @@
 // import './App.css'
 
-import { useState } from "react";
-import SquareComponent from "./concepts/21. ReactMemo/SqaureComponent";
+import { useState, useCallback } from "react";
+import SquareComponent from "./concepts/21. useCallback/SquareComponent";
 
 export default function ParentComponent() {
 
@@ -10,20 +10,19 @@ export default function ParentComponent() {
 
   console.log("Parent Component Rendered");
 
-  const handler = () => {
+  const handler = useCallback(() => {
     setInput(prev => prev + 1);
-    
-  };
+  }, []);
 
-  const stateHandler = () => {
+  function handleParentState() {
     setState(!state);
   };
 
   return (
     <>
       
-      <button onClick={stateHandler}>
-        Change Parent State
+      <button onClick={handleParentState}>
+        Re-render State
       </button>
 
       <SquareComponent 
