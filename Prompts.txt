@@ -149,112 +149,123 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
-Good gp, The explanation you gave on Lifting State Up is awesome, now let's move to next concept "Debouncing",
+Good gp, we have completed so far basics and I revised Js OOPS also, now let's move to Advanced Hooks and in that 
+the next concept "useRef",
 I written a notes on it with some codes. Below is the notes of it, go through it
 
-18th Concept: Debouncing
+18th Concept: useRef
 
+================================================================================================================
 notes.txt 
-Debouncing:
-=> It is a programming practice that ensures a func. is not called too frequently 
-    by delaying its execution until a specified time has passed since the last invocation.
-=> Use Cases: Search Autocomplete, Window Resizing, Button clicks etc...
+        "NO UNNECESSARILY RE-RENDERS"
+=> If there are more re-renders in a short-span of time then the browser will run slow or get crashed.
+=> A setter method always re-render a component, below is a example.
 
-Problem Statement: 
-In general in search input fields whenever we type a single letter the API call is done multiple times.
-Because of this API is called multiple times increasing in bandwidth and decreasing the performance.
+Eg: App.js
+import { useState } from "react";
 
-Solution: (Debouncing)
-=> Debouncing is used to make a particular function to run after a specific time reducing the load.
+export default function App(){
+    // 1st approach: Use simple Js variable
+    let counter = 0;
+    // 2nd approach: Use useState variable
+    const [count, setCount] = useState(0);
 
-Task: 
-Create a search bar in a header without debouncing.
-Observe the API call made every-time we type.
-Later apply Debouncing and observe the change.
-(Use axios get method to fetch the details of posts/videos when typing in search bar
-  and useEffect() method)
-
-Example code: Without Debouncing
-
-function Header(){
-    const [searchKey, setSearchKey] = useState("");
-
-    const handleChange = (e) => {
-        setSearchKey(e.target.value);
+    const handleIncrement = () => {
+        setCount((prevValue) => prevValue + 1);
+        counter++;
+        console.log("count: ", counter);
     };
 
-    const fetchVideos = async () => {
-        try{
-            let res = await axios.get(
-                `https://................videos?title=${searchKey}`,
-            );
-            console.log(res.data);
-        } catch (err) {
-            console.log(err, "error");
-        }
-    };
-
-    useEffect(() => {
-        fetchVideos();
-    }, [searchKey]);   // calls the function only when searchKey is updated. known as "update phase in useEffect".
+    console.log("Component re-rendered");
 
     return(
-        <TextField
-            type="text"
-            placeholder="Search here..."
-            value={searchKey}
-            onChange={(e) => handleChange(e)}
-        />
-    )
+        <div className="App">
+            <h2>{count}</h2>
+            <button onClick={handleIncrement}>Increment</button>
+        </div>
+    );
 }
 
-Example code: With Debouncing
+=> To solve the above re-rendering problem the below approaches won't work effectively.
+    1st approach: Use simple Js variable
+    2nd approach: Use useState variable
+=> To solve this issue we use "useRef" hook. (3rd approach)
 
-function Header(){
-    const [searchKey, setSearchKey] = useState("");
-    const [timer, setTimer] = useState("");
+useRef:
+=> "useRef" is used to create mutable reference persisting across multiple re-render for an element while avoiding unnecessary re-renders.
+=> The useRef will updates the component(data variable) without re-rendering.
+=> The value will be persistent across multiple re-renders which was not possible with 'useState'.
 
-    const handleChange = (e) => {
-        setSearchKey(e.target.value);
+Demo code: App.js
+import { useState } from "react";
+
+export default function App(){
+
+    // 3rd approach: useRef
+    const counterRef = useRef(0);
+
+    const handleIncrement = () => {
+        counter++;
+        console.log("count: ", counter);
+
+        // writing a useRef variable
+        counterRef.current++;
+        console.log("useRef variable value", counterRef.current);  // reading a useRef variable
     };
 
-    const fetchVideos = async () => {
-        try{
-            let res = await axios.get(
-                `https://................videos?title=${searchKey}`,
-            );
-            console.log(res.data);
-        } catch (err) {
-            console.log(err, "error");
-        }
-    };
+    console.log ("Component re-rendered");
 
-    function debounceSearch(func, delay){
-        if(timer) clearTimeout(timer);
-        let timerId = setTimeout(() => {
-            fetchVideos()
-        }, delay);
-        setTimer(timerId);
+    return(
+        <div className="App">
+            <h2>{count}</h2>
+            <button onClick={handleIncrement}>Increment</button>
+        </div>
+    );
+}
+
+NOTE: the reading and writing of a useRef variable can be done only at two places.
+        1. handler functions 
+        2. useEffect hooks 
+
+Pitfalls of useRef Hook:
+=> Do not read/write ref.current during rendering.
+=> React expects that components should behave like a pure function.
+=> If the inputs(props, state and context) are the same, it should return exactly the same JSX.
+
+Use cases of useRef Hook:
+=> DOM Manipulation
+=> Focusing a text input
+
+Eg: 
+import { useRef } from "react";
+
+export default function Form(){
+    const inputRef = useRef(null);
+
+    function handleClick(){
+        inputRef.current.focus();
     }
 
-    useEffect(() => {
-        debounceSearch(1000);
-    }, [searchKey]);   // calls the function only when searchKey is updated. known as "update phase in useEffect".
-
     return(
-        <TextField
-            type="text"
-            placeholder="Search here..."
-            value={searchKey}
-            onChange={(e) => handleChange(e)}
-        />
-    )
+        <>
+            <input ref={inputRef} />
+            <button onClick={handleClick}>
+                Focus on input
+            </button>
+        </>
+    );
 }
 
-As you can see I explained in a story way explaining one-by-one wihtout debouncing and after using debouncing.  You can use the posts idea which we used earlier.
+
+When to use "useState" and "useRef".
+=> If we want to use a variable in jsx i.e. that value is shown on UI then we should use "useState".
+=> For the variables which we won't use for UI but use for sub-calculations and other operations we need "useRef".
+
+================================================================================================================
+
+As you can see I explained in a story way explaining one-by-one with example and the when and how to use "useRef" Hook.  
 
 Analyze them and add more information on this as much as you can, and also add better examples and real-life scenarios and codes, so everyone could understand it better way. Maintain the flow easy.
-Give both the examples of before and after using "Debouncing" with codes also.
 
 At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
 
