@@ -1,35 +1,22 @@
-// import './App.css'
+import './App.css'
 
-import { useState, useCallback } from "react";
-import SquareComponent from "./concepts/21. useCallback/SquareComponent";
+import { useState } from "react";
+import ParentComponent from './concepts/22. useContext/ParentComponent';
+import { CountContext } from './concepts/22. useContext/CountContext';
 
-export default function ParentComponent() {
+export default function App() {
 
-  const [state, setState] = useState(false);
-  const [input, setInput] = useState(1);
-
-  console.log("Parent Component Rendered");
-
-  const handler = useCallback(() => {
-    setInput(prev => prev + 1);
-  }, []);
-
-  function handleParentState() {
-    setState(!state);
-  };
+  const [count, setCount] = useState(0);
 
   return (
     <>
-      
-      <button onClick={handleParentState}>
-        Re-render State
-      </button>
+      <CountContext.Provider value={{ count, setCount }}>
 
-      <SquareComponent 
-        handler={handler}
-        input={input}
-      />
+        <h1>App Component</h1>
 
+        <ParentComponent />
+
+      </CountContext.Provider>
     </>
   );
 }

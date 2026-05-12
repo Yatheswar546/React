@@ -1,4 +1,4 @@
-// import { StrictMode, React } from 'react'
+import { StrictMode, React } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
@@ -7,10 +7,10 @@ import { AuthProvider } from './concepts/08. ProtectedRoute/AuthContext.jsx'
 
 createRoot(document.getElementById('root')).render(
   <BrowserRouter>
-    {/* <StrictMode> */}
+    <StrictMode>
       <AuthProvider>
         <App />
       </AuthProvider>
-    {/* </StrictMode> */}
+    </StrictMode>
   </BrowserRouter>
 )
