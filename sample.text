@@ -5,8 +5,8 @@ Phase 1:
 ✅ Lists 
 ✅ Controlled Components (forms)
 
-
 Phase 2:
+
 ✅ APIs
 ✅ Fetch vs Axios
 ✅ useEffect + API Integration
@@ -16,6 +16,7 @@ Phase 2:
 ✅ Debouncing
 
 Before moving to Phase a recap of Js OOPS concepts:
+
 ✅ OOP
 ✅ Constructors
 ✅ this keyword
@@ -35,13 +36,14 @@ Before moving to Phase a recap of Js OOPS concepts:
 Modules
 
 Phase 3:
+
 ✅ useRef 
 useMemo 
 useCallback
 useContext
 Custom Hooks 
 
-
 Phase 4:
+
 Tailwind.css
 Material UI
