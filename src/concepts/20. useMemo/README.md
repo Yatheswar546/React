@@ -590,11 +590,11 @@ const total = useMemo(() => a + b, [a, b]);
 
 ## 15. Common Mistakes
 
-❌ Using `useMemo` everywhere
-❌ Wrong dependency array
-❌ Forgetting dependencies
-❌ Expecting useMemo to stop re-renders
-❌ Using useMemo for tiny calculations
+* Using `useMemo` everywhere  ❌
+* Wrong dependency array  ❌
+* Forgetting dependencies  ❌
+* Expecting useMemo to stop re-renders  ❌
+* Using useMemo for tiny calculations  ❌
 
 ---
 
