@@ -779,11 +779,11 @@ React.memo
 
 ## 8. Common Mistakes
 
-❌ Using useCallback everywhere
-❌ Wrong dependency array
-❌ Forgetting dependencies
-❌ Thinking useCallback stops parent re-renders
-❌ Confusing useMemo with useCallback
+* Using useCallback everywhere  ❌
+* Wrong dependency array  ❌
+* Forgetting dependencies  ❌
+* Thinking useCallback stops parent re-renders  ❌
+* Confusing useMemo with useCallback  ❌
 
 ---
 
