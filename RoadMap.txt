@@ -560,7 +560,7 @@ Promise.all([fetchUsers(), fetchPosts()])
 
 ---
 
-## 13. useMemo
+✅ ## 13. useMemo
 
 👉 Example:
 
