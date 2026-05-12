@@ -150,143 +150,186 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 
 
-Good gp, we have completed useMemo, now let's move to next concept "useCallback". In which I covered both React.memo
-and how it's drawback lead to "useCallback".
+Okay gp, we have completed useCallback with detail explanation, now let's move to next concept "useContext". In which I covered Prop-drilling also
+and how we overcome that using "useContext".
 I written a notes on it with some codes. Below is the notes of it, go through it
 
-21st Concept: useCallback
+22nd Concept: useContext
 
 ================================================================================================================
 notes.txt 
 
-How to memoize functions or Child components ?
+UseContext  : Avoid Prop drilling in React 
 
-SquareComponent.jsx
+Prop Drilling:
 
+=> Components used to get props that they don't need it
+
+Let us consider a scenario, we have "n" components
+component A -> has state A 
+component B (Child of component A)
+component C (Child of component B)
+component D (Child of component C)
+component E (Child of component D)
+.
+.
+.
+.
+.
+component n (Child of previous component) -> it requires state A 
+
+Now, in the above scenario "component n" requires state A from "component A". 
+It has to pass through all components B, C, D, E..... upto "n" even though the middle components don't need state A.
+
+The above scenario is called "Prop Drilling".
+
+Example: on Prop-Drilling
+
+App.jsx
+import React, { useState } from "react";
+import ParentComponent from './ParentComponent';
+
+function App() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <>
+            <ParentComponent count={count} setCount={setCount} />
+        </>
+    );
+}
+
+ParentComponent.jsx
+import React from "react;
+import ChildComponent from './ChildComponent';
+
+function ParentComponent({ count, setCount }) {
+    return (
+        <div>
+            <ChildComponent count={count} setCount={setCount} />
+        </div>
+    );
+}
+
+ChildComponent.jsx
+import React from "react";
+import GrandchildComponent from './GrandchildComponent;
+
+function GrandchildComponent({ count, setCount }) {
+    return (
+        <div>
+            <GrandchildComponent count={count} setCount={setCount} />
+        </div>
+    );
+}
+
+GrandchildComponent.jsx 
 import React from "react";
 
-function SquareComponent({ handler, input }) {
-    const square = (num) => {
-        console.log("Square ", num);
-        return num*num;
-    }
 
+function GrandchildComponent({ count, setCount }) {
     return (
-        <>
-            <h1>{square(input)}</h1>
-            <button onClick={handler}>Increment</button>
-        </>
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+        </div>
     );
 }
 
-export default (SquareComponent);
-
-In the above SquareComponent, it receives two props:
-1) input: Number to calculate square
-2) handler: function to update the input value
-
-App.jsx:
-
-import { useState, useCallback, useRef, useMemo } from "react";
-
-export default function ParentComponent() {
-    const [state, setState] = useState(false);
-    const [input, setInput] = useState(1);
-    console.log("Parent Component Rendered");
-
-    const handler = (prevInput) => setInput(prevInput + 1);
-
-    const statehandler = () => {
-        setState(!state);
-    };
-
-    return (
-        <>
-            <button onClick={statehandler}>
-                Change State of Parent Component
-            </button>
-            <SquareComponent handler={handler} input={input} />
-        </>
-    );
-}
-
-In the above ParentComponent, it has two state variables:
-1) state : To re-render component
-2) input: Number to calculate square
-
-In tha above example, when we click on "Change State of Parent Component" button.
-Along with Parent Component, Child component is also re-rendered which is an "unnecessary re-render"
-
-We can optimize this behavior using "memoize" technique
+We can fix this using "useContext" hook.
 
 ===============================================
 
-Step 1: Memoize the child component (Square component)
+useContext:
 
-=> Components only re-renders if their "state" or "props" changes
-=> So, we can memoize the child component using "React.memo"
+=> useContext will automatically pass all the state and data variables declared in the context to all the child components of that ParentComponent.
 
-React.memo:
+=> "createContext" lets you create a 'context' that components can provide or read.
 
-=> React.memo is a higher order component (HOC) provided by React that
-    performs a shallow equality check on the component's props.
-=> It determines if the component should be re-rendered by comparing 
-    the previous and current props.
-=> If the props haven't changed, React.memo prevents the re-rendering of the component.
+=> we will create a context which holds a value at global and that value can be used at any component 
+=> Provider :
+=> Consumer :
 
-Example:
+Steps to use "useContext" Hook:
 
-function SquareComponent({ handler, input }) {
-    const square = (num) => {
-        console.log("Square ", num);
-        return num;
-    }
+1. Create a Context with "useContext" hook in React.
+
+CountContext.jsx 
+import React from 'react';
+
+export const CountContext = React.createContext();
+
+2. Wrap App.js with "contextProvider" by passing values that need access in all the children components.
+
+App.jsx
+import React, { useState } from 'react';
+import { CountContext } from './CountContext';
+import ParentComponent from './ParentComponent';
+
+function App() {
+    const [count, setCount] = useState(0);
 
     return (
-        <>
-            <h1>Square Component</h1>
-            <button onClick={handler}>Increment</button>
-        </>
+        <div>
+            <CountContext.Provider value={{ count, setCount }}>
+                <ParentComponent />
+            </CountContext.Provider>
+        </div>
     );
 }
 
-export default React.memo(SquareComponent);
+3. Now we can directly access the count variable declared in App.js component in any component (GrandchildComponent.js)
+    without passing it as props through every children component
 
-In the above code, we use "React.memo" but still we are facing the same issue.
-Because in SquareComponent when we pass the props(handler) as handler is a function the function reference is passed as Pass by Reference concept.
-Whenever we call ParentComponent, a new memory location is created for handler function and the new memory reference is passed to child component.
+ParentComponent.jsx
+import React from 'react';
+import ChildComponent from './ChildComponent';
 
-===============================================
+function ParentComponent() {
+    return (
+        <div>
+            <ChildComponent />
+        </div>
+    );
+}
 
-To fix the above issue we can use "useCallback" hook.
+ChildComponent.jsx 
+import React from 'react';
+import GrandchildComponent from './GrandchildComponent';
 
-useCallback:
+function ChildComponent() {
+    return (
+        <div>
+            <GrandchildComponent />
+        </div>
+    );
+}
 
-=> useCallback is a React Hook that lets you cache a function definition between re-renders.
-=> useCallback function is used to memoize functions and avoid calling them unless certain dependencies changes
+GrandchildComponent.jsx 
+import React, { useContext } from 'react';
+import { CountContext } from './CountContext';
 
-Example:
-const handler = UseCallback(() => {
-    setInput(input + 1);   
-}, [input]);
+function GrandchildComponent() {
+    const { count, setCount } = useContext(CountContext);
 
-
-NOTE:
-useMemo      --> memoize the value 
-useCallback  --> memoize the function object, function, arrays references
+    return (
+        <div>
+            <p>Count: {count}</p>
+            <button onClick={() => setCount(count + 1)}>Increment</button>
+        </div>
+    );
+}
 
 ================================================================================================================
 
 As you can see I explained in a story way with a scenario at beginning about
-what is React.memo and how it is used and how the drawbacks of React.memo lead to "useCallback"
+what is Prop Drilling and how it is used normally and how it is causing issue and how it resolved using "useContext"
 
 Analyze them and add more information on this as much as you can, and also add better examples and real-life scenarios and codes, so everyone could understand it better way. Maintain the flow easy.
 
 At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
-Make sure this concept needs some visualization because in each rendering a new function reference is created and because of which we need "useCallback"
-So make sure the flow of concept is easy to understand
 
-Also in the README file, right after the codes explain how the code is actually working one-by-one bas we did for previous folders because if all the folders(concepts) have some flow then it would be easy.
+Also in the README file, right after the codes explain how the code is actually working one-by-one as we did for previous folders because if all the folders(concepts) have some flow then it would be easy.
 
 Help me in creating a folder with required information and codes that explains fetch vs axios concept very well and 
 at last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
