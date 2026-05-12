@@ -547,6 +547,69 @@ Inside JSX rendering logic can create unpredictable behavior.
 
 ---
 
+## ⚠️ Pitfalls of useRef Hook
+
+### ❌ Avoid Reading/Writing `ref.current` During Rendering
+
+```jsx id="k5z9qt"
+const value = myRef.current;
+```
+
+👉 Don’t directly read/write refs inside rendering logic.
+
+---
+
+## Why?
+
+React components should behave like **pure functions**.
+
+👉 Meaning:
+
+If the inputs are same:
+
+* Props
+* State
+* Context
+
+Then React expects the component to return the **same JSX output**.
+
+---
+
+## ❌ Problem with refs during render
+
+If `ref.current` changes during rendering:
+
+* Output may become unpredictable
+* React behavior may break
+* UI inconsistencies can happen
+
+---
+
+## ✅ Safe Places to Use `ref.current`
+
+1. Event handlers
+
+```js id="t0kq6m"
+handleClick()
+```
+
+2. useEffect hooks
+
+```js id="1p1uzh"
+useEffect(() => {})
+```
+
+---
+
+## 🎯 Simple Rule
+
+```text id="vbh2jz"
+Render phase → Avoid refs ❌
+Event/useEffect → Safe ✅
+```
+
+---
+
 ## 9. useState vs useRef
 
 | Feature                 | useState | useRef       |
@@ -584,6 +647,7 @@ Use when:
 * Value should NOT trigger UI update
 * DOM access needed
 * Store timers/interval IDs
+* For sub-calculations of a value
 * Store previous values
 
 Examples:
