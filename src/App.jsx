@@ -1,12 +1,36 @@
 // import './App.css'
 
-// import WithoutMemo from "./concepts/20. useMemo/memoizeFunction";
-// import WithoutUseMemo from "./concepts/20. useMemo/WithoutUseMemo";
-import WithUseMemo from "./concepts/20. useMemo/WithUseMemo";
+import { useState } from "react";
+import SquareComponent from "./concepts/21. ReactMemo/SqaureComponent";
 
-export default function App() {
+export default function ParentComponent() {
+
+  const [state, setState] = useState(false);
+  const [input, setInput] = useState(1);
+
+  console.log("Parent Component Rendered");
+
+  const handler = () => {
+    setInput(prev => prev + 1);
+    
+  };
+
+  const stateHandler = () => {
+    setState(!state);
+  };
 
   return (
-    <WithUseMemo />
+    <>
+      
+      <button onClick={stateHandler}>
+        Change Parent State
+      </button>
+
+      <SquareComponent 
+        handler={handler}
+        input={input}
+      />
+
+    </>
   );
 }

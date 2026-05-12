@@ -149,11 +149,12 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 --------------------------------------------------------------------------------------
 
-now let's move to next concept "useMemo",
-Good gp, we have completed useMemo, but before moving to useCallback I need to cover React.memo 
+
+Good gp, we have completed useMemo, now let's move to next concept "useCallback". In which I covered both React.memo
+and how it's drawback lead to "useCallback".
 I written a notes on it with some codes. Below is the notes of it, go through it
 
-21st Concept: React.memo
+21st Concept: useCallback
 
 ================================================================================================================
 notes.txt 
@@ -251,16 +252,39 @@ function SquareComponent({ handler, input }) {
 
 export default React.memo(SquareComponent);
 
+In the above code, we use "React.memo" but still we are facing the same issue.
+Because in SquareComponent when we pass the props(handler) as handler is a function the function reference is passed as Pass by Reference concept.
+Whenever we call ParentComponent, a new memory location is created for handler function and the new memory reference is passed to child component.
+
+===============================================
+
+To fix the above issue we can use "useCallback" hook.
+
+useCallback:
+
+=> useCallback is a React Hook that lets you cache a function definition between re-renders.
+=> useCallback function is used to memoize functions and avoid calling them unless certain dependencies changes
+
+Example:
+const handler = UseCallback(() => {
+    setInput(input + 1);   
+}, [input]);
+
+
+NOTE:
+useMemo      --> memoize the value 
+useCallback  --> memoize the function object, function, arrays references
+
 ================================================================================================================
 
-As you can see I explained in a story way with a scenario at beginning and how React.memo is helping it.
+As you can see I explained in a story way with a scenario at beginning about
+what is React.memo and how it is used and how the drawbacks of React.memo lead to "useCallback"
 
 Analyze them and add more information on this as much as you can, and also add better examples and real-life scenarios and codes, so everyone could understand it better way. Maintain the flow easy.
 
 At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
-
-After this we will move to "useCallback" by connecting the last code as it has a drawback. We will cover that drawback using "useCallback" in the next repo.
-
+Make sure this concept needs some visualization because in each rendering a new function reference is created and because of which we need "useCallback"
+So make sure the flow of concept is easy to understand
 
 Also in the README file, right after the codes explain how the code is actually working one-by-one bas we did for previous folders because if all the folders(concepts) have some flow then it would be easy.
 
