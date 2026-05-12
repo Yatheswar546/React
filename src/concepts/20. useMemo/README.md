@@ -35,6 +35,7 @@ Sometimes functions are:
 * Called repeatedly
 
 Even when input is same.
+This usually happens because components re-render frequently in React.
 
 This causes:
 
@@ -79,6 +80,8 @@ It recalculates again and again ❌
 👉 Memoization means:
 
 Caching previously calculated results and reusing them.
+
+👉 If same input comes again, we return stored result instead of recalculating.
 
 ---
 
@@ -543,7 +546,7 @@ Caches entire component rendering.
 
 ---
 
-## 13. useMemo vs Normal Variable
+## 13. useMemo vs Normal Function
 
 | Normal Function             | useMemo                  |
 | --------------------------- | ------------------------ |
@@ -581,6 +584,10 @@ const total = useMemo(() => a + b, [a, b]);
 
 ---
 
+👉 Premature optimization is also bad practice.
+
+---
+
 ## 15. Common Mistakes
 
 ❌ Using `useMemo` everywhere
@@ -588,6 +595,13 @@ const total = useMemo(() => a + b, [a, b]);
 ❌ Forgetting dependencies
 ❌ Expecting useMemo to stop re-renders
 ❌ Using useMemo for tiny calculations
+
+---
+
+## 🔥 Important Understanding
+
+* useMemo optimizes calculations
+    NOT component rendering
 
 ---
 
