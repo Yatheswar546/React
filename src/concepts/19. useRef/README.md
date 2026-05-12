@@ -670,10 +670,10 @@ Examples:
 
 ## 11. Common Mistakes
 
-❌ Using useRef instead of useState for UI
-❌ Updating ref expecting UI update
-❌ Reading/writing during render
-❌ Forgetting `.current`
+* Using useRef instead of useState for UI  ❌
+* Updating ref expecting UI update  ❌
+* Reading/writing during render  ❌
+* Forgetting `.current`  ❌
 
 ---
 
