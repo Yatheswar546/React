@@ -150,166 +150,215 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 
 
-Okay gp, we have completed almost all major React Hooks with detail explanations, now let's move to next concept "Custom Hooks". 
-I written a notes on it with some codes. Below is the notes of it, go through it
+Okay gp, we have completed almost all React concepts including major Hooks as we planned earlier, 
+now we are moving to Styling Part - "React Styling".
 
-23rd Concept: Custom Hooks
+For this I decided to 1st finish "Styling React using CSS" and move to "Tailwind.css" and later use "Material UI"
+
+So far, I written a notes on "Styling React using CSS". The below is the notes, go through the notes and analyze each point.
 
 ================================================================================================================
 notes.txt 
 
-Custom Hooks in React:
+Styling React Using CSS
 
-=> In React, a 'custom hook' is a reusable function that starts with the prefix "use" and 
-    allows you to share and reuse stateful or side-effect
-    ful logic across multiple components.
-=> Custom hooks allow you to extract and share logic such as state management, side effects,
-    and event handling without duplicating code.
+There are many ways to style React with CSS, will take a closer look at three common ways:
 
-    Custom Hooks Examples in React: https://github.com/streamich/react-use
+1) Inline styling
+2) CSS stylesheets
+3) CSS Modules
 
-NOTE: We cannot use custom Hook in a normal function we must use inside a Custom Hook(prefix "use") function only
+1) Inline styling
+(i) Inline Styling
+To style an element with the inline style attribute, the value must be a JavaScript object:
 
-Example 1:
-
-TempComponent.jsx
-
-import { useState } from 'react';
-import { useLocalStorageInput } from './hooks/useLocalStorageInput';
-
-const LOCAL_STORAGE_KEY = "temp_key"
-
-export const TempComponent = () => {
-
-    // const [input, setInput] = useState(
-    //     localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Crio'
-    // );
-
-    // useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY, input)
-    // }, [input]);
-
-    // after using useLocalStorageInput file completely we don't need above code
-    const { input, setInput } = useLocalStorageInput(LOCAL_STORAGE_KEY, "Crio");
-
-    return (
-        <div>
-            <h1>Temp Component</h1>
-            <input value={input} onChange={(e) => setInput(e.target.value)} />
-        </div>
-    );
-};
-
-RandomComponent.jsx
-
-import { useState } from 'react';
-import { useLocalStorageInput } from './hooks/useLocalStorageInput';
-
-const LOCAL_STORAGE_KEY = "random_key"
-
-export const RandomComponent = () => {
-
-    // const [input, setInput] = useState(
-    //     localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Random'
-    // );
-    // 
-    // useEffect(() => {
-    //     localStorage.setItem(LOCAL_STORAGE_KEY, input)
-    // }, [input]);
-
-    // after using useLocalStorageInput file completely we don't need above code
-    const { input, setInput } = useLocalStorageInput(LOCAL_STORAGE_KEY, "random");
-
-    return (
-        <div>
-            <h1>Random Component</h1>
-            <input value={input} onChange={(e) => setInput(e.target.value)} />
-        </div>
-    );
-};
-
-
-useLocalStorageInput.jsx (inside hooks folder)
-
-import { useState, useEffect } from 'react';
-
-export const useLocalStorageInput = (key, defaultValue) => {
-
-    const [input, setInput] = useState(localStorage.getItem(key) ?? defaultValue);
-
-    useEffect(() => {
-        localStorage.setItem(key, input);
-    }, [input]);
-
-    return {input, setInput} ;
-
-};
-
-App.jsx
-import React, { useState, useContext } from "react";
-import { TempComponent } from './TempComponent';
-import { RandomComponent } from './RandomComponent';
-
-export default function App() {
-    
-    return (
-        <div>
-            <TempComponent />
-            <RandomComponent />
-        </div>
-    );
+Example:
+const Header = () => {
+  return (
+    <>
+      <h1 style={{color: "red"}}>Hello Style!</h1>
+      <p>Add a little style!</p>
+    </>
+  );
 }
 
-Example 2 (Custom Hook that returns "window size"):
+(ii) JavaScript Object
+You can also create an object with styling information, and refer to it in the style attribute:
 
-import { useState, useEffect } from 'react';
+Example: Create a style object named "myStyle"
+const Header = () => {
+  const myStyle = {
+    color: "white",
+    backgroundColor: "DodgerBlue",
+    padding: "10px",
+    fontFamily: "Sans-Serif"
+  };
+  return (
+    <>
+      <h1 style={myStyle}>Hello Style!</h1>
+      <p>Add a little style!</p>
+    </>
+  );
+}
 
-const useWindowSize = () => {
-    const [windowsize, setWindowSize] = useState({
-        width: window.innerWidth,
-        height: window.innerHeight
-    });
+-----------------------------------------------------------------------------------------
 
-    useEffect(() => {
-        const handleResize = () => {
-            setWindowSize({
-                width: window.innerWidth,
-                height: window.innerHeight
-            });
-        };
+2) CSS stylesheets
+=> You can write your CSS styling in a separate file, just save the file with the .css file extension, and import it in your application.
 
-        window.addEventListener("resize", handleResize);
+Example: Create a new file called "MyStylesheet.css" and insert some CSS code in it:
 
-        return () => {
-            window.removeEventListener("resize", handleResize);
-        };
-    }, []);;
+MyStylesheet.css
+body {
+  background-color: #282c34;
+  color: white;
+  padding: 40px;
+  font-family: Sans-Serif;
+  text-align: center;
+}
 
-    return windowsize;
-};
+Import the stylesheet in your application:
 
-export default useWindowSize;
+Example: Use the import statement to import the stylesheet:
 
-Example 3 (useLocalStorage custom Hook):
+index.js
+import { createRoot } from 'react-dom/client';
+import './MyStylesheet.css';
 
-import { useState, useEffect } from 'react';
+const Header = () => {
+  return (
+    <>
+      <h1>Hello Style!</h1>
+      <p>Add a little style!.</p>
+    </>
+  );
+}
 
-const useLocalStorage = (key, initialValue = "") => {
+createRoot(document.getElementById('root')).render(
+  <Header />
+);
 
-    const [value, setValue] = useState(() => {
-        const storedValue = localStorage.getItem(key);
-        
-        return storedValue ? JSON.parse(storedValue) : initialValue;
-    });
+-----------------------------------------------------------------------------------------
 
-    useEffect(() => {
-        localStorage.setItem(key, JSON.stringify(value));
-    }, [key, value]);
+3) CSS Modules
 
-    return [value, setValue];
-};
+=> Another way of adding styles to your application is to use CSS Modules.
+=> CSS Modules are convenient for components that are placed in separate files.
+=> The CSS inside a module is available only for the component that imported it, and you do not have to worry about name conflicts.
 
-export default useLocalStorage;
+Example: Create a new file called "my-style.module.css" and insert some CSS code in it:
+
+my-style.module.css
+.bigred {
+  color: Tomato;
+  padding: 40px;
+  font-family: Sans-Serif;
+  text-align: center;
+}
+
+Import the stylesheet in your component:
+
+index.js
+
+import { createRoot } from 'react-dom/client';
+import styles from './my-style.module.css'; 
+  
+const Car = () => {
+  return <h1 className={styles.bigred}>Hello Car!</h1>;
+}
+  
+createRoot(document.getElementById('root')).render(
+  <Car />
+);
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+React CSS Modules
+
+=> CSS Modules let you write CSS that is scoped locally to a specific component.
+=> This prevents CSS class name conflicts and makes your styles more maintainable.
+
+What are CSS Modules?
+In React, CSS Modules are CSS files where class names are scoped locally by default.
+
+Creating a CSS Module:  "module.css"
+
+Button.module.css
+.mybutton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+Using a CSS Module
+
+import styles from './Button.module.css';
+
+function App() {
+  return (
+    <div>
+      <button className={styles.mybutton}>
+        My Button
+      </button>
+    </div>
+  );
+}
+
+----------------------------------------------------------------------------------
+
+Multiple Classes
+In the example above, we only used one class, but let's add more classes:
+
+Example:
+
+Button.module.css
+
+.mybutton {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+Use two buttons, with different styling:
+
+import styles from './Button.module.css';
+
+function App() {
+  return (
+    <div>
+      <button className={`${styles.mybutton} ${styles.primary}`}>
+        My Primary Button
+      </button>
+      <button className={`${styles.mybutton} ${styles.secondary}`}>
+        My Secondary Button
+      </button>
+    </div>
+  );
+}
+
+----------------------------------------------------------------------------------
+
+Composing Classes
+
+=> CSS Modules allow you to combine classes using the composes keyword:
+=> Which means that one class can inherit the styles of another class.
+=> For the previous example, both the primary and the secondary classes are depending on the styles of the mybutton class.
+=> This can be done by adding composes: mybutton to the primary and secondary classes:
+
+
 
 ================================================================================================================
 
@@ -324,6 +373,9 @@ At last create a README file with a flow that is easy to understand for everyone
 
 Also in the README file, right after the codes explain how the code is actually working one-by-one as we did for previous folders because if all the folders(concepts) have some flow then it would be easy.
 
+
+
+
 Analyze them and add more information on this as much as you can, and also add better examples and real-life scenarios and codes, so everyone could understand it better way. Maintain the flow easy.
 
 At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
@@ -332,10 +384,36 @@ Also in the README file, right after the codes explain how the code is actually 
 
 
 
+
 Help me in creating a folder with required information and codes that explains fetch vs axios concept very well and 
 at last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
+
+
 
 
 Ok gp, now let's move to next topic "Controlled Components" as you said, I have written only a small notes on this not even any code.
 So help me in preparing this folder you can add as much information as you want and also help me with the coding part 
 for better understanding. 
+
+
+
+--------------------------------------------------------------------------------------
+--------------------------------------------------------------------------------------
+
+Okay gp, we have completed almost all React concepts including major Hooks as we planned earlier, 
+now we are moving to Styling Part - "React Styling".
+
+For this I decided to 1st finish "Styling React using CSS" and move to "Tailwind.css" and later use "Material UI"
+
+In this process for the first part i.e. Styling React using CSS, I collected the below 3 links which have all information.
+1. https://www.w3schools.com/react/react_css_styling.asp 
+2. https://www.w3schools.com/react/react_css_modules.asp 
+3. https://www.w3schools.com/react/react_css_js.asp
+
+Analyze all the 3 links and collect the complete information and help me in creating folder(s) on "Styling React using CSS". 
+
+Make sure the flow is easy and you covered maximum concepts and use simple and mostly used examples so everyone can understand it in a easier way.
+
+At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
+
+Also, as we are entering into UI and styling part I want the topics to be simple rather than deep explanation just explain how much is needed.
