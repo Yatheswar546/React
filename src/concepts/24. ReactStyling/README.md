@@ -14,7 +14,7 @@
 
 ---
 
-# 1. Introduction
+## 1. Introduction
 
 React only handles:
 
@@ -28,7 +28,7 @@ To make UI beautiful:
 
 ---
 
-# 2. Ways to Style React
+## 2. Ways to Style React
 
 React supports multiple styling approaches:
 
@@ -41,7 +41,7 @@ React supports multiple styling approaches:
 
 ---
 
-# 🧠 Recommendation Order
+## 🧠 Recommendation Order
 
 For beginners:
 
@@ -59,42 +59,13 @@ Material UI
 
 ---
 
-# 📁 Suggested Folder Structure
-
-```bash
-src
-│
-├── concepts
-│     └── 24.ReactStyling
-│            ├── 01.ExternalCSS
-│            │      ├── ExternalCSS.jsx
-│            │      └── ExternalCSS.css
-│            │
-│            ├── 02.InlineCSS
-│            │      └── InlineCSS.jsx
-│            │
-│            ├── 03.CSSModules
-│            │      ├── Button.jsx
-│            │      └── Button.module.css
-│            │
-│            ├── 04.CSSInJS
-│            │      └── StyledComponent.jsx
-│            │
-│            └── README.md
-│
-├── App.jsx
-└── main.jsx
-```
-
----
-
-# 3. External CSS (Most Common)
+## 3. External CSS (Most Common)
 
 This is the most commonly used beginner-friendly approach.
 
 ---
 
-# 📄 ExternalCSS.css
+### 📄 ExternalCSS.css
 
 ```css
 .container {
@@ -118,7 +89,7 @@ This is the most commonly used beginner-friendly approach.
 
 ---
 
-# 📄 ExternalCSS.jsx
+### 📄 ExternalCSS.jsx
 
 ```jsx
 import "./ExternalCSS.css";
@@ -143,17 +114,17 @@ export default function ExternalCSS() {
 
 ---
 
-# 🔍 How This Works
+### 🔍 How This Works
 
 ---
 
-## Step 1:
+#### Step 1:
 
 Create CSS file.
 
 ---
 
-## Step 2:
+#### Step 2:
 
 Import CSS file.
 
@@ -163,7 +134,7 @@ import "./ExternalCSS.css";
 
 ---
 
-## Step 3:
+#### Step 3:
 
 Use classes using:
 
@@ -173,7 +144,7 @@ className=""
 
 ---
 
-# ⚠️ Important
+## ⚠️ Important
 
 In React:
 
@@ -185,7 +156,7 @@ because `class` is reserved in JavaScript.
 
 ---
 
-# 🧠 Best Use Case
+## 🧠 Best Use Case
 
 Use External CSS for:
 
@@ -195,7 +166,7 @@ Use External CSS for:
 
 ---
 
-# 4. Inline CSS
+## 4. Inline CSS
 
 Inline CSS means:
 
@@ -203,7 +174,7 @@ Inline CSS means:
 
 ---
 
-# 📄 InlineCSS.jsx
+### 📄 InlineCSS.jsx
 
 ```jsx
 export default function InlineCSS() {
@@ -228,11 +199,11 @@ export default function InlineCSS() {
 
 ---
 
-# 🔍 How This Works
+### 🔍 How This Works
 
 ---
 
-## Step 1:
+#### Step 1:
 
 Styles written as:
 
@@ -242,7 +213,7 @@ JavaScript Object
 
 ---
 
-## Step 2:
+#### Step 2:
 
 Pass object to:
 
@@ -252,7 +223,7 @@ style={}
 
 ---
 
-# ⚠️ Important Rules
+## ⚠️ Important Rules
 
 ---
 
@@ -280,7 +251,7 @@ color: "red"
 
 ---
 
-# 🧠 Best Use Case
+## 🧠 Best Use Case
 
 Use Inline CSS for:
 
@@ -290,7 +261,7 @@ Use Inline CSS for:
 
 ---
 
-# ❌ Not Ideal For
+## ❌ Not Ideal For
 
 * Large styling
 * Reusable styles
@@ -298,7 +269,7 @@ Use Inline CSS for:
 
 ---
 
-# 5. Dynamic Inline Styling
+## 5. Dynamic Inline Styling
 
 One powerful feature of inline styling:
 
@@ -306,7 +277,7 @@ One powerful feature of inline styling:
 
 ---
 
-# 📄 DynamicStyle.jsx
+### 📄 DynamicStyle.jsx
 
 ```jsx
 export default function DynamicStyle() {
@@ -333,7 +304,7 @@ export default function DynamicStyle() {
 
 ---
 
-# 🔍 How This Works
+### 🔍 How This Works
 
 ```js
 condition ? value1 : value2
@@ -343,7 +314,7 @@ changes styles dynamically.
 
 ---
 
-# 🧠 Real-World Usage
+## 🧠 Real-World Usage
 
 * Dark mode
 * Error messages
@@ -352,7 +323,7 @@ changes styles dynamically.
 
 ---
 
-# 6. CSS Modules
+## 6. CSS Modules
 
 Problem with normal CSS:
 
@@ -368,7 +339,7 @@ can affect multiple components accidentally.
 
 ---
 
-# ✅ Solution → CSS Modules
+### ✅ Solution → CSS Modules
 
 CSS Modules provide:
 
@@ -378,7 +349,7 @@ Component-scoped CSS
 
 ---
 
-# 📄 Button.module.css
+### 📄 Button.module.css
 
 ```css
 .button {
@@ -391,7 +362,7 @@ Component-scoped CSS
 
 ---
 
-# 📄 Button.jsx
+### 📄 Button.jsx
 
 ```jsx
 import styles from "./Button.module.css";
@@ -408,11 +379,11 @@ export default function Button() {
 
 ---
 
-# 🔍 How This Works
+### 🔍 How This Works
 
 ---
 
-## Step 1:
+#### Step 1:
 
 File name must be:
 
@@ -422,7 +393,7 @@ File name must be:
 
 ---
 
-## Step 2:
+#### Step 2:
 
 Import styles object.
 
@@ -432,7 +403,7 @@ import styles from "./Button.module.css";
 
 ---
 
-## Step 3:
+#### Step 3:
 
 Use classes like:
 
@@ -442,7 +413,7 @@ styles.button
 
 ---
 
-# 🧠 Biggest Advantage
+## 🧠 Biggest Advantage
 
 CSS Modules automatically create:
 
@@ -456,7 +427,7 @@ So:
 
 ---
 
-# 🧠 Best Use Case
+## 🧠 Best Use Case
 
 Use CSS Modules for:
 
@@ -466,7 +437,7 @@ Use CSS Modules for:
 
 ---
 
-# 7. CSS-in-JS (styled-components)
+## 7. CSS-in-JS (styled-components)
 
 CSS-in-JS means:
 
@@ -480,7 +451,7 @@ styled-components
 
 ---
 
-# 📦 Installation
+### 📦 Installation
 
 ```bash
 npm install styled-components
@@ -488,7 +459,7 @@ npm install styled-components
 
 ---
 
-# 📄 StyledComponent.jsx
+### 📄 StyledComponent.jsx
 
 ```jsx
 import styled from "styled-components";
@@ -516,11 +487,11 @@ export default function StyledComponent() {
 
 ---
 
-# 🔍 How This Works
+### 🔍 How This Works
 
 ---
 
-## Step 1:
+#### Step 1:
 
 Import:
 
@@ -530,7 +501,7 @@ styled
 
 ---
 
-## Step 2:
+#### Step 2:
 
 Create styled component.
 
@@ -540,7 +511,7 @@ const Heading = styled.h1
 
 ---
 
-## Step 3:
+#### Step 3:
 
 Write CSS inside:
 
@@ -550,7 +521,7 @@ backticks ``
 
 ---
 
-## Step 4:
+#### Step 4:
 
 Use component normally.
 
@@ -560,7 +531,7 @@ Use component normally.
 
 ---
 
-# 🧠 Biggest Advantage
+## 🧠 Biggest Advantage
 
 ✅ Component-scoped styling
 ✅ Dynamic styling
@@ -568,7 +539,7 @@ Use component normally.
 
 ---
 
-# ⚠️ Beginner Note
+## ⚠️ Beginner Note
 
 CSS-in-JS is powerful,
 
@@ -578,7 +549,7 @@ but:
 
 ---
 
-# 8. Comparison of Styling Methods
+## 8. Comparison of Styling Methods
 
 | Method       | Best For                  |
 | ------------ | ------------------------- |
@@ -589,7 +560,7 @@ but:
 
 ---
 
-# 9. Most Commonly Used in Real Projects
+## 9. Most Commonly Used in Real Projects
 
 Nowadays:
 
@@ -607,7 +578,7 @@ But:
 
 ---
 
-# 10. Common Mistakes
+## 10. Common Mistakes
 
 * Using `class` instead of `className`  ❌
 * Forgetting `.module.css` extension  ❌
@@ -617,11 +588,11 @@ But:
 
 ---
 
-# 11. Interview Questions (With Answers)
+## 11. Interview Questions (With Answers)
 
 ---
 
-## 1. How can we style React components?
+### 1. How can we style React components?
 
 Using:
 
@@ -632,31 +603,31 @@ Using:
 
 ---
 
-## 2. Why className instead of class?
+### 2. Why className instead of class?
 
 Because `class` is reserved in JavaScript.
 
 ---
 
-## 3. What are CSS Modules?
+### 3. What are CSS Modules?
 
 CSS files scoped locally to components.
 
 ---
 
-## 4. What is CSS-in-JS?
+### 4. What is CSS-in-JS?
 
 Writing CSS directly inside JavaScript.
 
 ---
 
-## 5. Which styling approach is best?
+### 5. Which styling approach is best?
 
 Depends on project size and requirements.
 
 ---
 
-# 12. Practice Problems
+## 12. Practice Problems
 
 1. Create dark/light mode
 2. Style card component
@@ -666,7 +637,7 @@ Depends on project size and requirements.
 
 ---
 
-# 13. Summary
+## 13. Summary
 
 * React supports multiple styling methods
 * External CSS is easiest for beginners
@@ -676,7 +647,7 @@ Depends on project size and requirements.
 
 ---
 
-# 🧠 Simple Analogy
+## 🧠 Simple Analogy
 
 Think of styling methods like:
 
@@ -689,7 +660,7 @@ Think of styling methods like:
 
 ---
 
-# 🔚 Final Takeaway
+## 🔚 Final Takeaway
 
 Before learning:
 
