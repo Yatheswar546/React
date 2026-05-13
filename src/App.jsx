@@ -1,26 +1,20 @@
 import './App.css'
 
-// import TempComponent from './concepts/23. CustomHooks/TempComponent';
-// import RandomComponent from './concepts/23. CustomHooks/RandomComponent';
-// import WindowSizeComponent from './concepts/23. CustomHooks/WindowSizeComponent';
-import useLocalStorage from './concepts/23. CustomHooks/hooks/useLocalStorage';
+import ExternalCSS from './concepts/24. ReactStyling/01. ExternalCSS/ExternalCSS';
+import InlineCSS from './concepts/24. ReactStyling/02. InlineCSS/InlineCSS';
+import DynamicStyle from './concepts/24. ReactStyling/02. InlineCSS/DynamicStyle';
+import Button from './concepts/24. ReactStyling/03. CSSModules/Button';
+import StyledComponent from './concepts/24. ReactStyling/04. CSSInJS/StyledComponent';
 
 export default function App() {
 
-  const [name, setName] = useLocalStorage("username", "")
-
   return (
-    <>
-      {/* <TempComponent />
-      <RandomComponent /> */}
-      {/* <WindowSizeComponent /> */}
-      
-      <h1>{name}</h1>
-
-      <button onClick={() => setName("Yathe")}>
-        Set Name
-      </button>
-
-    </>
+      <>
+        <ExternalCSS />
+        <InlineCSS />
+        <DynamicStyle />
+        <Button />
+        <StyledComponent />
+      </>
   );
 }
