@@ -93,7 +93,7 @@ Instead of only explaining theory:
 
 ---
 
-## 🎨 Phase 4: Styling React
+### 🎨 Phase 4: Styling React
 
 * External CSS
 * Inline CSS
