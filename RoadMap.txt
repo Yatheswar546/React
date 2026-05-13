@@ -584,7 +584,7 @@ Promise.all([fetchUsers(), fetchPosts()])
 
 ---
 
-## 15. useContext
+✅ ## 15. useContext
 
 👉 Example: **Theme Switch (Dark/Light)**
 

@@ -150,180 +150,179 @@ so a beginner can also easily understand their real-life use cases
 --------------------------------------------------------------------------------------
 
 
-Okay gp, we have completed useCallback with detail explanation, now let's move to next concept "useContext". In which I covered Prop-drilling also
-and how we overcome that using "useContext".
+Okay gp, we have completed almost all major React Hooks with detail explanations, now let's move to next concept "Custom Hooks". 
 I written a notes on it with some codes. Below is the notes of it, go through it
 
-22nd Concept: useContext
+23rd Concept: Custom Hooks
 
 ================================================================================================================
 notes.txt 
 
-UseContext  : Avoid Prop drilling in React 
+Custom Hooks in React:
 
-Prop Drilling:
+=> In React, a 'custom hook' is a reusable function that starts with the prefix "use" and 
+    allows you to share and reuse stateful or side-effect
+    ful logic across multiple components.
+=> Custom hooks allow you to extract and share logic such as state management, side effects,
+    and event handling without duplicating code.
 
-=> Components used to get props that they don't need it
+    Custom Hooks Examples in React: https://github.com/streamich/react-use
 
-Let us consider a scenario, we have "n" components
-component A -> has state A 
-component B (Child of component A)
-component C (Child of component B)
-component D (Child of component C)
-component E (Child of component D)
-.
-.
-.
-.
-.
-component n (Child of previous component) -> it requires state A 
+NOTE: We cannot use custom Hook in a normal function we must use inside a Custom Hook(prefix "use") function only
 
-Now, in the above scenario "component n" requires state A from "component A". 
-It has to pass through all components B, C, D, E..... upto "n" even though the middle components don't need state A.
+Example 1:
 
-The above scenario is called "Prop Drilling".
+TempComponent.jsx
 
-Example: on Prop-Drilling
+import { useState } from 'react';
+import { useLocalStorageInput } from './hooks/useLocalStorageInput';
+
+const LOCAL_STORAGE_KEY = "temp_key"
+
+export const TempComponent = () => {
+
+    // const [input, setInput] = useState(
+    //     localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Crio'
+    // );
+
+    // useEffect(() => {
+    //     localStorage.setItem(LOCAL_STORAGE_KEY, input)
+    // }, [input]);
+
+    // after using useLocalStorageInput file completely we don't need above code
+    const { input, setInput } = useLocalStorageInput(LOCAL_STORAGE_KEY, "Crio");
+
+    return (
+        <div>
+            <h1>Temp Component</h1>
+            <input value={input} onChange={(e) => setInput(e.target.value)} />
+        </div>
+    );
+};
+
+RandomComponent.jsx
+
+import { useState } from 'react';
+import { useLocalStorageInput } from './hooks/useLocalStorageInput';
+
+const LOCAL_STORAGE_KEY = "random_key"
+
+export const RandomComponent = () => {
+
+    // const [input, setInput] = useState(
+    //     localStorage.getItem(LOCAL_STORAGE_KEY) ?? 'Random'
+    // );
+    // 
+    // useEffect(() => {
+    //     localStorage.setItem(LOCAL_STORAGE_KEY, input)
+    // }, [input]);
+
+    // after using useLocalStorageInput file completely we don't need above code
+    const { input, setInput } = useLocalStorageInput(LOCAL_STORAGE_KEY, "random");
+
+    return (
+        <div>
+            <h1>Random Component</h1>
+            <input value={input} onChange={(e) => setInput(e.target.value)} />
+        </div>
+    );
+};
+
+
+useLocalStorageInput.jsx (inside hooks folder)
+
+import { useState, useEffect } from 'react';
+
+export const useLocalStorageInput = (key, defaultValue) => {
+
+    const [input, setInput] = useState(localStorage.getItem(key) ?? defaultValue);
+
+    useEffect(() => {
+        localStorage.setItem(key, input);
+    }, [input]);
+
+    return {input, setInput} ;
+
+};
 
 App.jsx
-import React, { useState } from "react";
-import ParentComponent from './ParentComponent';
+import React, { useState, useContext } from "react";
+import { TempComponent } from './TempComponent';
+import { RandomComponent } from './RandomComponent';
 
-function App() {
-    const [count, setCount] = useState(0);
-
-    return (
-        <>
-            <ParentComponent count={count} setCount={setCount} />
-        </>
-    );
-}
-
-ParentComponent.jsx
-import React from "react;
-import ChildComponent from './ChildComponent';
-
-function ParentComponent({ count, setCount }) {
+export default function App() {
+    
     return (
         <div>
-            <ChildComponent count={count} setCount={setCount} />
+            <TempComponent />
+            <RandomComponent />
         </div>
     );
 }
 
-ChildComponent.jsx
-import React from "react";
-import GrandchildComponent from './GrandchildComponent;
+Example 2 (Custom Hook that returns "window size"):
 
-function GrandchildComponent({ count, setCount }) {
-    return (
-        <div>
-            <GrandchildComponent count={count} setCount={setCount} />
-        </div>
-    );
-}
+import { useState, useEffect } from 'react';
 
-GrandchildComponent.jsx 
-import React from "react";
+const useWindowSize = () => {
+    const [windowsize, setWindowSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
 
+    useEffect(() => {
+        const handleResize = () => {
+            setWindowSize({
+                width: window.innerWidth,
+                height: window.innerHeight
+            });
+        };
 
-function GrandchildComponent({ count, setCount }) {
-    return (
-        <div>
-            <p>Count: {count}</p>
-            <button onClick={() => setCount(count + 1)}>Increment</button>
-        </div>
-    );
-}
+        window.addEventListener("resize", handleResize);
 
-We can fix this using "useContext" hook.
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);;
 
-===============================================
+    return windowsize;
+};
 
-useContext:
+export default useWindowSize;
 
-=> useContext will automatically pass all the state and data variables declared in the context to all the child components of that ParentComponent.
+Example 3 (useLocalStorage custom Hook):
 
-=> "createContext" lets you create a 'context' that components can provide or read.
+import { useState, useEffect } from 'react';
 
-=> we will create a context which holds a value at global and that value can be used at any component 
-=> Provider :
-=> Consumer :
+const useLocalStorage = (key, initialValue = "") => {
 
-Steps to use "useContext" Hook:
+    const [value, setValue] = useState(() => {
+        const storedValue = localStorage.getItem(key);
+        
+        return storedValue ? JSON.parse(storedValue) : initialValue;
+    });
 
-1. Create a Context with "useContext" hook in React.
+    useEffect(() => {
+        localStorage.setItem(key, JSON.stringify(value));
+    }, [key, value]);
 
-CountContext.jsx 
-import React from 'react';
+    return [value, setValue];
+};
 
-export const CountContext = React.createContext();
-
-2. Wrap App.js with "contextProvider" by passing values that need access in all the children components.
-
-App.jsx
-import React, { useState } from 'react';
-import { CountContext } from './CountContext';
-import ParentComponent from './ParentComponent';
-
-function App() {
-    const [count, setCount] = useState(0);
-
-    return (
-        <div>
-            <CountContext.Provider value={{ count, setCount }}>
-                <ParentComponent />
-            </CountContext.Provider>
-        </div>
-    );
-}
-
-3. Now we can directly access the count variable declared in App.js component in any component (GrandchildComponent.js)
-    without passing it as props through every children component
-
-ParentComponent.jsx
-import React from 'react';
-import ChildComponent from './ChildComponent';
-
-function ParentComponent() {
-    return (
-        <div>
-            <ChildComponent />
-        </div>
-    );
-}
-
-ChildComponent.jsx 
-import React from 'react';
-import GrandchildComponent from './GrandchildComponent';
-
-function ChildComponent() {
-    return (
-        <div>
-            <GrandchildComponent />
-        </div>
-    );
-}
-
-GrandchildComponent.jsx 
-import React, { useContext } from 'react';
-import { CountContext } from './CountContext';
-
-function GrandchildComponent() {
-    const { count, setCount } = useContext(CountContext);
-
-    return (
-        <div>
-            <p>Count: {count}</p>
-            <button onClick={() => setCount(count + 1)}>Increment</button>
-        </div>
-    );
-}
+export default useLocalStorage;
 
 ================================================================================================================
 
-As you can see I explained in a story way with a scenario at beginning about
-what is Prop Drilling and how it is used normally and how it is causing issue and how it resolved using "useContext"
+As you can see I explained about Custom Hook in just few steps. I want you to analyze them at first and create a Custom Hook folder as we did earlier for each topic.
+But I want you explain about what is Custom Hook and in general where we can use Custom Hook. Explain about 2-3 real time examples where we can use Custom Hook.
+
+And write codes for that Custom Hooks also so people can understand them easily and in a better way. Maintain the flow easy.
+
+I want everyone to understand what is Custom Hook, Where to use a Custom Hook, How to create and use a Custom Hook in a easy way.
+
+At last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
+
+Also in the README file, right after the codes explain how the code is actually working one-by-one as we did for previous folders because if all the folders(concepts) have some flow then it would be easy.
 
 Analyze them and add more information on this as much as you can, and also add better examples and real-life scenarios and codes, so everyone could understand it better way. Maintain the flow easy.
 
@@ -331,15 +330,12 @@ At last create a README file with a flow that is easy to understand for everyone
 
 Also in the README file, right after the codes explain how the code is actually working one-by-one as we did for previous folders because if all the folders(concepts) have some flow then it would be easy.
 
+
+
 Help me in creating a folder with required information and codes that explains fetch vs axios concept very well and 
 at last create a README file with a flow that is easy to understand for everyone and meet our primary goals as we discussed earlier.
 
-Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.
 
 Ok gp, now let's move to next topic "Controlled Components" as you said, I have written only a small notes on this not even any code.
 So help me in preparing this folder you can add as much information as you want and also help me with the coding part 
 for better understanding. 
-
-Analyze them and do the changes so the flow is easy to understand for everyone and create a README.md file with our primary goals as we discussed earlier.
-
-Also in the README file right after the codes explain how to code is actually working one-by-one because if all the folders(concepts) have some flow then it would be easy.

@@ -40,7 +40,7 @@ Phase 3:
 ✅ useRef 
 ✅ useMemo 
 ✅ useCallback
-useContext
+✅ useContext
 Custom Hooks 
 
 Phase 4:
