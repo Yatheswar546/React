@@ -19,12 +19,12 @@ this repository will guide you step-by-step with simple explanations, practical 
 
 The primary goal of this repository is:
 
-✅ Build **strong React fundamentals**
-✅ Explain concepts in a **simple storytelling flow**
-✅ Connect concepts with **real-world examples**
-✅ Help beginners understand **how and why things work**
-✅ Prepare learners for **projects + interviews**
-✅ Create a repository that can also be used for **teaching others**
+* Build **strong React fundamentals**
+* Explain concepts in a **simple storytelling flow**
+* Connect concepts with **real-world examples**
+* Help beginners understand **how and why things work**
+* Prepare learners for **projects + interviews**
+* Create a repository that can also be used for **teaching others**
 
 ---
 
@@ -194,12 +194,12 @@ This repository focuses heavily on concepts used in actual React applications:
 
 ## 💡 Who Can Use This Repository?
 
-* Complete Beginners  ✅
-* College Students  ✅
-* Self-learners  ✅
-* Interview Preparation  ✅
-* Developers revising React  ✅
-* Teachers/Trainers  ✅
+* Complete Beginners
+* College Students
+* Self-learners
+* Interview Preparation
+* Developers revising React
+* Teachers/Trainers
 
 ---
 
