@@ -1,22 +1,26 @@
 import './App.css'
 
-import { useState } from "react";
-import ParentComponent from './concepts/22. useContext/ParentComponent';
-import { CountContext } from './concepts/22. useContext/CountContext';
+// import TempComponent from './concepts/23. CustomHooks/TempComponent';
+// import RandomComponent from './concepts/23. CustomHooks/RandomComponent';
+// import WindowSizeComponent from './concepts/23. CustomHooks/WindowSizeComponent';
+import useLocalStorage from './concepts/23. CustomHooks/hooks/useLocalStorage';
 
 export default function App() {
 
-  const [count, setCount] = useState(0);
+  const [name, setName] = useLocalStorage("username", "")
 
   return (
     <>
-      <CountContext.Provider value={{ count, setCount }}>
+      {/* <TempComponent />
+      <RandomComponent /> */}
+      {/* <WindowSizeComponent /> */}
+      
+      <h1>{name}</h1>
 
-        <h1>App Component</h1>
+      <button onClick={() => setName("Yathe")}>
+        Set Name
+      </button>
 
-        <ParentComponent />
-
-      </CountContext.Provider>
     </>
   );
 }
