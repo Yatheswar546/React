@@ -1,4 +1,4 @@
-# Tailwind CSS with React + Vite
+# 🌊 Tailwind CSS with React + Vite
 
 ## 🎨 What is Tailwind CSS?
 
