@@ -83,7 +83,7 @@ Add Tailwind to CSS
 =======================================================
 
 Test Tailwind 
-
+ 
 1. In src/App.jsx file
 
 function App() {
@@ -110,6 +110,8 @@ Auto suggestions
 Auto completion
 Color preview
 Class recommendations
+
+Another Extension - "Prettier - Code formatter" is also recommended
 
 =======================================================
 
