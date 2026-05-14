@@ -1,0 +1,34 @@
+.formContainer {
+    background-color: white;
+    height: fit-content;
+    padding: 30px;
+    border-radius: 15px;
+}
+
+.heading{
+    color: #000;
+    font-size: 48px;
+    font-weight: 600;
+}
+
+.form{
+    background-color: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    margin: 8px;
+}
+
+input {
+    background-color: white;
+    color: #000;
+    border: 1px solid #000;
+}
+
+button {
+    margin: 10px;
+    width: 100%;
+    background-color: rgb(3, 159, 26);
+}

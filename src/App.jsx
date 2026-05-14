@@ -1,10 +1,14 @@
 import './App.css'
 
+import Form from './concepts/24. ReactStyling/03. CSSModules/Form';
+
 export default function App() {
 
   return (
       <>
-        <h1>Hello, Welcome to React</h1>
+
+        <Form />
+
       </>
   );
 }
