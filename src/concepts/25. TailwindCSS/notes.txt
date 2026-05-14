@@ -52,9 +52,8 @@ Create React + Vite Project
 
 Install Tailwind CSS 
 
-1. Open Terminal 
+1. Open Terminal
     npm install tailwindcss @tailwindcss/vite 
-
 
 =======================================================
 
